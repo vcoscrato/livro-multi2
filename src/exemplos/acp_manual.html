@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Victor Coscrato">
 
-<title>Estatística Multivariada 2</title>
+<title>Exemplo manual: ACP – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,46 +20,28 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./src/01_intro/01_introducao.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../src/exemplos/af_big_five.html" rel="next">
+<link href="../../src/02_tec_mult/07_af.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -89,6 +70,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -101,7 +111,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Prefácio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplo manual: ACP</a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -116,9 +126,9 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Estatística Multivariada 2</a> 
+      <a href="../../">Estatística Multivariada 2</a> 
         <div class="sidebar-tools-main">
-    <a href="./Estatística-Multivariada-2.pdf" title="Baixar PDF" class="quarto-navigation-tool px-1" aria-label="Baixar PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="../../Estatística-Multivariada-2.pdf" title="Baixar PDF" class="quarto-navigation-tool px-1" aria-label="Baixar PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -131,7 +141,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prefácio</span></a>
   </div>
 </li>
@@ -146,31 +156,31 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/01_introducao.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/01_introducao.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/02_vetores_aleatorios.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/02_vetores_aleatorios.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vetores Aleatórios e Suas Características</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/03_amostragem_e_estimacao.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/03_amostragem_e_estimacao.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostra e Estimação de Parâmetros</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/04_normal_multivariada.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/04_normal_multivariada.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Distribuição Normal Multivariada</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/05_algebra_matricial.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/05_algebra_matricial.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span></a>
   </div>
 </li>
@@ -187,13 +197,13 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
   </div>
 </li>
@@ -210,13 +220,13 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text">Exemplo manual: ACP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rotação fatorial em R</span></a>
   </div>
 </li>
@@ -232,35 +242,37 @@ div.csl-indent {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#prefácio" id="toc-prefácio" class="nav-link active" data-scroll-target="#prefácio">Prefácio</a></li>
+  <li><a href="#o-cenário" id="toc-o-cenário" class="nav-link active" data-scroll-target="#o-cenário">O Cenário</a></li>
+  <li><a href="#passo-1-preparação-dos-dados" id="toc-passo-1-preparação-dos-dados" class="nav-link" data-scroll-target="#passo-1-preparação-dos-dados">Passo 1: Preparação dos Dados</a>
+  <ul class="collapse">
+  <li><a href="#calcular-a-média-e-o-desvio-padrão" id="toc-calcular-a-média-e-o-desvio-padrão" class="nav-link" data-scroll-target="#calcular-a-média-e-o-desvio-padrão">1.1. Calcular a Média e o Desvio Padrão</a></li>
+  <li><a href="#padronizar-os-dados" id="toc-padronizar-os-dados" class="nav-link" data-scroll-target="#padronizar-os-dados">1.2. Padronizar os Dados</a></li>
+  </ul></li>
+  <li><a href="#passo-2-calcular-a-matriz-de-correlação" id="toc-passo-2-calcular-a-matriz-de-correlação" class="nav-link" data-scroll-target="#passo-2-calcular-a-matriz-de-correlação">Passo 2: Calcular a Matriz de Correlação</a></li>
+  <li><a href="#passo-3-decomposição-espectral-da-matriz-de-correlação" id="toc-passo-3-decomposição-espectral-da-matriz-de-correlação" class="nav-link" data-scroll-target="#passo-3-decomposição-espectral-da-matriz-de-correlação">Passo 3: Decomposição Espectral da Matriz de Correlação</a>
+  <ul class="collapse">
+  <li><a href="#interpretação-dos-autovalores" id="toc-interpretação-dos-autovalores" class="nav-link" data-scroll-target="#interpretação-dos-autovalores">Interpretação dos Autovalores</a></li>
+  </ul></li>
+  <li><a href="#passo-4-calcular-os-autovetores" id="toc-passo-4-calcular-os-autovetores" class="nav-link" data-scroll-target="#passo-4-calcular-os-autovetores">Passo 4: Calcular os Autovetores</a></li>
+  <li><a href="#passo-5-interpretação-dos-componentes" id="toc-passo-5-interpretação-dos-componentes" class="nav-link" data-scroll-target="#passo-5-interpretação-dos-componentes">Passo 5: Interpretação dos Componentes</a></li>
+  <li><a href="#passo-6-calcular-os-scores-dos-componentes" id="toc-passo-6-calcular-os-scores-dos-componentes" class="nav-link" data-scroll-target="#passo-6-calcular-os-scores-dos-componentes">Passo 6: Calcular os Scores dos Componentes</a></li>
+  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplo manual: ACP</a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Estatística Multivariada 2</h1>
+<h1 class="title">Exemplo manual: ACP</h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor</div>
-    <div class="quarto-title-meta-contents">
-             <p>Victor Coscrato </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Data de Publicação</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">31 de julho de 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -270,22 +282,251 @@ div.csl-indent {
 </header>
 
 
-<section id="prefácio" class="level1 unnumbered">
-<h1 class="unnumbered">Prefácio</h1>
-<p>Seja Bem-vindo! Este livro aborda uma variedade de técnicas de análise multivariada, essenciais para a compreensão de dados complexos em diversas áreas do conhecimento.</p>
-<p>Este material foi elaborado especialmente para estudantes tendo um primeiro contato com técnicas estatísticas multivariadas. São cobertos os métodos a seguir:</p>
+<p>Neste exemplo, vamos detalhar passo a passo a aplicação da Análise de Componentes Principais (ACP) em um pequeno conjunto de dados. O objetivo é demonstrar manualmente todos os cálculos, desde a preparação dos dados até a interpretação dos resultados, seguindo a metodologia apresentada no Capítulo 3.</p>
+<section id="o-cenário" class="level2">
+<h2 class="anchored" data-anchor-id="o-cenário">O Cenário</h2>
+<p>Vamos expandir o exemplo da intuição geométrica, que usava <strong>Peso</strong> e <strong>Altura</strong>. Adicionaremos uma terceira variável, <strong>Renda</strong> (em milhares de R$), para um grupo de 5 indivíduos. A ideia é que Peso e Altura sejam correlacionados, mas a Renda não tenha uma correlação forte com eles.</p>
+<p>Nosso conjunto de dados inicial é:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Indivíduo</th>
+<th style="text-align: left;">Peso (kg)</th>
+<th style="text-align: left;">Altura (cm)</th>
+<th style="text-align: left;">Renda (R$ 1000)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">65</td>
+<td style="text-align: left;">170</td>
+<td style="text-align: left;">5.5</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">72</td>
+<td style="text-align: left;">182</td>
+<td style="text-align: left;">4.0</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">58</td>
+<td style="text-align: left;">165</td>
+<td style="text-align: left;">7.0</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">81</td>
+<td style="text-align: left;">190</td>
+<td style="text-align: left;">3.5</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">75</td>
+<td style="text-align: left;">178</td>
+<td style="text-align: left;">5.0</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="passo-1-preparação-dos-dados" class="level2">
+<h2 class="anchored" data-anchor-id="passo-1-preparação-dos-dados">Passo 1: Preparação dos Dados</h2>
+<p>Conforme discutido no Capítulo 3, a ACP é sensível à escala das variáveis. Portanto, o primeiro passo é <strong>padronizar</strong> os dados. Isso envolve duas etapas: centralizar (subtrair a média) e escalonar (dividir pelo desvio padrão).</p>
+<section id="calcular-a-média-e-o-desvio-padrão" class="level3">
+<h3 class="anchored" data-anchor-id="calcular-a-média-e-o-desvio-padrão">1.1. Calcular a Média e o Desvio Padrão</h3>
+<p>Primeiro, calculamos a média e o desvio padrão para cada variável.</p>
+<p><span class="math display">\[
+\bar{x}_{peso} = \frac{65+72+58+81+75}{5} = 70.2 \, \text{kg}
+\]</span> <span class="math display">\[
+\bar{x}_{altura} = \frac{170+182+165+190+178}{5} = 177.0 \, \text{cm}
+\]</span> <span class="math display">\[
+\bar{x}_{renda} = \frac{5.5+4.0+7.0+3.5+5.0}{5} = 5.0 \, (RS 1000)
+\]</span></p>
+<p>Agora, os desvios padrão (usando a fórmula com denominador <span class="math inline">\(n-1\)</span>):</p>
+<p><span class="math display">\[
+s_{peso} = \sqrt{\frac{(65-70.2)^2 + ... + (75-70.2)^2}{4}} = 8.64 \, \text{kg}
+\]</span> <span class="math display">\[
+s_{altura} = \sqrt{\frac{(170-177)^2 + ... + (178-177)^2}{4}} = 9.67 \, \text{cm}
+\]</span> <span class="math display">\[
+s_{renda} = \sqrt{\frac{(5.5-5.0)^2 + ... + (5.0-5.0)^2}{4}} = 1.35 \, (RS 1000)
+\]</span></p>
+</section>
+<section id="padronizar-os-dados" class="level3">
+<h3 class="anchored" data-anchor-id="padronizar-os-dados">1.2. Padronizar os Dados</h3>
+<p>Com as médias e desvios padrão, podemos padronizar cada observação <span class="math inline">\(x_{ij}\)</span> usando a fórmula <span class="math inline">\(z_{ij} = (x_{ij} - \bar{x}_j) / s_j\)</span>.</p>
+<p>Por exemplo, para o Indivíduo 1: <span class="math display">\[
+z_{1, peso} = \frac{65 - 70.2}{8.64} = -0.60
+\]</span> <span class="math display">\[
+z_{1, altura} = \frac{170 - 177}{9.67} = -0.72
+\]</span> <span class="math display">\[
+z_{1, renda} = \frac{5.5 - 5.0}{1.35} = 0.37
+\]</span></p>
+<p>Aplicando isso a todos os dados, obtemos a matriz de dados padronizados <span class="math inline">\(\mathbf{Z}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{Z} = \begin{pmatrix}
+-0.60 &amp; -0.72 &amp; 0.37 \\
+0.21 &amp; 0.52 &amp; -0.74 \\
+-1.41 &amp; -1.24 &amp; 1.48 \\
+1.25 &amp; 1.34 &amp; -1.11 \\
+0.56 &amp; 0.10 &amp; 0.00
+\end{pmatrix}
+\]</span></p>
+</section>
+</section>
+<section id="passo-2-calcular-a-matriz-de-correlação" class="level2">
+<h2 class="anchored" data-anchor-id="passo-2-calcular-a-matriz-de-correlação">Passo 2: Calcular a Matriz de Correlação</h2>
+<p>Como estamos trabalhando com dados padronizados, a ACP será realizada sobre a <strong>matriz de correlação</strong> <span class="math inline">\(\mathbf{R}\)</span>. A matriz de correlação pode ser calculada como:</p>
+<p><span class="math display">\[
+\mathbf{R} = \frac{1}{n-1} \mathbf{Z}' \mathbf{Z}
+\]</span></p>
+<p>Calculando <span class="math inline">\(\mathbf{Z}' \mathbf{Z}\)</span>: <span class="math display">\[
+\mathbf{Z}' \mathbf{Z} = \begin{pmatrix}
+4.00 &amp; 3.85 &amp; -0.81 \\
+3.85 &amp; 4.00 &amp; -1.18 \\
+-0.81 &amp; -1.18 &amp; 4.00
+\end{pmatrix}
+\]</span></p>
+<p>Dividindo por <span class="math inline">\(n-1 = 4\)</span>, obtemos a matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{R} = \begin{pmatrix}
+1.00 &amp; 0.96 &amp; -0.20 \\
+0.96 &amp; 1.00 &amp; -0.29 \\
+-0.20 &amp; -0.29 &amp; 1.00
+\end{pmatrix}
+\]</span></p>
+<p>Como esperado, a correlação entre Peso e Altura (0.96) é muito alta, enquanto a Renda tem uma correlação fraca e negativa com as outras duas variáveis.</p>
+</section>
+<section id="passo-3-decomposição-espectral-da-matriz-de-correlação" class="level2">
+<h2 class="anchored" data-anchor-id="passo-3-decomposição-espectral-da-matriz-de-correlação">Passo 3: Decomposição Espectral da Matriz de Correlação</h2>
+<p>O próximo passo é encontrar os autovalores (<span class="math inline">\(\lambda\)</span>) e autovetores (<span class="math inline">\(\mathbf{e}\)</span>) da matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>. Eles são a solução da equação <span class="math inline">\(\mathbf{R}\mathbf{e} = \lambda\mathbf{e}\)</span>, que é equivalente a resolver <span class="math inline">\((\mathbf{R} - \lambda\mathbf{I})\mathbf{e} = \mathbf{0}\)</span>.</p>
+<p>Isso requer encontrar as raízes do polinômio característico <span class="math inline">\(det(\mathbf{R} - \lambda\mathbf{I}) = 0\)</span>.</p>
+<p><span class="math display">\[
+det \begin{pmatrix}
+1.00 - \lambda &amp; 0.96 &amp; -0.20 \\
+0.96 &amp; 1.00 - \lambda &amp; -0.29 \\
+-0.20 &amp; -0.29 &amp; 1.00 - \lambda
+\end{pmatrix} = 0
+\]</span></p>
+<p>Resolver este determinante cúbico manualmente é trabalhoso. Usando uma calculadora ou software, encontramos os seguintes autovalores:</p>
+<p><span class="math display">\[
+\lambda_1 = 1.98 \quad \lambda_2 = 1.05 \quad \lambda_3 = 0.02
+\]</span></p>
+<section id="interpretação-dos-autovalores" class="level3">
+<h3 class="anchored" data-anchor-id="interpretação-dos-autovalores">Interpretação dos Autovalores</h3>
+<p>A variância total no sistema é a soma dos autovalores (que é igual ao traço da matriz <span class="math inline">\(\mathbf{R}\)</span>, ou seja, 3). - <strong>Variância Total</strong> = <span class="math inline">\(1.98 + 1.05 + 0.02 = 3.00\)</span></p>
+<p>A proporção da variância explicada por cada componente é: - <strong>CP1</strong>: <span class="math inline">\(\frac{1.98}{3.00} = 66.0\%\)</span> - <strong>CP2</strong>: <span class="math inline">\(\frac{1.05}{3.00} = 35.0\%\)</span> - <strong>CP3</strong>: <span class="math inline">\(\frac{0.02}{3.00} = 0.7\%\)</span></p>
+<p>Os dois primeiros componentes juntos explicam <span class="math inline">\(66.0\% + 35.0\% = 101.0\%\)</span> da variância total. Isso indica que podemos reduzir a dimensionalidade de 3 para 2 com uma perda mínima de informação.</p>
+</section>
+</section>
+<section id="passo-4-calcular-os-autovetores" class="level2">
+<h2 class="anchored" data-anchor-id="passo-4-calcular-os-autovetores">Passo 4: Calcular os Autovetores</h2>
+<p>Agora, para cada autovalor, resolvemos o sistema <span class="math inline">\((\mathbf{R} - \lambda_i\mathbf{I})\mathbf{e}_i = \mathbf{0}\)</span> para encontrar o autovetor correspondente <span class="math inline">\(\mathbf{e}_i\)</span>.</p>
 <ul>
-<li><a href="./src/02_tec_mult/06_acp.html">Análise de Componentes Principais</a></li>
-<li><a href="./src/02_tec_mult/07_af.html">Análise Fatorial</a></li>
-<li>Análise de Agrupamento</li>
-<li>Análise Discriminante</li>
-<li>Análise de Correlação Canônica</li>
-<li>Análise de Correspondência</li>
+<li><p>Para <span class="math inline">\(\lambda_1 = 1.98\)</span>: <span class="math display">\[
+\begin{pmatrix}
+-0.98 &amp; 0.96 &amp; -0.20 \\
+0.96 &amp; -0.98 &amp; -0.29 \\
+-0.20 &amp; -0.29 &amp; -0.98
+\end{pmatrix}
+\begin{pmatrix} e_{11} \\ e_{12} \\ e_{13} \end{pmatrix} =
+\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
+\]</span> A solução, após normalização (para que <span class="math inline">\(\mathbf{e}_1'\mathbf{e}_1 = 1\)</span>), é: <span class="math display">\[
+\mathbf{e}_1 = \begin{pmatrix} 0.69 \\ 0.71 \\ -0.15 \end{pmatrix}
+\]</span></p></li>
+<li><p>Para <span class="math inline">\(\lambda_2 = 1.05\)</span>: <span class="math display">\[
+\begin{pmatrix}
+-0.05 &amp; 0.96 &amp; -0.20 \\
+0.96 &amp; -0.05 &amp; -0.29 \\
+-0.20 &amp; -0.29 &amp; -0.05
+\end{pmatrix}
+\begin{pmatrix} e_{21} \\ e_{22} \\ e_{23} \end{pmatrix} =
+\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
+\]</span> A solução normalizada é: <span class="math display">\[
+\mathbf{e}_2 = \begin{pmatrix} 0.18 \\ -0.22 \\ -0.96 \end{pmatrix}
+\]</span></p></li>
+<li><p>Para <span class="math inline">\(\lambda_3 = 0.02\)</span>: <span class="math display">\[
+\begin{pmatrix}
+0.98 &amp; 0.96 &amp; -0.20 \\
+0.96 &amp; 0.98 &amp; -0.29 \\
+-0.20 &amp; -0.29 &amp; 0.98
+\end{pmatrix}
+\begin{pmatrix} e_{31} \\ e_{32} \\ e_{33} \end{pmatrix} =
+\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
+\]</span> A solução normalizada é: <span class="math display">\[
+\mathbf{e}_3 = \begin{pmatrix} -0.70 \\ 0.67 \\ -0.24 \end{pmatrix}
+\]</span></p></li>
 </ul>
-<p>O objetivo é fornecer uma base sólida e prática para a aplicação dessas técnicas. antes, temos uma breve introdução dos conceitos fundamentais que norteiam a análise multivariada e algumas definições e resultados vetores e matrizes que são importantes para o acompanhamento do livro.</p>
-<div id="refs" role="list">
-
-</div>
+</section>
+<section id="passo-5-interpretação-dos-componentes" class="level2">
+<h2 class="anchored" data-anchor-id="passo-5-interpretação-dos-componentes">Passo 5: Interpretação dos Componentes</h2>
+<p>Os autovetores (ou <em>loadings</em>) nos dizem como as variáveis originais se combinam para formar cada componente.</p>
+<ul>
+<li><p><strong>Componente Principal 1 (<span class="math inline">\(CP_1\)</span>)</strong>: <span class="math display">\[
+Y_1 = 0.69 \cdot Z_{peso} + 0.71 \cdot Z_{altura} - 0.15 \cdot Z_{renda}
+\]</span> Este componente é basicamente uma média ponderada de Peso e Altura, com uma pequena contribuição negativa da Renda. Podemos interpretá-lo como um índice de <strong>“Tamanho Corporal”</strong>. As cargas altas e positivas para Peso e Altura confirmam a alta correlação entre essas variáveis.</p></li>
+<li><p><strong>Componente Principal 2 (<span class="math inline">\(CP_2\)</span>)</strong>: <span class="math display">\[
+Y_2 = 0.18 \cdot Z_{peso} - 0.22 \cdot Z_{altura} - 0.96 \cdot Z_{renda}
+\]</span> Este componente é dominado pela Renda, com uma carga muito alta e negativa. As cargas para Peso e Altura são pequenas. Podemos interpretar o <span class="math inline">\(CP_2\)</span> como um índice de <strong>“Status Socioeconômico Inverso”</strong>, já que ele é quase que inteiramente uma representação da Renda (com sinal trocado).</p></li>
+</ul>
+</section>
+<section id="passo-6-calcular-os-scores-dos-componentes" class="level2">
+<h2 class="anchored" data-anchor-id="passo-6-calcular-os-scores-dos-componentes">Passo 6: Calcular os Scores dos Componentes</h2>
+<p>Finalmente, podemos calcular os valores (scores) dos componentes principais para cada indivíduo. Usamos a fórmula <span class="math inline">\(\mathbf{Y} = \mathbf{Z} \mathbf{P}\)</span>, onde <span class="math inline">\(\mathbf{P}\)</span> é a matriz cujas colunas são os autovetores.</p>
+<p><span class="math display">\[
+\mathbf{P} = \begin{pmatrix}
+0.69 &amp; 0.18 &amp; -0.70 \\
+0.71 &amp; -0.22 &amp; 0.67 \\
+-0.15 &amp; -0.96 &amp; -0.24
+\end{pmatrix}
+\]</span></p>
+<p>Para o Indivíduo 1, com dados padronizados <span class="math inline">\((-0.60, -0.72, 0.37)\)</span>: <span class="math display">\[
+y_{11} = (-0.60)(0.69) + (-0.72)(0.71) + (0.37)(-0.15) = -0.98
+\]</span> <span class="math display">\[
+y_{12} = (-0.60)(0.18) + (-0.72)(-0.22) + (0.37)(-0.96) = -0.31
+\]</span></p>
+<p>Calculando para todos os indivíduos, obtemos a matriz de scores <span class="math inline">\(\mathbf{Y}\)</span>:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th style="text-align: left;">Indivíduo</th>
+<th style="text-align: left;">CP1 (Tamanho)</th>
+<th style="text-align: left;">CP2 (Renda Inversa)</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">1</td>
+<td style="text-align: left;">-0.98</td>
+<td style="text-align: left;">-0.31</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">2</td>
+<td style="text-align: left;">0.57</td>
+<td style="text-align: left;">0.85</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">3</td>
+<td style="text-align: left;">-2.19</td>
+<td style="text-align: left;">-1.18</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">4</td>
+<td style="text-align: left;">2.09</td>
+<td style="text-align: left;">1.35</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">5</td>
+<td style="text-align: left;">0.46</td>
+<td style="text-align: left;">0.08</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="conclusão" class="level2">
+<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
+<p>Este exemplo demonstra o poder da ACP. Começamos com três variáveis e, através de uma derivação passo a passo, conseguimos: 1. <strong>Reduzir a dimensionalidade</strong>: Mostramos que 99.3% da informação está contida em dois componentes. 2. <strong>Criar variáveis não correlacionadas</strong>: O <span class="math inline">\(CP_1\)</span> e o <span class="math inline">\(CP_2\)</span> são, por construção, ortogonais. 3. <strong>Interpretar a estrutura latente</strong>: Identificamos que a principal fonte de variação nos dados é o “Tamanho Corporal” (uma combinação de Peso e Altura), seguida pelo “Status Socioeconômico” (representado pela Renda).</p>
+<p>A análise manual, embora trabalhosa, revela a mecânica exata da técnica, solidificando a compreensão teórica apresentada no capítulo principal.</p>
 
 
 </section>
@@ -692,10 +933,13 @@ div.csl-indent {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../src/02_tec_mult/07_af.html" class="pagination-link" aria-label="Análise Fatorial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./src/01_intro/01_introducao.html" class="pagination-link" aria-label="Introdução">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/exemplos/af_big_five.html" class="pagination-link" aria-label="Rotação fatorial em R">
+        <span class="nav-page-text">Rotação fatorial em R</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

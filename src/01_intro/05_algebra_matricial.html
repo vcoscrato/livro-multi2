@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Victor Coscrato">
 
-<title>Estatística Multivariada 2</title>
+<title>5&nbsp; Fundamentos Matemáticos: Álgebra Matricial – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,46 +20,28 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./src/01_intro/01_introducao.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../src/02_tec_mult/06_acp.html" rel="next">
+<link href="../../src/01_intro/04_normal_multivariada.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -89,6 +70,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -101,7 +111,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Prefácio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/01_intro/01_introducao.html">Parte I: Introdução</a></li><li class="breadcrumb-item"><a href="../../src/01_intro/05_algebra_matricial.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -116,9 +126,9 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Estatística Multivariada 2</a> 
+      <a href="../../">Estatística Multivariada 2</a> 
         <div class="sidebar-tools-main">
-    <a href="./Estatística-Multivariada-2.pdf" title="Baixar PDF" class="quarto-navigation-tool px-1" aria-label="Baixar PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="../../Estatística-Multivariada-2.pdf" title="Baixar PDF" class="quarto-navigation-tool px-1" aria-label="Baixar PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -131,7 +141,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prefácio</span></a>
   </div>
 </li>
@@ -146,31 +156,31 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/01_introducao.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/01_introducao.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/02_vetores_aleatorios.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/02_vetores_aleatorios.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vetores Aleatórios e Suas Características</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/03_amostragem_e_estimacao.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/03_amostragem_e_estimacao.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostra e Estimação de Parâmetros</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/04_normal_multivariada.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/04_normal_multivariada.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Distribuição Normal Multivariada</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/05_algebra_matricial.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/05_algebra_matricial.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span></a>
   </div>
 </li>
@@ -187,13 +197,13 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
   </div>
 </li>
@@ -210,13 +220,13 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exemplo manual: ACP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rotação fatorial em R</span></a>
   </div>
 </li>
@@ -232,35 +242,25 @@ div.csl-indent {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#prefácio" id="toc-prefácio" class="nav-link active" data-scroll-target="#prefácio">Prefácio</a></li>
+  <li><a href="#formas-quadráticas" id="toc-formas-quadráticas" class="nav-link active" data-scroll-target="#formas-quadráticas"><span class="header-section-number">5.1</span> Formas Quadráticas</a></li>
+  <li><a href="#matrizes-positiva-definidas" id="toc-matrizes-positiva-definidas" class="nav-link" data-scroll-target="#matrizes-positiva-definidas"><span class="header-section-number">5.2</span> Matrizes positiva-Definidas</a></li>
+  <li><a href="#sec-espectral" id="toc-sec-espectral" class="nav-link" data-scroll-target="#sec-espectral"><span class="header-section-number">5.3</span> Decomposição Espectral</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/01_intro/01_introducao.html">Parte I: Introdução</a></li><li class="breadcrumb-item"><a href="../../src/01_intro/05_algebra_matricial.html"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Estatística Multivariada 2</h1>
+<h1 class="title"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor</div>
-    <div class="quarto-title-meta-contents">
-             <p>Victor Coscrato </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Data de Publicação</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">31 de julho de 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -270,21 +270,63 @@ div.csl-indent {
 </header>
 
 
-<section id="prefácio" class="level1 unnumbered">
-<h1 class="unnumbered">Prefácio</h1>
-<p>Seja Bem-vindo! Este livro aborda uma variedade de técnicas de análise multivariada, essenciais para a compreensão de dados complexos em diversas áreas do conhecimento.</p>
-<p>Este material foi elaborado especialmente para estudantes tendo um primeiro contato com técnicas estatísticas multivariadas. São cobertos os métodos a seguir:</p>
+<p>Com os conceitos estatísticos fundamentais estabelecidos, voltamos nossa atenção para as ferramentas matemáticas necessárias para manipular esses objetos. A linguagem da análise multivariada é a álgebra linear.</p>
+<p>Neste capítulo, revisaremos conceitos-chave — formas quadráticas, matrizes positiva-definidas e a decomposição espectral — que são a base para muitas das técnicas que veremos, como a Análise de Componentes Principais (PCA).</p>
+<section id="formas-quadráticas" class="level2" data-number="5.1">
+<h2 data-number="5.1" class="anchored" data-anchor-id="formas-quadráticas"><span class="header-section-number">5.1</span> Formas Quadráticas</h2>
+<p>Uma forma quadrática é uma função polinomial de várias variáveis que contém apenas termos de grau dois. Para um vetor <span class="math inline">\(\mathbf{x}\)</span> de dimensão <span class="math inline">\(p \times 1\)</span> e uma matriz simétrica <span class="math inline">\(\mathbf{A}\)</span> de dimensão <span class="math inline">\(p \times p\)</span>, a forma quadrática é expressa como:</p>
+<p><span class="math display">\[
+Q(\mathbf{x}) = \mathbf{x}' \mathbf{A} \mathbf{x} = \sum_{i=1}^p \sum_{j=1}^p a_{ij} x_i x_j
+\]</span></p>
+<p>Um exemplo fundamental que já encontramos é a distância de Mahalanobis ao quadrado, <span class="math inline">\((\mathbf{x} - \boldsymbol{\mu})' \boldsymbol{\Sigma}^{-1} (\mathbf{x} - \boldsymbol{\mu})\)</span>, que aparece no expoente da distribuição normal multivariada. Esta forma quadrática define as elipses de contorno de densidade constante da distribuição.</p>
+</section>
+<section id="matrizes-positiva-definidas" class="level2" data-number="5.2">
+<h2 data-number="5.2" class="anchored" data-anchor-id="matrizes-positiva-definidas"><span class="header-section-number">5.2</span> Matrizes positiva-Definidas</h2>
+<p>O conceito de positividade para um número escalar é estendido para matrizes através das formas quadráticas. Uma matriz simétrica <span class="math inline">\(\mathbf{A}\)</span> é dita:</p>
 <ul>
-<li><a href="./src/02_tec_mult/06_acp.html">Análise de Componentes Principais</a></li>
-<li><a href="./src/02_tec_mult/07_af.html">Análise Fatorial</a></li>
-<li>Análise de Agrupamento</li>
-<li>Análise Discriminante</li>
-<li>Análise de Correlação Canônica</li>
-<li>Análise de Correspondência</li>
+<li><strong>positiva-definida</strong> se <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x} &gt; 0\)</span> para todos os vetores não-nulos <span class="math inline">\(\mathbf{x}\)</span>.</li>
+<li><strong>positiva-semidefinida</strong> se <span class="math inline">\(\mathbf{x}' \mathbf{A} \mathbf{x} \geq 0\)</span> para todos os vetores não-nulos <span class="math inline">\(\mathbf{x}\)</span>.</li>
 </ul>
-<p>O objetivo é fornecer uma base sólida e prática para a aplicação dessas técnicas. antes, temos uma breve introdução dos conceitos fundamentais que norteiam a análise multivariada e algumas definições e resultados vetores e matrizes que são importantes para o acompanhamento do livro.</p>
-<div id="refs" role="list">
-
+<p>Propriedades de uma matriz positiva-definida: - Todos os seus autovalores são estritamente positivos (<span class="math inline">\(\lambda_i &gt; 0\)</span>). - A matriz é invertível (não-singular). - Seu determinante é positivo.</p>
+<p>Matrizes de covariância (<span class="math inline">\(\boldsymbol{\Sigma}\)</span>) e correlação (<span class="math inline">\(\mathbf{R}\)</span>) são, por natureza, positiva-semidefinidas. Para que a função de densidade da normal multivariada seja bem definida e a matriz <span class="math inline">\(\boldsymbol{\Sigma}\)</span> seja invertível, exigimos que ela seja <strong>positiva-definida</strong>. Isso implica que nenhuma variável no vetor aleatório é uma combinação linear perfeita de outras (ou seja, não há redundância linear total nos dados).</p>
+</section>
+<section id="sec-espectral" class="level2" data-number="5.3">
+<h2 data-number="5.3" class="anchored" data-anchor-id="sec-espectral"><span class="header-section-number">5.3</span> Decomposição Espectral</h2>
+<p>A decomposição espectral (ou de autovalores) é uma fatoração de uma matriz simétrica em seus autovalores e autovetores. Ela revela a estrutura fundamental da transformação linear representada pela matriz.</p>
+<p>Toda matriz simétrica <span class="math inline">\(\mathbf{A}\)</span> de dimensão <span class="math inline">\(p \times p\)</span> pode ser reescrita como:</p>
+<p><span class="math display">\[
+\mathbf{A} = \mathbf{E}\Lambda\mathbf{E}'
+\]</span></p>
+<p>Onde:</p>
+<ul>
+<li><span class="math inline">\(\lambda_1, \dots, \lambda_p\)</span> são os <strong>autovalores</strong> de <span class="math inline">\(\mathbf{A}\)</span>.</li>
+<li><span class="math inline">\(\mathbf{e}_1, \dots, \mathbf{e}_p\)</span> são os <strong>autovetores</strong> ortonormais correspondentes.</li>
+<li><span class="math inline">\(\Lambda\)</span> é a matriz diagonal com os autovalores <span class="math inline">\(\lambda_i\)</span> na diagonal.</li>
+<li><span class="math inline">\(\mathbf{E}\)</span> é a matriz ortogonal cujas colunas são os autovetores <span class="math inline">\(\mathbf{e}_i\)</span>.</li>
+</ul>
+<div id="exm-espectral" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 5.1</strong></span> Vamos decompor a seguinte matriz de covariâncias <span class="math inline">\(\mathbf{S}\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{S} = \begin{pmatrix} 2 &amp; 1 \\ 1 &amp; 2
+\end{pmatrix}
+\]</span></p>
+<ol type="1">
+<li><p><strong>Autovalores</strong>: Resolvendo a equação característica <span class="math inline">\(\det(\mathbf{S} - \lambda\mathbf{I}) = 0\)</span>, encontramos <span class="math inline">\(\lambda_1 = 3\)</span> e <span class="math inline">\(\lambda_2 = 1\)</span>.</p></li>
+<li><p><strong>Autovetores</strong>:</p>
+<ul>
+<li>Para <span class="math inline">\(\lambda_1 = 3\)</span>: O autovetor correspondente é <span class="math inline">\(\mathbf{e}_1 = \begin{pmatrix} 1/\sqrt{2} \\ 1/\sqrt{2}
+\end{pmatrix}\)</span>.</li>
+<li>Para <span class="math inline">\(\lambda_2 = 1\)</span>: O autovetor correspondente é <span class="math inline">\(\mathbf{e}_2 = \begin{pmatrix} 1/\sqrt{2} \\ -1/\sqrt{2}
+\end{pmatrix}\)</span>.</li>
+</ul></li>
+</ol>
+<p>A decomposição é <span class="math inline">\(\mathbf{S} = \mathbf{E}\Lambda\mathbf{E}'\)</span>, com: <span class="math display">\[
+\mathbf{E} = \begin{pmatrix} 1/\sqrt{2} &amp; 1/\sqrt{2} \\ 1/\sqrt{2} &amp; -1/\sqrt{2}
+\end{pmatrix}, \quad
+\Lambda = \begin{pmatrix} 3 &amp; 0 \\ 0 &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>Isso nos diz que a maior variância dos dados (igual a 3) está na direção do vetor <span class="math inline">\((1, 1)\)</span>, enquanto a variância na direção ortogonal <span class="math inline">\((1, -1)\)</span> é menor (igual a 1).</p>
 </div>
 
 
@@ -692,10 +734,13 @@ div.csl-indent {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../src/01_intro/04_normal_multivariada.html" class="pagination-link" aria-label="A Distribuição Normal Multivariada">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Distribuição Normal Multivariada</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./src/01_intro/01_introducao.html" class="pagination-link" aria-label="Introdução">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/02_tec_mult/06_acp.html" class="pagination-link" aria-label="Análise de Componentes Principais">
+        <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

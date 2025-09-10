@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.7.33">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>7&nbsp; Análise Fatorial – Estatística Multivariada 2</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../src/exemplos/acp_manual.html" rel="next">
+<link href="../../src/02_tec_mult/06_acp.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "Nenhum resultado",
+    "search-matching-documents-text": "documentos correspondentes",
+    "search-copy-link-title": "Copiar link para a busca",
+    "search-hide-matches-text": "Esconder correspondências adicionais",
+    "search-more-match-text": "mais correspondência neste documento",
+    "search-more-matches-text": "mais correspondências neste documento",
+    "search-clear-button-title": "Limpar",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancelar",
+    "search-submit-button-title": "Enviar",
+    "search-label": "Procurar"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+</head>
+
+<body class="nav-sidebar floating quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Técnicas Multivariadas</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/07_af.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="sidebar-title mb-0 py-0">
+      <a href="../../">Estatística Multivariada 2</a> 
+        <div class="sidebar-tools-main">
+    <a href="../../Estatística-Multivariada-2.pdf" title="Baixar PDF" class="quarto-navigation-tool px-1" aria-label="Baixar PDF"><i class="bi bi-file-pdf"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Procurar"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Prefácio</span></a>
+  </div>
+</li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Parte I: Introdução</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/01_introducao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/02_vetores_aleatorios.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vetores Aleatórios e Suas Características</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/03_amostragem_e_estimacao.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostra e Estimação de Parâmetros</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/04_normal_multivariada.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Distribuição Normal Multivariada</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/05_algebra_matricial.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Parte II: Técnicas Multivariadas</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true">
+ <span class="menu-text">Exemplos</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" role="navigation" aria-expanded="true" aria-label="Alternar seção">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Exemplo manual: ACP</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Rotação fatorial em R</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">Índice</h2>
+   
+  <ul>
+  <li><a href="#o-modelo-fatorial-ortogonal" id="toc-o-modelo-fatorial-ortogonal" class="nav-link active" data-scroll-target="#o-modelo-fatorial-ortogonal"><span class="header-section-number">7.1</span> O Modelo Fatorial Ortogonal</a></li>
+  <li><a href="#a-estrutura-de-covariância-implícita" id="toc-a-estrutura-de-covariância-implícita" class="nav-link" data-scroll-target="#a-estrutura-de-covariância-implícita"><span class="header-section-number">7.2</span> A Estrutura de Covariância Implícita</a></li>
+  <li><a href="#problemas-no-modelo-fatorial" id="toc-problemas-no-modelo-fatorial" class="nav-link" data-scroll-target="#problemas-no-modelo-fatorial"><span class="header-section-number">7.3</span> Problemas no Modelo Fatorial</a></li>
+  <li><a href="#adequabilidade-do-modelo-fatorial" id="toc-adequabilidade-do-modelo-fatorial" class="nav-link" data-scroll-target="#adequabilidade-do-modelo-fatorial"><span class="header-section-number">7.4</span> Adequabilidade do Modelo Fatorial</a>
+  <ul class="collapse">
+  <li><a href="#teste-de-esfericidade-de-bartlett" id="toc-teste-de-esfericidade-de-bartlett" class="nav-link" data-scroll-target="#teste-de-esfericidade-de-bartlett"><span class="header-section-number">7.4.1</span> Teste de Esfericidade de Bartlett</a></li>
+  <li><a href="#medida-de-adequação-da-amostra-kmo" id="toc-medida-de-adequação-da-amostra-kmo" class="nav-link" data-scroll-target="#medida-de-adequação-da-amostra-kmo"><span class="header-section-number">7.4.2</span> Medida de Adequação da Amostra (KMO)</a></li>
+  </ul></li>
+  <li><a href="#métodos-de-estimação" id="toc-métodos-de-estimação" class="nav-link" data-scroll-target="#métodos-de-estimação"><span class="header-section-number">7.5</span> Métodos de Estimação</a>
+  <ul class="collapse">
+  <li><a href="#a-solução-por-componentes-principais" id="toc-a-solução-por-componentes-principais" class="nav-link" data-scroll-target="#a-solução-por-componentes-principais"><span class="header-section-number">7.5.1</span> A Solução por Componentes Principais</a></li>
+  <li><a href="#método-da-máxima-verossimilhança-mmv" id="toc-método-da-máxima-verossimilhança-mmv" class="nav-link" data-scroll-target="#método-da-máxima-verossimilhança-mmv"><span class="header-section-number">7.5.2</span> Método da Máxima Verossimilhança (MMV)</a></li>
+  </ul></li>
+  <li><a href="#a-escolha-do-número-de-fatores-m" id="toc-a-escolha-do-número-de-fatores-m" class="nav-link" data-scroll-target="#a-escolha-do-número-de-fatores-m"><span class="header-section-number">7.6</span> A Escolha do Número de Fatores (m)</a></li>
+  <li><a href="#rotação-fatorial" id="toc-rotação-fatorial" class="nav-link" data-scroll-target="#rotação-fatorial"><span class="header-section-number">7.7</span> Rotação Fatorial</a>
+  <ul class="collapse">
+  <li><a href="#rotações-ortogonais" id="toc-rotações-ortogonais" class="nav-link" data-scroll-target="#rotações-ortogonais"><span class="header-section-number">7.7.1</span> Rotações Ortogonais</a></li>
+  <li><a href="#rotações-oblíquas" id="toc-rotações-oblíquas" class="nav-link" data-scroll-target="#rotações-oblíquas"><span class="header-section-number">7.7.2</span> Rotações Oblíquas</a></li>
+  </ul></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Técnicas Multivariadas</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/07_af.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title"><span id="sec-af" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>A Análise Fatorial é uma técnica estatística utilizada para descrever a estrutura de covariância entre um conjunto de variáveis observadas. A hipótese central é que essa estrutura é gerada por um número menor de variáveis latentes não observáveis, denominadas <strong>fatores comuns</strong>.</p>
+<p>Começamos com uma intuição. Suponha que temos as seguintes variáveis de gastos para diferentes famílias:</p>
+<ul>
+<li><span class="math inline">\(X_1\)</span>: Gasto em educação</li>
+<li><span class="math inline">\(X_2\)</span>: Gasto em cultura</li>
+<li><span class="math inline">\(X_3\)</span>: Gasto em alimentação</li>
+</ul>
+<p>É razoável supor que essas variáveis sejam correlacionadas. Mais do que isso, pode existir um fator latente, como a <strong>renda familiar</strong> (<span class="math inline">\(F_1\)</span>), que influencia todos esses gastos. A Análise Fatorial busca formalizar e quantificar essa relação.</p>
+<section id="o-modelo-fatorial-ortogonal" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="o-modelo-fatorial-ortogonal"><span class="header-section-number">7.1</span> O Modelo Fatorial Ortogonal</h2>
+<p>O modelo supõe que cada variável observada é linearmente dependente de um conjunto de fatores comuns, somado a um termo de variância individual, ou específico.</p>
+<div id="def-orthogonal-factor-model" class="theorem definition" title="O Modelo Fatorial Ortogonal">
+<p><span class="theorem-title"><strong>Definição 7.1</strong></span> Seja <span class="math inline">\(\mathbf{x}\)</span> um vetor aleatório de <em>p</em> variáveis observadas com vetor de médias <span class="math inline">\(\boldsymbol{\mu}\)</span> e matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>. O modelo fatorial com <em>m</em> fatores comuns (<span class="math inline">\(m &lt; p\)</span>) postula que <span class="math inline">\(\mathbf{x}\)</span> é linearmente dependente de <em>m</em> fatores comuns <span class="math inline">\(F_1, F_2, \dots, F_m\)</span> e <em>p</em> termos de erro <span class="math inline">\(\epsilon_1, \epsilon_2, \dots, \epsilon_p\)</span>. Em notação matricial, o modelo é:</p>
+<p><span id="eq-factor-model"><span class="math display">\[
+\mathbf{x}_{(p \times 1)} - \boldsymbol{\mu}_{(p \times 1)} = \mathbf{L}_{(p \times m)}\mathbf{F}_{(m \times 1)} + \boldsymbol{\epsilon}_{(p \times 1)}
+\tag{7.1}\]</span></span></p>
+<p>Onde:</p>
+<ul>
+<li><span class="math inline">\(\mathbf{L}\)</span> é a matriz de <strong>cargas fatoriais</strong>: Uma matriz de pesos responsável por quantificar as relações entre as <em>p</em> variáveis e os <em>m</em> fatores.</li>
+<li><span class="math inline">\(\mathbf{F}\)</span> é o vetor de <strong>fatores comuns</strong>, ou seja <span class="math inline">\(\mathbf{F} = [F_1, F_2, \dots, F_m]'\)</span>.</li>
+<li><span class="math inline">\(\boldsymbol{\epsilon}\)</span> é o vetor de <strong>erros</strong>, ou <strong>variâncias específicas</strong>, ou seja, <span class="math inline">\(\boldsymbol{\epsilon} = [\epsilon_1, \epsilon_2, \dots, \epsilon_p]'\)</span></li>
+</ul>
+<p>Para que o ajuste desse modelo seja factível, as seguintes suposições são feitas para o modelo ortogonal:</p>
+<ol type="1">
+<li><span class="math inline">\(E[\mathbf{F}] = \mathbf{0}\)</span> e <span class="math inline">\(Cov(\mathbf{F}) = E[\mathbf{F}\mathbf{F}'] = \mathbf{I}\)</span>.</li>
+<li><span class="math inline">\(E[\boldsymbol{\epsilon}] = \mathbf{0}\)</span> e <span class="math inline">\(Cov(\boldsymbol{\epsilon}) = E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}'] = \mathbf{\Psi}\)</span>, onde <span class="math inline">\(\mathbf{\Psi}\)</span> é uma matriz diagonal.</li>
+<li><span class="math inline">\(Cov(\mathbf{F}, \boldsymbol{\epsilon}) = E[\mathbf{F}\boldsymbol{\epsilon}'] = \mathbf{0}\)</span>.</li>
+</ol>
+</div>
+</section>
+<section id="a-estrutura-de-covariância-implícita" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="a-estrutura-de-covariância-implícita"><span class="header-section-number">7.2</span> A Estrutura de Covariância Implícita</h2>
+<p>As suposições do modelo implicam uma estrutura específica para a matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>.</p>
+<div id="thm-covariance-structure" class="theorem" title="Estrutura da Matriz de Covariâncias">
+<p><span class="theorem-title"><strong>Teorema 7.1</strong></span> Sob as premissas do modelo fatorial ortogonal (<a href="#def-orthogonal-factor-model" class="quarto-xref">Definição&nbsp;<span class="quarto-unresolved-ref">def-orthogonal-factor-model</span></a>), a matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span> do vetor <span class="math inline">\(\mathbf{x}\)</span> é dada por:</p>
+<p><span id="eq-covariance-structure"><span class="math display">\[
+\mathbf{\Sigma} = \mathbf{L}\mathbf{L}' + \mathbf{\Psi}
+\tag{7.2}\]</span></span></p>
+</div>
+<div class="proof">
+<p><span class="proof-title"><em>Comprovação</em>. </span>A partir do modelo fatorial em <a href="#eq-factor-model" class="quarto-xref">Equação&nbsp;<span class="quarto-unresolved-ref">eq-factor-model</span></a>, temos que <span class="math inline">\(\mathbf{x} - \boldsymbol{\mu} = \mathbf{L}\mathbf{F} + \boldsymbol{\epsilon}\)</span>. A matriz de covariâncias de <span class="math inline">\(\mathbf{x}\)</span> é, por definição, <span class="math inline">\(\mathbf{\Sigma} = E[(\mathbf{x} - \boldsymbol{\mu})(\mathbf{x} - \boldsymbol{\mu})']\)</span>. Substituindo a expressão do modelo, obtemos:</p>
+<p><span class="math display">\[
+\begin{align*}
+\mathbf{\Sigma} &amp;= E[(\mathbf{L}\mathbf{F} + \boldsymbol{\epsilon})(\mathbf{L}\mathbf{F} + \boldsymbol{\epsilon})'] \\
+&amp;= E[(\mathbf{L}\mathbf{F} + \boldsymbol{\epsilon})(\mathbf{F}'\mathbf{L}' + \boldsymbol{\epsilon}')] \\
+&amp;= E[\mathbf{L}\mathbf{F}\mathbf{F}'\mathbf{L}' + \mathbf{L}\mathbf{F}\boldsymbol{\epsilon}' + \boldsymbol{\epsilon}\mathbf{F}'\mathbf{L}' + \boldsymbol{\epsilon}\boldsymbol{\epsilon}'] \\
+&amp;= \mathbf{L}E[\mathbf{F}\mathbf{F}']\mathbf{L}' + \mathbf{L}E[\mathbf{F}\boldsymbol{\epsilon}'] + E[\boldsymbol{\epsilon}\mathbf{F}']\mathbf{L}' + E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}']
+\end{align*}
+\]</span></p>
+<p>Pelas suposições do modelo ortogonal (<a href="#def-orthogonal-factor-model" class="quarto-xref">Definição&nbsp;<span class="quarto-unresolved-ref">def-orthogonal-factor-model</span></a>):</p>
+<ol type="1">
+<li><span class="math inline">\(E[\mathbf{F}\mathbf{F}'] = \text{Cov}(\mathbf{F}) = \mathbf{I}\)</span> (os fatores são não correlacionados e têm variância unitária).</li>
+<li><span class="math inline">\(E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}'] = \text{Cov}(\boldsymbol{\epsilon}) = \mathbf{\Psi}\)</span> (os erros são não correlacionados entre si).</li>
+<li><span class="math inline">\(E[\mathbf{F}\boldsymbol{\epsilon}'] = \text{Cov}(\mathbf{F}, \boldsymbol{\epsilon}) = \mathbf{0}\)</span> (os fatores e os erros são não correlacionados).</li>
+</ol>
+<p>Substituindo essas esperanças na equação de <span class="math inline">\(\mathbf{\Sigma}\)</span>, temos:</p>
+<p><span class="math display">\[
+\mathbf{\Sigma} = \mathbf{L}\mathbf{I}\mathbf{L}' + \mathbf{L}\mathbf{0} + \mathbf{0}\mathbf{L}' + \mathbf{\Psi} = \mathbf{L}\mathbf{L}' + \mathbf{\Psi}
+\]</span></p>
+<p>Isso completa a prova.</p>
+</div>
+<p>Esta equação decompõe a variância de cada variável <span class="math inline">\(X_i\)</span> em:</p>
+<ul>
+<li><strong>Comunalidade (<span class="math inline">\(h_i^2\)</span>)</strong>: A porção da variância de <span class="math inline">\(X_i\)</span> explicada pelos <em>m</em> fatores comuns (<span class="math inline">\(h_i^2 = \sum_{j=1}^{m} l_{ij}^2\)</span>).</li>
+<li><strong>Variância Específica (<span class="math inline">\(\psi_i\)</span>)</strong>: A porção da variância de <span class="math inline">\(X_i\)</span> não explicada pelos fatores comuns (<span class="math inline">\(Var(X_i) = \sigma_{ii} = h_i^2 + \psi_i\)</span>).</li>
+</ul>
+<div id="exm-solucao-fatorial" class="theorem example" title="Solução de um Modelo Fatorial">
+<p><span class="theorem-title"><strong>Exemplo 7.1</strong></span> Suponha que a matriz de covariâncias de um vetor aleatório <span class="math inline">\(\mathbf{x}\)</span> com <span class="math inline">\(p=4\)</span> variáveis seja:</p>
+<p><span class="math display">\[
+\mathbf{\Sigma} =
+\begin{pmatrix}
+19 &amp; 30 &amp; 2 &amp; 12 \\
+30 &amp; 57 &amp; 5 &amp; 23 \\
+2 &amp; 5 &amp; 37 &amp; 47 \\
+12 &amp; 23 &amp; 47 &amp; 68
+\end{pmatrix}
+\]</span></p>
+<p>É possível mostrar que um modelo fatorial com <span class="math inline">\(m=2\)</span> fatores comuns pode gerar essa estrutura de covariância. Uma solução possível para <span class="math inline">\(\mathbf{L}\)</span> e <span class="math inline">\(\mathbf{\Psi}\)</span> é dada por:</p>
+<p><span class="math display">\[
+\mathbf{L} =
+\begin{pmatrix}
+4 &amp; 1 \\
+7 &amp; 2 \\
+-1 &amp; 6 \\
+1 &amp; 8
+\end{pmatrix}
+,
+\quad
+\mathbf{\Psi} =
+\begin{pmatrix}
+2 &amp; 0 &amp; 0 &amp; 0 \\
+0 &amp; 4 &amp; 0 &amp; 0 \\
+0 &amp; 0 &amp; 3 &amp; 0 \\
+0 &amp; 0 &amp; 0 &amp; 3
+\end{pmatrix}
+\]</span></p>
+<p>O leitor pode verificar que <span class="math inline">\(\mathbf{\Sigma} = \mathbf{L}\mathbf{L}' + \mathbf{\Psi}\)</span>. O modelo decompõe a variância de cada variável.</p>
+<ul>
+<li>Para <span class="math inline">\(X_1\)</span>, a comunalidade é <span class="math inline">\(h_1^2 = 4^2 + 1^2 = 17\)</span>, e sua variância total é <span class="math inline">\(Var(X_1) = \sigma_{11} = h_1^2 + \psi_1 = 17 + 2 = 19\)</span>.</li>
+<li>Para <span class="math inline">\(X_2\)</span>, a comunalidade é <span class="math inline">\(h_2^2 = 7^2 + 2^2 = 53\)</span>, e sua variância total é <span class="math inline">\(Var(X_2) = \sigma_{22} = h_2^2 + \psi_2 = 53 + 4 = 57\)</span>.</li>
+</ul>
+</div>
+</section>
+<section id="problemas-no-modelo-fatorial" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="problemas-no-modelo-fatorial"><span class="header-section-number">7.3</span> Problemas no Modelo Fatorial</h2>
+<ul>
+<li><strong>Existência da Solução</strong>: Nem sempre existe uma solução factível para o modelo fatorial com <em>m</em> fatores. A estimação dos parâmetros, especialmente com um número inadequado de fatores, pode levar a soluções impróprias, como uma variância específica negativa (<span class="math inline">\(\hat{\psi}_i &lt; 0\)</span>), conhecida como <strong>caso de Heywood</strong>. Isso viola a premissa de que <span class="math inline">\(\psi_i\)</span> é uma variância e, portanto, deve ser não-negativa. Geralmente, uma solução imprópria indica que o modelo é inadequado para os dados.</li>
+</ul>
+<div id="exm-improper-solution" class="theorem example" title="Exemplo de Solução Imprópria">
+<p><span class="theorem-title"><strong>Exemplo 7.2</strong></span> Considere um modelo de um fator (<span class="math inline">\(m=1\)</span>) para <span class="math inline">\(p=3\)</span> variáveis, com a seguinte matriz de correlação populacional:</p>
+<p><span class="math display">\[
+\mathbf{R} =
+\begin{pmatrix}
+1.0 &amp; 0.4 &amp; 0.9 \\
+0.4 &amp; 1.0 &amp; 0.7 \\
+0.9 &amp; 0.7 &amp; 1.0
+\end{pmatrix}
+\]</span></p>
+<p>O modelo fatorial para a matriz de correlação é <span class="math inline">\(\mathbf{P} = \mathbf{L}\mathbf{L}' + \mathbf{\Psi}\)</span>. Para <span class="math inline">\(m=1\)</span>, as cargas são um vetor <span class="math inline">\(\mathbf{L} = [l_{11}, l_{21}, l_{31}]'\)</span>. As covariâncias (correlações) são dadas por <span class="math inline">\(\rho_{ij} = l_{i1}l_{j1}\)</span>. Temos o sistema:</p>
+<ul>
+<li><span class="math inline">\(\rho_{12} = l_{11}l_{21} = 0.4\)</span></li>
+<li><span class="math inline">\(\rho_{13} = l_{11}l_{31} = 0.9\)</span></li>
+<li><span class="math inline">\(\rho_{23} = l_{21}l_{31} = 0.7\)</span></li>
+</ul>
+<p>Multiplicando as três equações, obtemos <span class="math inline">\((l_{11}l_{21}l_{31})^2 = 0.4 \times 0.9 \times 0.7 = 0.252\)</span>. Isso nos permite resolver para as cargas:</p>
+<ul>
+<li><span class="math inline">\(l_{11}^2 = (l_{11}l_{21})(l_{11}l_{31}) / (l_{21}l_{31}) = (0.4 \times 0.9) / 0.7 \approx 0.514\)</span></li>
+<li><span class="math inline">\(l_{21}^2 = (l_{11}l_{21})(l_{21}l_{31}) / (l_{11}l_{31}) = (0.4 \times 0.7) / 0.9 \approx 0.311\)</span></li>
+<li><span class="math inline">\(l_{31}^2 = (l_{11}l_{31})(l_{21}l_{31}) / (l_{11}l_{21}) = (0.9 \times 0.7) / 0.4 = 1.575\)</span></li>
+</ul>
+<p>A comunalidade da terceira variável é <span class="math inline">\(h_3^2 = l_{31}^2 = 1.575\)</span>. Como estamos modelando uma matriz de correlação, a variância total de cada variável é 1. A variância específica seria <span class="math inline">\(\psi_3 = 1 - h_3^2 = 1 - 1.575 = -0.575\)</span>. Uma variância negativa é impossível, indicando que o modelo de um fator não é apropriado para descrever a estrutura de correlação dada.</p>
+</div>
+<ul>
+<li><strong>Indeterminação da Solução (Rotação Fatorial)</strong>: A solução para a matriz de cargas <span class="math inline">\(\mathbf{L}\)</span> não é única. Para qualquer matriz ortogonal <span class="math inline">\(\mathbf{T}\)</span> de dimensão <span class="math inline">\(m \times m\)</span> (ou seja, uma matriz tal que <span class="math inline">\(\mathbf{T}\mathbf{T}' = \mathbf{T}'\mathbf{T} = \mathbf{I}\)</span>), podemos definir uma nova matriz de cargas <span class="math inline">\(\mathbf{L}^* = \mathbf{L}\mathbf{T}\)</span> que resulta na mesma matriz de covariâncias.</li>
+</ul>
+<p>Isso ocorre porque a parte da covariância explicada pelos fatores, <span class="math inline">\(\mathbf{L}\mathbf{L}'\)</span>, permanece inalterada:</p>
+<p><span class="math display">\[
+\mathbf{L}^*(\mathbf{L}^*)' = (\mathbf{L}\mathbf{T})(\mathbf{L}\mathbf{T})' = \mathbf{L}\mathbf{T}\mathbf{T}'\mathbf{L}' = \mathbf{L}(\mathbf{T}\mathbf{T}')\mathbf{L}' = \mathbf{L}\mathbf{I}\mathbf{L}' = \mathbf{L}\mathbf{L}'
+\]</span></p>
+<p>Portanto, o modelo <span class="math inline">\(\mathbf{\Sigma} = \mathbf{L}^*(\mathbf{L}^*)' + \mathbf{\Psi}\)</span> é equivalente ao modelo original. Essa propriedade é a base para a <strong>rotação fatorial</strong>, um procedimento que busca a solução <span class="math inline">\(\mathbf{L}^*\)</span> mais simples e interpretável, sem alterar o ajuste do modelo.</p>
+</section>
+<section id="adequabilidade-do-modelo-fatorial" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="adequabilidade-do-modelo-fatorial"><span class="header-section-number">7.4</span> Adequabilidade do Modelo Fatorial</h2>
+<p>Antes de aplicar os métodos de estimação, pode-se avaliar se os dados são adequados para a Análise Fatorial. A lema fundamental da AF é que as variáveis observadas são correlacionadas e que essa correlação pode ser explicada por fatores latentes. Se as variáveis são ortogonais ou se a correlação entre elas é espúria, o modelo fatorial não é apropriado.</p>
+<p>Dois dos principais diagnósticos para verificar a adequabilidade dos dados são o Teste de Esfericidade de Bartlett e a medida de adequação da amostra de Kaiser-Meyer-Olkin (KMO).</p>
+<section id="teste-de-esfericidade-de-bartlett" class="level3" data-number="7.4.1">
+<h3 data-number="7.4.1" class="anchored" data-anchor-id="teste-de-esfericidade-de-bartlett"><span class="header-section-number">7.4.1</span> Teste de Esfericidade de Bartlett</h3>
+<p>O Teste de Esfericidade de Bartlett avalia a hipótese nula (<span class="math inline">\(H_0\)</span>) de que a matriz de correlação populacional <span class="math inline">\(\mathbf{P}\)</span> é uma matriz identidade (<span class="math inline">\(H_0: \mathbf{P} = \mathbf{I}\)</span>). Se essa hipótese for verdadeira, as variáveis são não correlacionadas, e não há estrutura latente para ser extraída.</p>
+<p>A estatística de teste é baseada no determinante da matriz de correlação amostral <span class="math inline">\(\mathbf{R}\)</span> e, sob <span class="math inline">\(H_0\)</span>, segue aproximadamente uma distribuição Qui-quadrado. Para uma amostra de tamanho <em>n</em> e <em>p</em> variáveis, a estatística é:</p>
+<p><span class="math display">\[
+\chi^2 = -\left[(n - 1) - \frac{2p + 5}{6}\right] \ln(|\mathbf{R}|)
+\]</span></p>
+<p>Esta estatística tem, aproximadamente, uma distribuição <span class="math inline">\(\chi^2\)</span> com <span class="math inline">\(p(p-1)/2\)</span> graus de liberdade. Um p-valor baixo (e.g., &lt; 0.05) leva à rejeição de <span class="math inline">\(H_0\)</span>, indicando que existe correlação suficiente entre as variáveis para justificar a aplicação da Análise Fatorial.</p>
+</section>
+<section id="medida-de-adequação-da-amostra-kmo" class="level3" data-number="7.4.2">
+<h3 data-number="7.4.2" class="anchored" data-anchor-id="medida-de-adequação-da-amostra-kmo"><span class="header-section-number">7.4.2</span> Medida de Adequação da Amostra (KMO)</h3>
+<p>Enquanto o teste de Bartlett avalia se a matriz de correlação como um todo se desvia significativamente da identidade, a medida de Kaiser-Meyer-Olkin (KMO) quantifica o quão adequados os dados são para a fatorização. O KMO compara a magnitude dos coeficientes de correlação observados com a magnitude dos coeficientes de correlação parcial.</p>
+<p>A lógica é que, se as variáveis compartilham fatores comuns, as correlações parciais entre pares de variáveis (controlando pelas outras variáveis) devem ser pequenas. A estatística KMO é calculada como:</p>
+<p><span class="math display">\[
+\text{KMO} = \frac{\sum_{i \neq j} r_{ij}^2}{\sum_{i \neq j} r_{ij}^2 + \sum_{i \neq j} a_{ij}^2}
+\]</span></p>
+<p>Onde <span class="math inline">\(r_{ij}\)</span> é o coeficiente de correlação simples entre as variáveis <span class="math inline">\(X_i\)</span> e <span class="math inline">\(X_j\)</span>, e <span class="math inline">\(a_{ij}\)</span> é o coeficiente de correlação parcial.</p>
+<p>O valor do KMO varia de 0 a 1. Valores mais altos indicam que a Análise Fatorial é mais apropriada. Uma regra prática para a interpretação do KMO é:</p>
+<ul>
+<li><strong>&gt; 0.9</strong>: Maravilhoso</li>
+<li><strong>0.8 - 0.9</strong>: Meritório</li>
+<li><strong>0.7 - 0.8</strong>: Razoável</li>
+<li><strong>0.6 - 0.7</strong>: Medíocre</li>
+<li><strong>0.5 - 0.6</strong>: Ruim</li>
+<li><strong>&lt; 0.5</strong>: Inaceitável</li>
+</ul>
+<p>Valores abaixo de 0.5 sugerem que a Análise Fatorial pode não ser uma boa ideia.</p>
+</section>
+</section>
+<section id="métodos-de-estimação" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="métodos-de-estimação"><span class="header-section-number">7.5</span> Métodos de Estimação</h2>
+<p>Assumindo uma amostra aleatória <span class="math inline">\(\mathbf{x}_1, \dots, \mathbf{x}_n\)</span> de uma população com matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>, o desafio é estimar <span class="math inline">\(\mathbf{L}\)</span> e <span class="math inline">\(\mathbf{\Psi}\)</span> usando a matriz de covariâncias amostral <span class="math inline">\(\mathbf{S}\)</span> ou a matriz de correlação amostral <span class="math inline">\(\mathbf{R}\)</span>.</p>
+<p>Existem diversos métodos para estimar os parâmetros do modelo fatorial, cada um com suas próprias premissas e propriedades. Alguns dos mais conhecidos incluem:</p>
+<ul>
+<li>Método de Componentes Principais (MCP)</li>
+<li>Método da Máxima Verossimilhança (MMV)</li>
+<li>Método dos Fatores Principais (<em>Principal Axis Factoring</em>)</li>
+<li>Mínimos Quadrados Ponderados</li>
+<li>Mínimos Quadrados Generalizados</li>
+</ul>
+<p>Neste capítulo, focaremos nos dois métodos mais amplamente utilizados na prática: o Método de Componentes Principais, por sua simplicidade computacional, e o Método da Máxima Verossimilhança, por sua fundamentação estatística robusta.</p>
+<section id="a-solução-por-componentes-principais" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="a-solução-por-componentes-principais"><span class="header-section-number">7.5.1</span> A Solução por Componentes Principais</h3>
+<p>O método de componentes principais (MCP) provê uma solução para <span class="math inline">\(\mathbf{L}\)</span> e <span class="math inline">\(\mathbf{\Psi}\)</span> a partir da decomposição espectral da matriz de covariâncias amostral <span class="math inline">\(\mathbf{S}\)</span> (ou da matriz de correlações <span class="math inline">\(\mathbf{R}\)</span>).</p>
+<p>A ideia é que a matriz <span class="math inline">\(\mathbf{S}\)</span> pode ser decomposta em termos de seus pares de autovalor-autovetor <span class="math inline">\((\hat{\lambda}_i, \hat{\mathbf{e}}_i)\)</span>:</p>
+<p><span class="math display">\[
+\mathbf{S} = \hat{\lambda}_1\hat{\mathbf{e}}_1\hat{\mathbf{e}}_1' + \hat{\lambda}_2\hat{\mathbf{e}}_2\hat{\mathbf{e}}_2' + \dots + \hat{\lambda}_p\hat{\mathbf{e}}_p\hat{\mathbf{e}}_p'
+\]</span></p>
+<p>A estrutura do modelo fatorial é <span class="math inline">\(\mathbf{S} = \hat{\mathbf{L}}\hat{\mathbf{L}}' + \hat{\mathbf{\Psi}}\)</span>. O MCP busca uma aproximação para <span class="math inline">\(\mathbf{S}\)</span> retendo apenas os <em>m</em> primeiros componentes, que explicam a maior parte da variabilidade total. A matriz <span class="math inline">\(\hat{\mathbf{L}}\hat{\mathbf{L}}'\)</span> é construída para igualar a contribuição desses componentes:</p>
+<p><span class="math display">\[
+\hat{\mathbf{L}}\hat{\mathbf{L}}' = \hat{\lambda}_1\hat{\mathbf{e}}_1\hat{\mathbf{e}}_1' + \hat{\lambda}_2\hat{\mathbf{e}}_2\hat{\mathbf{e}}_2' + \dots + \hat{\lambda}_m\hat{\mathbf{e}}_m\hat{\mathbf{e}}_m'
+\]</span></p>
+<p>Uma solução explícita para <span class="math inline">\(\hat{\mathbf{L}}\)</span> que satisfaz essa equação é uma matriz <span class="math inline">\(p \times m\)</span> cujas colunas são os autovetores reescalados pelos respectivos autovalores. A matriz <span class="math inline">\(\hat{\mathbf{\Psi}}\)</span> é então definida para garantir que as variâncias do modelo (<span class="math inline">\(\text{diag}(\hat{\mathbf{L}}\hat{\mathbf{L}}' + \hat{\mathbf{\Psi}})\)</span>) sejam iguais às variâncias amostrais (<span class="math inline">\(\text{diag}(\mathbf{S})\)</span>).</p>
+<p>Isso nos leva à seguinte definição formal.</p>
+<div id="def-pc-solution" class="theorem definition" title="A Solução de Componentes Principais (m < p)">
+<p><span class="theorem-title"><strong>Definição 7.2</strong></span> Seja <span class="math inline">\(\mathbf{S}\)</span> a matriz de covariância amostral com pares de autovalor-autovetor <span class="math inline">\((\hat{\lambda}_i, \hat{\mathbf{e}}_i)\)</span>. A solução de componentes principais com <em>m</em> fatores é definida por:</p>
+<ul>
+<li><p><strong>Matriz de Cargas Estimada (<span class="math inline">\(\hat{\mathbf{L}}\)</span>)</strong>: <span class="math display">\[
+\hat{\mathbf{L}} = [\sqrt{\hat{\lambda}_1}\hat{\mathbf{e}}_1 | \sqrt{\hat{\lambda}_2}\hat{\mathbf{e}}_2 | \dots | \sqrt{\hat{\lambda}_m}\hat{\mathbf{e}}_m]
+\]</span></p></li>
+<li><p><strong>Matriz de Variâncias Específicas Estimada (<span class="math inline">\(\hat{\mathbf{\Psi}}\)</span>)</strong>: <span class="math display">\[
+\hat{\mathbf{\Psi}} = \text{diag}(\mathbf{S} - \hat{\mathbf{L}}\hat{\mathbf{L}}')
+\]</span></p></li>
+</ul>
+<p>onde <span class="math inline">\(\hat{\psi}_i = s_{ii} - \sum_{j=1}^{m} \hat{l}_{ij}^2\)</span>.</p>
+<p>Se a matriz de correlações <span class="math inline">\(\mathbf{R}\)</span> for utilizada, as cargas <span class="math inline">\(\hat{\mathbf{L}}\)</span> são calculadas a partir dos autovalores e autovetores de <span class="math inline">\(\mathbf{R}\)</span>, e as variâncias específicas são <span class="math inline">\(\hat{\psi}_i = 1 - \sum_{j=1}^{m} \hat{l}_{ij}^2\)</span>.</p>
+</div>
+<p>Por construção, este método força a diagonal da matriz de covariâncias do modelo, <span class="math inline">\(\hat{\mathbf{\Sigma}} = \hat{\mathbf{L}}\hat{\mathbf{L}}' + \hat{\mathbf{\Psi}}\)</span>, a ser idêntica à diagonal de <span class="math inline">\(\mathbf{S}\)</span>. O ajuste do modelo é então avaliado pela magnitude dos resíduos fora da diagonal. A matriz de resíduos é:</p>
+<p><span class="math display">\[
+\mathbf{S} - \hat{\mathbf{\Sigma}} = \mathbf{S} - (\hat{\mathbf{L}}\hat{\mathbf{L}}' + \hat{\mathbf{\Psi}})
+\]</span></p>
+<p>Como <span class="math inline">\(\hat{\mathbf{\Psi}} = \text{diag}(\mathbf{S} - \hat{\mathbf{L}}\hat{\mathbf{L}}')\)</span>, os elementos da diagonal da matriz de resíduos são zero. Os resíduos fora da diagonal são os elementos de <span class="math inline">\(\mathbf{S} - \hat{\mathbf{L}}\hat{\mathbf{L}}'\)</span>. Pode-se demonstrar que a soma dos quadrados de todos os elementos da matriz <span class="math inline">\(\mathbf{S} - \hat{\mathbf{L}}\hat{\mathbf{L}}'\)</span> (incluindo a diagonal) é:</p>
+<p><span class="math display">\[
+\sum_{i=1}^p \sum_{j=1}^p (s_{ij} - \sum_{k=1}^m \hat{l}_{ik}\hat{l}_{jk})^2 = \sum_{k=m+1}^p \hat{\lambda}_k^2
+\]</span></p>
+<p>Isso mostra que, para que o ajuste seja bom, a soma dos autovalores descartados (<span class="math inline">\(\hat{\lambda}_{m+1}, \dots, \hat{\lambda}_p\)</span>) deve ser pequena.</p>
+</section>
+<section id="método-da-máxima-verossimilhança-mmv" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="método-da-máxima-verossimilhança-mmv"><span class="header-section-number">7.5.2</span> Método da Máxima Verossimilhança (MMV)</h3>
+<p>O método da máxima verossimilhança (MMV) é uma abordagem mais rigorosa para a estimação, baseada em suposições sobre a distribuição dos dados.</p>
+<p><strong>Suposições Adicionais:</strong></p>
+<ol type="1">
+<li>O vetor de fatores comuns <span class="math inline">\(\mathbf{F}\)</span> e o vetor de erros <span class="math inline">\(\boldsymbol{\epsilon}\)</span> seguem uma distribuição normal multivariada:
+<ul>
+<li><span class="math inline">\(\mathbf{F} \sim N_m(\mathbf{0}, \mathbf{I})\)</span></li>
+<li><span class="math inline">\(\boldsymbol{\epsilon} \sim N_p(\mathbf{0}, \mathbf{\Psi})\)</span></li>
+</ul></li>
+<li><span class="math inline">\(\mathbf{F}\)</span> e <span class="math inline">\(\boldsymbol{\epsilon}\)</span> são independentes.</li>
+</ol>
+<p>Sob essas condições, o vetor de variáveis observáveis <span class="math inline">\(\mathbf{x}\)</span> segue uma distribuição normal multivariada <span class="math inline">\(N_p(\boldsymbol{\mu}, \mathbf{\Sigma})\)</span>, onde <span class="math inline">\(\mathbf{\Sigma} = \mathbf{L}\mathbf{L}' + \mathbf{\Psi}\)</span>.</p>
+<p>Dada uma amostra aleatória <span class="math inline">\(\mathbf{x}_1, \dots, \mathbf{x}_n\)</span>, a função de log-verossimilhança (ignorando constantes) para os parâmetros <span class="math inline">\(\mathbf{L}\)</span> e <span class="math inline">\(\mathbf{\Psi}\)</span> é:</p>
+<p><span class="math display">\[
+\log L(\mathbf{L}, \mathbf{\Psi}) = -\frac{n}{2} \ln |\mathbf{\Sigma}| - \frac{n}{2} \text{tr}(\mathbf{\Sigma}^{-1}\mathbf{S})
+\]</span></p>
+<p>onde <span class="math inline">\(\mathbf{S}\)</span> é a matriz de covariâncias amostral (versão ML, com divisor <em>n</em>). O objetivo é encontrar as estimativas <span class="math inline">\(\hat{\mathbf{L}}\)</span> e <span class="math inline">\(\hat{\mathbf{\Psi}}\)</span> que maximizam essa função, sujeito à restrição de que <span class="math inline">\(\hat{\mathbf{L}}'\hat{\mathbf{\Psi}}^{-1}\hat{\mathbf{L}}\)</span> seja uma matriz diagonal para garantir a unicidade da solução.</p>
+<p>A maximização é realizada por meio de algoritmos numéricos (como o de Newton-Raphson), pois não há uma solução analítica fechada. As estimativas resultantes, <span class="math inline">\(\hat{\mathbf{L}}\)</span> e <span class="math inline">\(\hat{\mathbf{\Psi}}\)</span>, satisfazem um conjunto complexo de equações.</p>
+<p>A principal vantagem do MMV é que ele permite um teste de hipóteses para a adequação do número de fatores <em>m</em>, comparando a matriz de covariâncias do modelo, <span class="math inline">\(\hat{\mathbf{\Sigma}} = \hat{\mathbf{L}}\hat{\mathbf{L}}' + \hat{\mathbf{\Psi}}\)</span>, com a matriz amostral <span class="math inline">\(\mathbf{S}\)</span>. Isso é fundamental na <strong>Análise Fatorial Confirmatória (AFC)</strong></p>
+</section>
+</section>
+<section id="a-escolha-do-número-de-fatores-m" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="a-escolha-do-número-de-fatores-m"><span class="header-section-number">7.6</span> A Escolha do Número de Fatores (m)</h2>
+<p>A determinação do número de fatores, <em>m</em>, é uma das decisões mais importantes na Análise Fatorial. Um número muito baixo de fatores pode não capturar a estrutura de covariância subjacente, enquanto um número muito alto pode levar a um modelo superajustado e de difícil interpretação, violando o princípio da parcimônia.</p>
+<p>A escolha de <em>m</em> geralmente envolve uma combinação de critérios estatísticos e julgamento prático. Vários dos métodos utilizados são análogos aos empregados na Análise de Componentes Principais (<a href="#sec-acp" class="quarto-xref"><span class="quarto-unresolved-ref">sec-acp</span></a>). Os mais comuns são:</p>
+<ol type="1">
+<li><p><strong>Proporção da Variância Total Explicada</strong>: Um critério comum é reter fatores suficientes para explicar uma proporção substancial (e.g., 70-90%) da variância total. No contexto do método de componentes principais para AF, a proporção da variância explicada pelo fator <em>j</em> é <span class="math inline">\(\hat{\lambda}_j / \text{tr}(\mathbf{S})\)</span>.</p></li>
+<li><p><strong>Critério de Kaiser (Autovalores &gt; 1)</strong>: Ao trabalhar com a matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>, o critério de Kaiser sugere reter apenas os fatores correspondentes a autovalores maiores que 1. A lógica é que um fator deve explicar pelo menos a variância de uma variável original.</p></li>
+<li><p><strong>Gráfico de cotovelo (<em>Scree Plot</em>)</strong>: Este é um gráfico dos autovalores ordenados (<span class="math inline">\(\hat{\lambda}_1 \ge \hat{\lambda}_2 \ge \dots\)</span>). Procura-se por um “cotovelo” no gráfico, um ponto onde a magnitude dos autovalores começa a diminuir drasticamente. O número de fatores a reter seria o número de pontos antes do início do platô.</p></li>
+<li><p><strong>Teste de Hipóteses (para MMV)</strong>: Quando o método da máxima verossimilhança é utilizado, é possível realizar um teste de razão de verossimilhanças para testar a hipótese nula de que <em>m</em> fatores são suficientes para descrever a estrutura de covariância.</p></li>
+</ol>
+<p>Na prática, é recomendável utilizar uma combinação desses critérios. A interpretabilidade da solução fatorial resultante é, em última análise, o guia mais importante.</p>
+</section>
+<section id="rotação-fatorial" class="level2" data-number="7.7">
+<h2 data-number="7.7" class="anchored" data-anchor-id="rotação-fatorial"><span class="header-section-number">7.7</span> Rotação Fatorial</h2>
+<p>Como visto anteriormente, a solução para a matriz de cargas fatoriais <span class="math inline">\(\hat{\mathbf{L}}\)</span> não é única. Qualquer rotação ortogonal dos fatores resulta em uma nova matriz de cargas <span class="math inline">\(\hat{\mathbf{L}}^* = \hat{\mathbf{L}}\mathbf{T}\)</span> que explica a estrutura de covariâncias dos dados exatamente da mesma forma, pois <span class="math inline">\(\hat{\mathbf{L}}\hat{\mathbf{L}}' = \hat{\mathbf{L}}^* (\hat{\mathbf{L}}^*)'\)</span>.</p>
+<p>Essa indeterminação, que a princípio parece um problema, é na verdade uma das ferramentas mais poderosas da Análise Fatorial. Ela nos permite girar a estrutura fatorial para uma posição que seja mais <strong>simples e interpretável</strong>, sem sacrificar o ajuste do modelo. O objetivo é alcançar o que o psicólogo Louis Thurstone chamou de <strong>estrutura simples</strong>.</p>
+<p>A estrutura simples ideal teria as seguintes propriedades:</p>
+<ol type="1">
+<li>Cada variável deve ter pelo menos uma carga fatorial próxima de zero.</li>
+<li>Cada fator deve ter várias cargas próximas de zero e algumas cargas altas.</li>
+<li>Para cada par de fatores, deve haver variáveis com cargas altas em um fator, mas não no outro.</li>
+</ol>
+<p>Em suma, busca-se uma matriz de cargas onde cada variável esteja fortemente associada a apenas um ou poucos fatores, e cada fator represente claramente um subconjunto de variáveis. Os métodos de rotação são algoritmos que buscam, de forma objetiva, uma matriz <span class="math inline">\(\mathbf{T}\)</span> que aproxime a matriz de cargas rotacionada <span class="math inline">\(\hat{\mathbf{L}}^*\)</span> a essa estrutura ideal.</p>
+<p>As rotações dividem-se em duas categorias principais.</p>
+<section id="rotações-ortogonais" class="level3" data-number="7.7.1">
+<h3 data-number="7.7.1" class="anchored" data-anchor-id="rotações-ortogonais"><span class="header-section-number">7.7.1</span> Rotações Ortogonais</h3>
+<p>Neste tipo de rotação, a matriz de transformação <span class="math inline">\(\mathbf{T}\)</span> é ortogonal, o que significa que os eixos dos fatores são girados, mas mantidos em um ângulo de 90 graus entre si. A consequência fundamental é que os fatores rotacionados <strong>permanecem não correlacionados</strong>.</p>
+<p>Os métodos mais comuns de rotação ortogonal são:</p>
+<ul>
+<li><p><strong>Varimax</strong>: É o método de rotação ortogonal mais popular. O objetivo do Varimax é simplificar as <strong>colunas</strong> da matriz de cargas fatoriais. Para cada fator, ele busca maximizar a variância das cargas ao quadrado, efetivamente empurrando as cargas para perto de 0 ou <span class="math inline">\(\pm 1\)</span>. Isso facilita a identificação de quais variáveis estão associadas a cada fator. O critério Varimax maximiza a seguinte função:</p>
+<p><span class="math display">\[
+V = \sum_{j=1}^{m} \left[ \frac{1}{p} \sum_{i=1}^{p} (\hat{l}_{ij}^* / h_i)^4 - \left( \frac{1}{p} \sum_{i=1}^{p} (\hat{l}_{ij}^* / h_i)^2 \right)^2 \right]
+\]</span></p>
+<p>Onde <span class="math inline">\(\hat{l}_{ij}^*\)</span> são as cargas rotacionadas e <span class="math inline">\(h_i^2\)</span> são as comunalidades (que permanecem invariantes sob rotação).</p></li>
+<li><p><strong>Quartimax</strong>: Este método foca em simplificar as <strong>linhas</strong> da matriz de cargas. Ele tenta fazer com que cada variável tenha carga alta em apenas um fator. O Quartimax foi o primeiro método analítico proposto, mas tende a criar um fator geral com cargas altas para muitas variáveis, o que pode dificultar a interpretação.</p></li>
+<li><p><strong>Equimax</strong>: É um meio termo entre o Varimax e o Quartimax. Ele tenta simplificar tanto as linhas quanto as colunas da matriz de cargas simultaneamente.</p></li>
+</ul>
+</section>
+<section id="rotações-oblíquas" class="level3" data-number="7.7.2">
+<h3 data-number="7.7.2" class="anchored" data-anchor-id="rotações-oblíquas"><span class="header-section-number">7.7.2</span> Rotações Oblíquas</h3>
+<p>Em muitos campos, especialmente nas ciências sociais, é teoricamente razoável esperar que os fatores latentes sejam correlacionados. Por exemplo, os fatores “habilidade verbal” e “habilidade matemática” são distintos, mas é provável que sejam positivamente correlacionados.</p>
+<p>As rotações oblíquas permitem que os fatores se tornem correlacionados. A matriz de transformação <span class="math inline">\(\mathbf{T}\)</span> não é mais ortogonal, e os eixos dos fatores podem ter ângulos diferentes de 90 graus. A vantagem é a capacidade de encontrar uma estrutura mais simples e teoricamente mais realista, ao custo de uma complexidade maior na interpretação, pois é preciso analisar tanto a matriz de cargas quanto a matriz de correlação entre os fatores.</p>
+<p>Os métodos mais comuns incluem:</p>
+<ul>
+<li><p><strong>Promax</strong>: É um método muito utilizado que funciona em duas etapas. Primeiro, ele realiza uma rotação ortogonal (geralmente Varimax). Em seguida, ele relaxa a restrição de ortogonalidade, permitindo que os fatores se correlacionem para buscar uma estrutura ainda mais simples (com mais cargas próximas de zero).</p></li>
+<li><p><strong>Oblimin Direto</strong>: É um método mais geral que busca minimizar a covariância das cargas ao quadrado para pares de fatores. Ele possui um parâmetro (delta) que controla o grau de correlação permitido entre os fatores.</p></li>
+</ul>
+<p>A escolha entre uma rotação ortogonal e oblíqua depende de considerações teóricas. Se não há uma razão forte para acreditar que os fatores são correlacionados, a rotação ortogonal (como a Varimax) é geralmente preferida por sua simplicidade. Se a correlação entre os fatores é esperada, uma rotação oblíqua pode fornecer uma representação mais fiel da realidade.</p>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copiada");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copiada");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+        const codeEl = trigger.previousElementSibling.cloneNode(true);
+        for (const childEl of codeEl.children) {
+          if (isCodeAnnotation(childEl)) {
+            childEl.remove();
+          }
+        }
+        return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+<nav class="page-navigation">
+  <div class="nav-page nav-page-previous">
+      <a href="../../src/02_tec_mult/06_acp.html" class="pagination-link" aria-label="Análise de Componentes Principais">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span>
+      </a>          
+  </div>
+  <div class="nav-page nav-page-next">
+      <a href="../../src/exemplos/acp_manual.html" class="pagination-link" aria-label="Exemplo manual: ACP">
+        <span class="nav-page-text">Exemplo manual: ACP</span> <i class="bi bi-arrow-right-short"></i>
+      </a>
+  </div>
+</nav>
+</div> <!-- /content -->
+
+
+
+
+</body></html>

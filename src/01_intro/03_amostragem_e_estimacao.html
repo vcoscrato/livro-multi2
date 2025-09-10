@@ -6,9 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Victor Coscrato">
 
-<title>Estatística Multivariada 2</title>
+<title>3&nbsp; Amostra e Estimação de Parâmetros – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -21,46 +20,28 @@ ul.task-list li input[type="checkbox"] {
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
-/* CSS for citations */
-div.csl-bib-body { }
-div.csl-entry {
-  clear: both;
-}
-.hanging-indent div.csl-entry {
-  margin-left:2em;
-  text-indent:-2em;
-}
-div.csl-left-margin {
-  min-width:2em;
-  float:left;
-}
-div.csl-right-inline {
-  margin-left:2em;
-  padding-left:1em;
-}
-div.csl-indent {
-  margin-left: 2em;
-}</style>
+</style>
 
 
-<script src="site_libs/quarto-nav/quarto-nav.js"></script>
-<script src="site_libs/quarto-nav/headroom.min.js"></script>
-<script src="site_libs/clipboard/clipboard.min.js"></script>
-<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
-<script src="site_libs/quarto-search/fuse.min.js"></script>
-<script src="site_libs/quarto-search/quarto-search.js"></script>
-<meta name="quarto:offset" content="./">
-<link href="./src/01_intro/01_introducao.html" rel="next">
-<script src="site_libs/quarto-html/quarto.js" type="module"></script>
-<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
-<script src="site_libs/quarto-html/popper.min.js"></script>
-<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
-<script src="site_libs/quarto-html/anchor.min.js"></script>
-<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
-<script src="site_libs/bootstrap/bootstrap.min.js"></script>
-<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../../">
+<link href="../../src/01_intro/04_normal_multivariada.html" rel="next">
+<link href="../../src/01_intro/02_vetores_aleatorios.html" rel="prev">
+<script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/popper.min.js"></script>
+<script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -89,6 +70,35 @@ div.csl-indent {
   }
 }</script>
 
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
@@ -101,7 +111,7 @@ div.csl-indent {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./index.html">Prefácio</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/01_intro/01_introducao.html">Parte I: Introdução</a></li><li class="breadcrumb-item"><a href="../../src/01_intro/03_amostragem_e_estimacao.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostra e Estimação de Parâmetros</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -116,9 +126,9 @@ div.csl-indent {
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
     <div class="pt-lg-2 mt-2 text-left sidebar-header">
     <div class="sidebar-title mb-0 py-0">
-      <a href="./">Estatística Multivariada 2</a> 
+      <a href="../../">Estatística Multivariada 2</a> 
         <div class="sidebar-tools-main">
-    <a href="./Estatística-Multivariada-2.pdf" title="Baixar PDF" class="quarto-navigation-tool px-1" aria-label="Baixar PDF"><i class="bi bi-file-pdf"></i></a>
+    <a href="../../Estatística-Multivariada-2.pdf" title="Baixar PDF" class="quarto-navigation-tool px-1" aria-label="Baixar PDF"><i class="bi bi-file-pdf"></i></a>
 </div>
     </div>
       </div>
@@ -131,7 +141,7 @@ div.csl-indent {
     <ul class="list-unstyled mt-1">
         <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./index.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../index.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Prefácio</span></a>
   </div>
 </li>
@@ -146,31 +156,31 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/01_introducao.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/01_introducao.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/02_vetores_aleatorios.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/02_vetores_aleatorios.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vetores Aleatórios e Suas Características</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/03_amostragem_e_estimacao.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/03_amostragem_e_estimacao.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostra e Estimação de Parâmetros</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/04_normal_multivariada.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/04_normal_multivariada.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Distribuição Normal Multivariada</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/01_intro/05_algebra_matricial.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/05_algebra_matricial.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span></a>
   </div>
 </li>
@@ -187,13 +197,13 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
   </div>
 </li>
@@ -210,13 +220,13 @@ div.csl-indent {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exemplo manual: ACP</span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="./src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Rotação fatorial em R</span></a>
   </div>
 </li>
@@ -232,35 +242,24 @@ div.csl-indent {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#prefácio" id="toc-prefácio" class="nav-link active" data-scroll-target="#prefácio">Prefácio</a></li>
+  <li><a href="#da-população-à-amostra" id="toc-da-população-à-amostra" class="nav-link active" data-scroll-target="#da-população-à-amostra"><span class="header-section-number">3.1</span> Da População à Amostra</a></li>
+  <li><a href="#estimadores-amostrais" id="toc-estimadores-amostrais" class="nav-link" data-scroll-target="#estimadores-amostrais"><span class="header-section-number">3.2</span> Estimadores Amostrais</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default">
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/01_intro/01_introducao.html">Parte I: Introdução</a></li><li class="breadcrumb-item"><a href="../../src/01_intro/03_amostragem_e_estimacao.html"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostra e Estimação de Parâmetros</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Estatística Multivariada 2</h1>
+<h1 class="title"><span class="chapter-number">3</span>&nbsp; <span class="chapter-title">Amostra e Estimação de Parâmetros</span></h1>
 </div>
 
 
 
 <div class="quarto-title-meta">
 
-    <div>
-    <div class="quarto-title-meta-heading">Autor</div>
-    <div class="quarto-title-meta-contents">
-             <p>Victor Coscrato </p>
-          </div>
-  </div>
     
-    <div>
-    <div class="quarto-title-meta-heading">Data de Publicação</div>
-    <div class="quarto-title-meta-contents">
-      <p class="date">31 de julho de 2025</p>
-    </div>
-  </div>
   
     
   </div>
@@ -270,22 +269,84 @@ div.csl-indent {
 </header>
 
 
-<section id="prefácio" class="level1 unnumbered">
-<h1 class="unnumbered">Prefácio</h1>
-<p>Seja Bem-vindo! Este livro aborda uma variedade de técnicas de análise multivariada, essenciais para a compreensão de dados complexos em diversas áreas do conhecimento.</p>
-<p>Este material foi elaborado especialmente para estudantes tendo um primeiro contato com técnicas estatísticas multivariadas. São cobertos os métodos a seguir:</p>
-<ul>
-<li><a href="./src/02_tec_mult/06_acp.html">Análise de Componentes Principais</a></li>
-<li><a href="./src/02_tec_mult/07_af.html">Análise Fatorial</a></li>
-<li>Análise de Agrupamento</li>
-<li>Análise Discriminante</li>
-<li>Análise de Correlação Canônica</li>
-<li>Análise de Correspondência</li>
-</ul>
-<p>O objetivo é fornecer uma base sólida e prática para a aplicação dessas técnicas. antes, temos uma breve introdução dos conceitos fundamentais que norteiam a análise multivariada e algumas definições e resultados vetores e matrizes que são importantes para o acompanhamento do livro.</p>
-<div id="refs" role="list">
-
+<p>No capítulo anterior, introduzimos os conceitos teóricos que descrevem uma população multivariada: o vetor de médias <span class="math inline">\(\boldsymbol{\mu}\)</span> e a matriz de covariâncias <span class="math inline">\(\boldsymbol{\Sigma}\)</span>. Esses parâmetros são construções ideais que existem no nível populacional. Na prática, quase nunca temos acesso a toda a população para calculá-los diretamente.</p>
+<p>O nosso trabalho como estatísticos e analistas de dados é fazer inferências sobre esses parâmetros desconhecidos com base em um conjunto limitado de dados. Fazemos isso através da <strong>amostragem</strong>.</p>
+<section id="da-população-à-amostra" class="level2" data-number="3.1">
+<h2 data-number="3.1" class="anchored" data-anchor-id="da-população-à-amostra"><span class="header-section-number">3.1</span> Da População à Amostra</h2>
+<p>Assumimos que coletamos uma <strong>amostra aleatória</strong> de <span class="math inline">\(n\)</span> observações da população. Cada observação, <span class="math inline">\(\mathbf{x}_i\)</span> (com <span class="math inline">\(i=1, \ldots, n\)</span>), é uma <strong>realização</strong> independente do vetor aleatório <span class="math inline">\(\mathbf{x}\)</span> que definimos no capítulo anterior.</p>
+<p>A coleção de todas essas observações forma o nosso conjunto de dados. É aqui que, finalmente, introduzimos a <strong>matriz de dados</strong>, <span class="math inline">\(\mathbf{X}\)</span>, uma estrutura central em toda a análise multivariada aplicada.</p>
+<p>A matriz <span class="math inline">\(\mathbf{X}\)</span> é uma matriz de dimensão <span class="math inline">\(n \times p\)</span>, onde cada linha é uma observação multivariada e cada coluna representa uma variável.</p>
+<p><span id="eq-matriz-dados"><span class="math display">\[
+\mathbf{X} = \begin{pmatrix}
+\mathbf{x}_1' \\
+\mathbf{x}_2' \\
+\vdots \\
+\mathbf{x}_n'
+\end{pmatrix} = \begin{pmatrix}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1p} \\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{n1} &amp; x_{n2} &amp; \cdots &amp; x_{np}
+\end{pmatrix}
+\tag{3.1}\]</span></span></p>
+<p>O elemento <span class="math inline">\(x_{ij}\)</span> representa o valor da <span class="math inline">\(j\)</span>-ésima variável para a <span class="math inline">\(i\)</span>-ésima observação. Com esta matriz em mãos, nosso objetivo é calcular quantidades que sirvam como boas <strong>estimativas</strong> para os parâmetros populacionais <span class="math inline">\(\boldsymbol{\mu}\)</span> e <span class="math inline">\(\boldsymbol{\Sigma}\)</span>.</p>
+</section>
+<section id="estimadores-amostrais" class="level2" data-number="3.2">
+<h2 data-number="3.2" class="anchored" data-anchor-id="estimadores-amostrais"><span class="header-section-number">3.2</span> Estimadores Amostrais</h2>
+<p>As quantidades que calculamos a partir da amostra são chamadas de <strong>estatísticas amostrais</strong> ou <strong>estimadores</strong>, e são as contrapartes amostrais dos parâmetros populacionais.</p>
+<div id="def-vetor-medias-amostral" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3.1</strong></span> O estimador de <span class="math inline">\(\boldsymbol{\mu}\)</span> é o <strong>vetor de médias amostral</strong>, <span class="math inline">\(\bar{\mathbf{x}}\)</span>, cujos componentes <span class="math inline">\(\bar{x}_j\)</span> são a média das observações para a <span class="math inline">\(j\)</span>-ésima variável.</p>
+<p><span class="math display">\[
+\bar{x}_j = \frac{1}{n} \sum_{i=1}^n x_{ij}, \quad \text{resultando em} \quad \bar{\mathbf{x}} = \begin{pmatrix}
+\bar{x}_1 \\
+\vdots \\
+\bar{x}_p
+\end{pmatrix}
+\]</span></p>
 </div>
+<div id="def-matriz-cov-amostral" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3.2</strong></span> O estimador de <span class="math inline">\(\boldsymbol{\Sigma}\)</span> é a <strong>matriz de covariâncias amostral</strong>, <span class="math inline">\(\mathbf{S}\)</span>. Seus elementos são a variância amostral (<span class="math inline">\(s_{jj}\)</span>) e a covariância amostral (<span class="math inline">\(s_{jk}\)</span>).</p>
+<p><span class="math inline">\(s_{jk} = \frac{1}{n-1} \sum_{i=1}^n (x_{ij} - \bar{x}_j)(x_{ik} - \bar{x}_k)\)</span></p>
+<p>A matriz resultante é:</p>
+<p><span class="math display">\[
+\mathbf{S} = \begin{pmatrix}
+s_{11} &amp; s_{12} &amp; \cdots &amp; s_{1p} \\
+s_{21} &amp; s_{22} &amp; \cdots &amp; s_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+s_{p1} &amp; s_{p2} &amp; \cdots &amp; s_{pp}
+\end{pmatrix}
+\]</span></p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Por que dividir por <span class="math inline">\(n-1\)</span>?
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>A divisão por <span class="math inline">\(n-1\)</span> (graus de liberdade) em vez de <span class="math inline">\(n\)</span> é feita para garantir que <span class="math inline">\(s_{jk}\)</span> seja um estimador não-viesado de <span class="math inline">\(\sigma_{jk}\)</span>, ou seja, <span class="math inline">\(E[s_{jk}] = \sigma_{jk}\)</span>.</p>
+</div>
+</div>
+</div>
+<div id="def-matriz-corr-amostral" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 3.3</strong></span> O estimador de <span class="math inline">\(\mathbf{P}\)</span> é a <strong>matriz de correlações amostral</strong>, <span class="math inline">\(\mathbf{R}\)</span>, cujos elementos <span class="math inline">\(r_{jk}\)</span> são obtidos padronizando a covariância amostral.</p>
+<p><span class="math inline">\(r_{jk} = \frac{s_{jk}}{\sqrt{s_{jj}} \sqrt{s_{kk}}} = \frac{\sum_{i=1}^n (x_{ij} - \bar{x}_j)(x_{ik} - \bar{x}_k)}{\sqrt{\sum_{i=1}^n (x_{ij} - \bar{x}_j)^2} \sqrt{\sum_{i=1}^n (x_{ik} - \bar{x}_k)^2}}\)</span></p>
+<p>A matriz resultante é:</p>
+<p><span class="math display">\[
+\mathbf{R} = \begin{pmatrix}
+1 &amp; r_{12} &amp; \cdots &amp; r_{1p} \\
+r_{21} &amp; 1 &amp; \cdots &amp; r_{2p} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+r_{p1} &amp; r_{p2} &amp; \cdots &amp; 1
+\end{pmatrix}
+\]</span></p>
+<p>A matriz <span class="math inline">\(\mathbf{R}\)</span> é uma matriz simétrica com 1s na diagonal.</p>
+</div>
+<hr>
+<p><strong>Em resumo:</strong> Neste capítulo, fizemos a ponte crucial entre a teoria e a prática. - No <strong>nível populacional</strong>, temos parâmetros teóricos e não observáveis (<span class="math inline">\(\boldsymbol{\mu}\)</span>, <span class="math inline">\(\boldsymbol{\Sigma}\)</span>). - No <strong>nível amostral</strong>, temos dados observáveis na matriz <span class="math inline">\(\mathbf{X}\)</span>, a partir da qual calculamos estatísticas (<span class="math inline">\(\bar{\mathbf{x}}\)</span>, <span class="math inline">\(\mathbf{S}\)</span>) que <strong>estimam</strong> esses parâmetros.</p>
+<p>A maior parte das técnicas que veremos neste livro opera sobre as matrizes <span class="math inline">\(\mathbf{S}\)</span> ou <span class="math inline">\(\mathbf{R}\)</span> para fazer inferências sobre a estrutura da população.</p>
 
 
 </section>
@@ -692,10 +753,13 @@ div.csl-indent {
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
+      <a href="../../src/01_intro/02_vetores_aleatorios.html" class="pagination-link" aria-label="Vetores Aleatórios e Suas Características">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">2</span>&nbsp; <span class="chapter-title">Vetores Aleatórios e Suas Características</span></span>
+      </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="./src/01_intro/01_introducao.html" class="pagination-link" aria-label="Introdução">
-        <span class="nav-page-text"><span class="chapter-number">1</span>&nbsp; <span class="chapter-title">Introdução</span></span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/01_intro/04_normal_multivariada.html" class="pagination-link" aria-label="A Distribuição Normal Multivariada">
+        <span class="nav-page-text"><span class="chapter-number">4</span>&nbsp; <span class="chapter-title">A Distribuição Normal Multivariada</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
