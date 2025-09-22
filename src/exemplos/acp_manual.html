@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -410,13 +410,13 @@ det \begin{pmatrix}
 \]</span></p>
 <p>Resolver este determinante cúbico manualmente é trabalhoso. Usando uma calculadora ou software, encontramos os seguintes autovalores:</p>
 <p><span class="math display">\[
-\lambda_1 = 1.98 \quad \lambda_2 = 1.05 \quad \lambda_3 = 0.02
+\lambda_1 = 1.98 \quad \lambda_2 = 1.00 \quad \lambda_3 = 0.02
 \]</span></p>
 <section id="interpretação-dos-autovalores" class="level3">
 <h3 class="anchored" data-anchor-id="interpretação-dos-autovalores">Interpretação dos Autovalores</h3>
-<p>A variância total no sistema é a soma dos autovalores (que é igual ao traço da matriz <span class="math inline">\(\mathbf{R}\)</span>, ou seja, 3). - <strong>Variância Total</strong> = <span class="math inline">\(1.98 + 1.05 + 0.02 = 3.00\)</span></p>
-<p>A proporção da variância explicada por cada componente é: - <strong>CP1</strong>: <span class="math inline">\(\frac{1.98}{3.00} = 66.0\%\)</span> - <strong>CP2</strong>: <span class="math inline">\(\frac{1.05}{3.00} = 35.0\%\)</span> - <strong>CP3</strong>: <span class="math inline">\(\frac{0.02}{3.00} = 0.7\%\)</span></p>
-<p>Os dois primeiros componentes juntos explicam <span class="math inline">\(66.0\% + 35.0\% = 101.0\%\)</span> da variância total. Isso indica que podemos reduzir a dimensionalidade de 3 para 2 com uma perda mínima de informação.</p>
+<p>A variância total no sistema é a soma dos autovalores (que é igual ao traço da matriz <span class="math inline">\(\mathbf{R}\)</span>, ou seja, 3). - <strong>Variância Total</strong> = <span class="math inline">\(1.98 + 1.00 + 0.02 = 3.00\)</span></p>
+<p>A proporção da variância explicada por cada componente é: - <strong>CP1</strong>: <span class="math inline">\(\frac{1.98}{3.00} = 66.0\%\)</span> - <strong>CP2</strong>: <span class="math inline">\(\frac{1.00}{3.00} = 33.3\%\)</span> - <strong>CP3</strong>: <span class="math inline">\(\frac{0.02}{3.00} = 0.7\%\)</span></p>
+<p>Os dois primeiros componentes juntos explicam <span class="math inline">\(66.0\% + 33.3\% = 99.3\%\)</span> da variância total. Isso indica que podemos reduzir a dimensionalidade de 3 para 2 com uma perda mínima de informação.</p>
 </section>
 </section>
 <section id="passo-4-calcular-os-autovetores" class="level2">
@@ -434,11 +434,11 @@ det \begin{pmatrix}
 \]</span> A solução, após normalização (para que <span class="math inline">\(\mathbf{e}_1'\mathbf{e}_1 = 1\)</span>), é: <span class="math display">\[
 \mathbf{e}_1 = \begin{pmatrix} 0.69 \\ 0.71 \\ -0.15 \end{pmatrix}
 \]</span></p></li>
-<li><p>Para <span class="math inline">\(\lambda_2 = 1.05\)</span>: <span class="math display">\[
+<li><p>Para <span class="math inline">\(\lambda_2 = 1.00\)</span>: <span class="math display">\[
 \begin{pmatrix}
--0.05 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; -0.05 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; -0.05
+0.00 &amp; 0.96 &amp; -0.20 \\
+0.96 &amp; 0.00 &amp; -0.29 \\
+-0.20 &amp; -0.29 &amp; 0.00
 \end{pmatrix}
 \begin{pmatrix} e_{21} \\ e_{22} \\ e_{23} \end{pmatrix} =
 \begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
