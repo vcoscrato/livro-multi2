@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>6&nbsp; Análise de Componentes Principais – Estatística Multivariada 2</title>
+<title>7&nbsp; Análise de Componentes Principais – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -31,7 +31,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
 <link href="../../src/02_tec_mult/07_af.html" rel="next">
-<link href="../../src/01_intro/05_algebra_matricial.html" rel="prev">
+<link href="../../src/01_intro/06_distancias.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -114,7 +114,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Técnicas Multivariadas</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Métodos multivariados</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -187,12 +187,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/06_distancias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Parte II: Técnicas Multivariadas</span></a>
+ <span class="menu-text">Parte II: Métodos multivariados</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -201,13 +207,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/02_tec_mult/08_cluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span></a>
   </div>
 </li>
       </ul>
@@ -245,34 +257,34 @@ window.Quarto = {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#variância-como-medida-de-informação" id="toc-variância-como-medida-de-informação" class="nav-link active" data-scroll-target="#variância-como-medida-de-informação"><span class="header-section-number">6.1</span> Variância como Medida de Informação</a></li>
-  <li><a href="#a-formalização-matemática" id="toc-a-formalização-matemática" class="nav-link" data-scroll-target="#a-formalização-matemática"><span class="header-section-number">6.2</span> A Formalização Matemática</a>
+  <li><a href="#variância-como-medida-de-informação" id="toc-variância-como-medida-de-informação" class="nav-link active" data-scroll-target="#variância-como-medida-de-informação"><span class="header-section-number">7.1</span> Variância como Medida de Informação</a></li>
+  <li><a href="#a-formalização-matemática" id="toc-a-formalização-matemática" class="nav-link" data-scroll-target="#a-formalização-matemática"><span class="header-section-number">7.2</span> A Formalização Matemática</a>
   <ul class="collapse">
-  <li><a href="#o-problema-de-maximização" id="toc-o-problema-de-maximização" class="nav-link" data-scroll-target="#o-problema-de-maximização"><span class="header-section-number">6.2.1</span> O Problema de Maximização</a></li>
-  <li><a href="#componentes-subsequentes" id="toc-componentes-subsequentes" class="nav-link" data-scroll-target="#componentes-subsequentes"><span class="header-section-number">6.2.2</span> Componentes Subsequentes</a></li>
+  <li><a href="#o-problema-de-maximização" id="toc-o-problema-de-maximização" class="nav-link" data-scroll-target="#o-problema-de-maximização"><span class="header-section-number">7.2.1</span> O Problema de Maximização</a></li>
+  <li><a href="#componentes-subsequentes" id="toc-componentes-subsequentes" class="nav-link" data-scroll-target="#componentes-subsequentes"><span class="header-section-number">7.2.2</span> Componentes Subsequentes</a></li>
   </ul></li>
-  <li><a href="#a-importância-do-pré-processamento-dos-dados" id="toc-a-importância-do-pré-processamento-dos-dados" class="nav-link" data-scroll-target="#a-importância-do-pré-processamento-dos-dados"><span class="header-section-number">6.3</span> A Importância do Pré-processamento dos Dados</a>
+  <li><a href="#a-importância-do-pré-processamento-dos-dados" id="toc-a-importância-do-pré-processamento-dos-dados" class="nav-link" data-scroll-target="#a-importância-do-pré-processamento-dos-dados"><span class="header-section-number">7.3</span> A Importância do Pré-processamento dos Dados</a>
   <ul class="collapse">
-  <li><a href="#centralização" id="toc-centralização" class="nav-link" data-scroll-target="#centralização"><span class="header-section-number">6.3.1</span> Centralização</a></li>
-  <li><a href="#por-que-escalonar-o-dilema-da-covariância-vs.-correlação" id="toc-por-que-escalonar-o-dilema-da-covariância-vs.-correlação" class="nav-link" data-scroll-target="#por-que-escalonar-o-dilema-da-covariância-vs.-correlação"><span class="header-section-number">6.3.2</span> Por que Escalonar? O Dilema da Covariância vs.&nbsp;Correlação</a></li>
+  <li><a href="#centralização" id="toc-centralização" class="nav-link" data-scroll-target="#centralização"><span class="header-section-number">7.3.1</span> Centralização</a></li>
+  <li><a href="#por-que-escalonar-o-dilema-da-covariância-vs.-correlação" id="toc-por-que-escalonar-o-dilema-da-covariância-vs.-correlação" class="nav-link" data-scroll-target="#por-que-escalonar-o-dilema-da-covariância-vs.-correlação"><span class="header-section-number">7.3.2</span> Por que Escalonar? O Dilema da Covariância vs.&nbsp;Correlação</a></li>
   </ul></li>
-  <li><a href="#componentes-principais-populacionais-vs.-amostrais" id="toc-componentes-principais-populacionais-vs.-amostrais" class="nav-link" data-scroll-target="#componentes-principais-populacionais-vs.-amostrais"><span class="header-section-number">6.4</span> Componentes Principais Populacionais vs.&nbsp;Amostrais</a></li>
-  <li><a href="#escolhendo-o-número-de-componentes" id="toc-escolhendo-o-número-de-componentes" class="nav-link" data-scroll-target="#escolhendo-o-número-de-componentes"><span class="header-section-number">6.5</span> Escolhendo o Número de Componentes</a>
+  <li><a href="#componentes-principais-populacionais-vs.-amostrais" id="toc-componentes-principais-populacionais-vs.-amostrais" class="nav-link" data-scroll-target="#componentes-principais-populacionais-vs.-amostrais"><span class="header-section-number">7.4</span> Componentes Principais Populacionais vs.&nbsp;Amostrais</a></li>
+  <li><a href="#escolhendo-o-número-de-componentes" id="toc-escolhendo-o-número-de-componentes" class="nav-link" data-scroll-target="#escolhendo-o-número-de-componentes"><span class="header-section-number">7.5</span> Escolhendo o Número de Componentes</a>
   <ul class="collapse">
-  <li><a href="#critério-da-variância-explicada-acumulada" id="toc-critério-da-variância-explicada-acumulada" class="nav-link" data-scroll-target="#critério-da-variância-explicada-acumulada"><span class="header-section-number">6.5.1</span> Critério da Variância Explicada Acumulada</a></li>
-  <li><a href="#critério-do-autovalor-critério-de-kaiser" id="toc-critério-do-autovalor-critério-de-kaiser" class="nav-link" data-scroll-target="#critério-do-autovalor-critério-de-kaiser"><span class="header-section-number">6.5.2</span> Critério do Autovalor (Critério de Kaiser)</a></li>
-  <li><a href="#scree-plot-gráfico-de-cotovelo" id="toc-scree-plot-gráfico-de-cotovelo" class="nav-link" data-scroll-target="#scree-plot-gráfico-de-cotovelo"><span class="header-section-number">6.5.3</span> Scree Plot (Gráfico de Cotovelo)</a></li>
+  <li><a href="#critério-da-variância-explicada-acumulada" id="toc-critério-da-variância-explicada-acumulada" class="nav-link" data-scroll-target="#critério-da-variância-explicada-acumulada"><span class="header-section-number">7.5.1</span> Critério da Variância Explicada Acumulada</a></li>
+  <li><a href="#critério-do-autovalor-critério-de-kaiser" id="toc-critério-do-autovalor-critério-de-kaiser" class="nav-link" data-scroll-target="#critério-do-autovalor-critério-de-kaiser"><span class="header-section-number">7.5.2</span> Critério do Autovalor (Critério de Kaiser)</a></li>
+  <li><a href="#scree-plot-gráfico-de-cotovelo" id="toc-scree-plot-gráfico-de-cotovelo" class="nav-link" data-scroll-target="#scree-plot-gráfico-de-cotovelo"><span class="header-section-number">7.5.3</span> Scree Plot (Gráfico de Cotovelo)</a></li>
   </ul></li>
-  <li><a href="#interpretando-os-componentes-principais" id="toc-interpretando-os-componentes-principais" class="nav-link" data-scroll-target="#interpretando-os-componentes-principais"><span class="header-section-number">6.6</span> Interpretando os Componentes Principais</a></li>
+  <li><a href="#interpretando-os-componentes-principais" id="toc-interpretando-os-componentes-principais" class="nav-link" data-scroll-target="#interpretando-os-componentes-principais"><span class="header-section-number">7.6</span> Interpretando os Componentes Principais</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Técnicas Multivariadas</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Métodos multivariados</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-acp" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></h1>
+<h1 class="title"><span id="sec-acp" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></h1>
 </div>
 
 
@@ -294,85 +306,85 @@ window.Quarto = {
 <p>Geometricamente, a ACP é uma projeção do espaço original de variáveis para um outro espaço com características mais interessantes: A variância dos dados é concentrada em direções especificas (os componentes principais) e não existem correlações entre os novos eixos.</p>
 <p>Para construir a intuição geométrica, vamos começar com um exemplo simples, em duas dimensões.</p>
 <div id="exm-pca-geom" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 6.1</strong></span> Suponha que coletamos dados de duas variáveis, <strong>Peso</strong> (em kg) e <strong>Altura</strong> (em cm), de um grupo de 10 pessoas.</p>
+<p><span class="theorem-title"><strong>Exemplo 7.1</strong></span> Suponha que coletamos dados de duas variáveis, <strong>Peso</strong> (em kg) e <strong>Altura</strong> (em cm), de um grupo de 10 pessoas.</p>
 <div class="cell" data-tbl-cap="Tabela de dados com Peso (kg) e Altura (cm)." data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <style type="text/css">
-#T_64b57_row10_col0, #T_64b57_row10_col1, #T_64b57_row10_col2, #T_64b57_row11_col0, #T_64b57_row11_col1, #T_64b57_row11_col2 {
+#T_fa90a_row10_col0, #T_fa90a_row10_col1, #T_fa90a_row10_col2, #T_fa90a_row11_col0, #T_fa90a_row11_col1, #T_fa90a_row11_col2 {
   font-weight: bold;
   background-color: #f9f68d;
 }
 </style>
 
-<table id="T_64b57" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_fa90a" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Tabela de dados com Peso (kg) e Altura (cm).</caption>
 <thead>
 <tr class="header">
-<th id="T_64b57_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th"></th>
-<th id="T_64b57_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Peso</th>
-<th id="T_64b57_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Altura</th>
+<th id="T_fa90a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th"></th>
+<th id="T_fa90a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Peso</th>
+<th id="T_fa90a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Altura</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_64b57_row0_col0" class="data row0 col0"></td>
-<td id="T_64b57_row0_col1" class="data row0 col1">65</td>
-<td id="T_64b57_row0_col2" class="data row0 col2">170</td>
+<td id="T_fa90a_row0_col0" class="data row0 col0"></td>
+<td id="T_fa90a_row0_col1" class="data row0 col1">65</td>
+<td id="T_fa90a_row0_col2" class="data row0 col2">170</td>
 </tr>
 <tr class="even">
-<td id="T_64b57_row1_col0" class="data row1 col0"></td>
-<td id="T_64b57_row1_col1" class="data row1 col1">72</td>
-<td id="T_64b57_row1_col2" class="data row1 col2">182</td>
+<td id="T_fa90a_row1_col0" class="data row1 col0"></td>
+<td id="T_fa90a_row1_col1" class="data row1 col1">72</td>
+<td id="T_fa90a_row1_col2" class="data row1 col2">182</td>
 </tr>
 <tr class="odd">
-<td id="T_64b57_row2_col0" class="data row2 col0"></td>
-<td id="T_64b57_row2_col1" class="data row2 col1">58</td>
-<td id="T_64b57_row2_col2" class="data row2 col2">165</td>
+<td id="T_fa90a_row2_col0" class="data row2 col0"></td>
+<td id="T_fa90a_row2_col1" class="data row2 col1">58</td>
+<td id="T_fa90a_row2_col2" class="data row2 col2">165</td>
 </tr>
 <tr class="even">
-<td id="T_64b57_row3_col0" class="data row3 col0"></td>
-<td id="T_64b57_row3_col1" class="data row3 col1">81</td>
-<td id="T_64b57_row3_col2" class="data row3 col2">190</td>
+<td id="T_fa90a_row3_col0" class="data row3 col0"></td>
+<td id="T_fa90a_row3_col1" class="data row3 col1">81</td>
+<td id="T_fa90a_row3_col2" class="data row3 col2">190</td>
 </tr>
 <tr class="odd">
-<td id="T_64b57_row4_col0" class="data row4 col0"></td>
-<td id="T_64b57_row4_col1" class="data row4 col1">75</td>
-<td id="T_64b57_row4_col2" class="data row4 col2">178</td>
+<td id="T_fa90a_row4_col0" class="data row4 col0"></td>
+<td id="T_fa90a_row4_col1" class="data row4 col1">75</td>
+<td id="T_fa90a_row4_col2" class="data row4 col2">178</td>
 </tr>
 <tr class="even">
-<td id="T_64b57_row5_col0" class="data row5 col0"></td>
-<td id="T_64b57_row5_col1" class="data row5 col1">60</td>
-<td id="T_64b57_row5_col2" class="data row5 col2">168</td>
+<td id="T_fa90a_row5_col0" class="data row5 col0"></td>
+<td id="T_fa90a_row5_col1" class="data row5 col1">60</td>
+<td id="T_fa90a_row5_col2" class="data row5 col2">168</td>
 </tr>
 <tr class="odd">
-<td id="T_64b57_row6_col0" class="data row6 col0"></td>
-<td id="T_64b57_row6_col1" class="data row6 col1">68</td>
-<td id="T_64b57_row6_col2" class="data row6 col2">175</td>
+<td id="T_fa90a_row6_col0" class="data row6 col0"></td>
+<td id="T_fa90a_row6_col1" class="data row6 col1">68</td>
+<td id="T_fa90a_row6_col2" class="data row6 col2">175</td>
 </tr>
 <tr class="even">
-<td id="T_64b57_row7_col0" class="data row7 col0"></td>
-<td id="T_64b57_row7_col1" class="data row7 col1">70</td>
-<td id="T_64b57_row7_col2" class="data row7 col2">172</td>
+<td id="T_fa90a_row7_col0" class="data row7 col0"></td>
+<td id="T_fa90a_row7_col1" class="data row7 col1">70</td>
+<td id="T_fa90a_row7_col2" class="data row7 col2">172</td>
 </tr>
 <tr class="odd">
-<td id="T_64b57_row8_col0" class="data row8 col0"></td>
-<td id="T_64b57_row8_col1" class="data row8 col1">78</td>
-<td id="T_64b57_row8_col2" class="data row8 col2">185</td>
+<td id="T_fa90a_row8_col0" class="data row8 col0"></td>
+<td id="T_fa90a_row8_col1" class="data row8 col1">78</td>
+<td id="T_fa90a_row8_col2" class="data row8 col2">185</td>
 </tr>
 <tr class="even">
-<td id="T_64b57_row9_col0" class="data row9 col0"></td>
-<td id="T_64b57_row9_col1" class="data row9 col1">62</td>
-<td id="T_64b57_row9_col2" class="data row9 col2">169</td>
+<td id="T_fa90a_row9_col0" class="data row9 col0"></td>
+<td id="T_fa90a_row9_col1" class="data row9 col1">62</td>
+<td id="T_fa90a_row9_col2" class="data row9 col2">169</td>
 </tr>
 <tr class="odd">
-<td id="T_64b57_row10_col0" class="data row10 col0">Média</td>
-<td id="T_64b57_row10_col1" class="data row10 col1">68.90</td>
-<td id="T_64b57_row10_col2" class="data row10 col2">175.40</td>
+<td id="T_fa90a_row10_col0" class="data row10 col0">Média</td>
+<td id="T_fa90a_row10_col1" class="data row10 col1">68.90</td>
+<td id="T_fa90a_row10_col2" class="data row10 col2">175.40</td>
 </tr>
 <tr class="even">
-<td id="T_64b57_row11_col0" class="data row11 col0">Variância</td>
-<td id="T_64b57_row11_col1" class="data row11 col1">59.88</td>
-<td id="T_64b57_row11_col2" class="data row11 col2">66.71</td>
+<td id="T_fa90a_row11_col0" class="data row11 col0">Variância</td>
+<td id="T_fa90a_row11_col1" class="data row11 col1">59.88</td>
+<td id="T_fa90a_row11_col2" class="data row11 col2">66.71</td>
 </tr>
 </tbody>
 </table>
@@ -387,7 +399,7 @@ window.Quarto = {
 <img src="06_acp_files/figure-html/fig-dispersao-output-1.png" width="566" height="375" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dispersao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;6.1: Diagrama de dispersão para os dados de Peso e Altura.
+Figura&nbsp;7.1: Diagrama de dispersão para os dados de Peso e Altura.
 </figcaption>
 </figure>
 </div>
@@ -403,7 +415,7 @@ Figura&nbsp;6.1: Diagrama de dispersão para os dados de Peso e Altura.
 <img src="06_acp_files/figure-html/fig-pca-output-1.png" width="566" height="375" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;6.2: O sistema de eixos rotacionado (vermelho) se alinha com a máxima dispersão (variância) dos dados.
+Figura&nbsp;7.2: O sistema de eixos rotacionado (vermelho) se alinha com a máxima dispersão (variância) dos dados.
 </figcaption>
 </figure>
 </div>
@@ -411,21 +423,21 @@ Figura&nbsp;6.2: O sistema de eixos rotacionado (vermelho) se alinha com a máxi
 </div>
 <p>O primeiro componente, <span class="math inline">\(CP_1\)</span>, agora aponta na direção de maior “alongamento” da nuvem de pontos. O segundo, <span class="math inline">\(CP_2\)</span>, é perpendicular ao primeiro e aponta na direção de maior variabilidade restante. Encontramos uma nova perspectiva que descreve a estrutura dos dados de forma mais natural e eficiente.</p>
 <p>Em casos com mais de duas variáveis (p &gt; 2), a lógica se estende: O <strong>i-ésimo componente principal (</strong><span class="math inline">\(CP_i\)</span>) aponta para a direção de maior variabilidade, sob a restrição de ser ortogonal (não correlacionado) a todos os componentes anteriores, <span class="math inline">\(\text{Cov}[CP_j, CP_i] = 0 \, \forall \, j &lt; i\)</span>.</p>
-<p>Uma intuição geométrica para o problema é buscar o ângulo <span class="math inline">\(\theta\)</span> de rotação do eixo das variáveis tal que a variância dos componentes seja máxima. Essa rotação é simples de ser observada nesse exemplo bidimensional (veja Figura <a href="#fig-pca" class="quarto-xref">Figura&nbsp;<span>6.2</span></a>).</p>
+<p>Uma intuição geométrica para o problema é buscar o ângulo <span class="math inline">\(\theta\)</span> de rotação do eixo das variáveis tal que a variância dos componentes seja máxima. Essa rotação é simples de ser observada nesse exemplo bidimensional (veja Figura <a href="#fig-pca" class="quarto-xref">Figura&nbsp;<span>7.2</span></a>).</p>
 </div>
-<section id="variância-como-medida-de-informação" class="level2" data-number="6.1">
-<h2 data-number="6.1" class="anchored" data-anchor-id="variância-como-medida-de-informação"><span class="header-section-number">6.1</span> Variância como Medida de Informação</h2>
+<section id="variância-como-medida-de-informação" class="level2" data-number="7.1">
+<h2 data-number="7.1" class="anchored" data-anchor-id="variância-como-medida-de-informação"><span class="header-section-number">7.1</span> Variância como Medida de Informação</h2>
 <p>A essa altura, você deve estar se perguntando: por que a direção do “maior alongamento” é a mais importante? Em estatística, a <strong>variância</strong> é frequentemente usada como uma medida de <strong>informação</strong>. Uma variável com alta variância indica que seus valores são bem espalhados, o que nos ajuda a diferenciar as observações. Se a variância fosse zero, todos os pontos seriam idênticos, não nos fornecendo nenhuma informação sobre suas diferenças.</p>
 <p>A ACP utiliza essa ideia para encontrar os eixos mais informativos. Ao rotacionar o sistema de coordenadas, ela não altera a variabilidade total dos dados, mas a redistribui de forma inteligente.</p>
 <div id="def-var-total" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 6.1</strong></span> A <strong>variância total</strong> de um conjunto de dados com <span class="math inline">\(p\)</span> variáveis é a soma das variâncias de cada variável individual. Matematicamente, se <span class="math inline">\(\mathbf{x} = (X_1, \dots, X_p)'\)</span> é o vetor de variáveis aleatórias com matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>, a variância total é definida como:</p>
+<p><span class="theorem-title"><strong>Definição 7.1</strong></span> A <strong>variância total</strong> de um conjunto de dados com <span class="math inline">\(p\)</span> variáveis é a soma das variâncias de cada variável individual. Matematicamente, se <span class="math inline">\(\mathbf{x} = (X_1, \dots, X_p)'\)</span> é o vetor de variáveis aleatórias com matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>, a variância total é definida como:</p>
 <p><span class="math display">\[
 \text{Variância Total} = \sum_{j=1}^{p} \text{Var}(X_j) = \sum_{j=1}^{p} \sigma_{jj} = tr(\mathbf{\Sigma})
 \]</span></p>
 <p>Onde <span class="math inline">\(\sigma_{jj}\)</span> é a variância da <span class="math inline">\(j\)</span>-ésima variável e <span class="math inline">\(tr(\mathbf{\Sigma})\)</span> é o traço da matriz de covariâncias (a soma dos elementos da diagonal principal). Essa medida representa a dispersão total na nuvem de pontos, somando a variabilidade em cada uma das direções dos eixos originais.</p>
 </div>
 <div id="exm-pca-geom2" class="theorem example">
-<p><span class="theorem-title"><strong>Exemplo 6.2</strong></span> Voltando ao exemplo <a href="#exm-pca-geom" class="quarto-xref">Exemplo&nbsp;<span>6.1</span></a>, as variâncias das variáveis originais são:</p>
+<p><span class="theorem-title"><strong>Exemplo 7.2</strong></span> Voltando ao exemplo <a href="#exm-pca-geom" class="quarto-xref">Exemplo&nbsp;<span>7.1</span></a>, as variâncias das variáveis originais são:</p>
 <ul>
 <li>Variância do Peso: 59.88</li>
 <li>Variância da Altura: 66.71</li>
@@ -444,8 +456,8 @@ Figura&nbsp;6.2: O sistema de eixos rotacionado (vermelho) se alinha com a máxi
 </ol>
 </div>
 </section>
-<section id="a-formalização-matemática" class="level2" data-number="6.2">
-<h2 data-number="6.2" class="anchored" data-anchor-id="a-formalização-matemática"><span class="header-section-number">6.2</span> A Formalização Matemática</h2>
+<section id="a-formalização-matemática" class="level2" data-number="7.2">
+<h2 data-number="7.2" class="anchored" data-anchor-id="a-formalização-matemática"><span class="header-section-number">7.2</span> A Formalização Matemática</h2>
 <p>Com a intuição geométrica estabelecida, podemos formalizar a Análise de Componentes Principais. O objetivo é transformar um conjunto de variáveis correlacionadas <span class="math inline">\(\mathbf{x} = (X_1, \dots, X_p)'\)</span> em um novo conjunto de variáveis não correlacionadas, os <strong>componentes principais</strong> <span class="math inline">\(\mathbf{y} = (Y_1, \dots, Y_p)'\)</span>. Cada componente é uma combinação linear das variáveis originais:</p>
 <p><span class="math display">\[
 \begin{aligned}
@@ -458,15 +470,15 @@ Y_p &amp;= e_{p1}X_1 + e_{p2}X_2 + \dots + e_{pp}X_p = \mathbf{e}_p' \mathbf{x}
 <p>Em notação matricial, a transformação pode ser escrita de forma compacta:</p>
 <p><span id="eq-pca-matriz"><span class="math display">\[
 \mathbf{Y} = \mathbf{E}' \mathbf{X}
-\tag{6.1}\]</span></span></p>
+\tag{7.1}\]</span></span></p>
 <p>Onde <span class="math inline">\(\mathbf{Y}\)</span> é o vetor <span class="math inline">\(p \times 1\)</span> de autovalores e <span class="math inline">\(\mathbf{E}\)</span> é a matriz <span class="math inline">\(p \times p\)</span> cujas colunas são os vetores de coeficientes <span class="math inline">\(\mathbf{e}_k\)</span>.</p>
 <p>Esses componentes são construídos para satisfazer duas condições fundamentais:</p>
 <ol type="1">
 <li><strong>Variâncias Ordenadas</strong>: A variância do primeiro componente é a maior possível, a do segundo é a maior possível entre as direções não correlacionadas com o primeiro, e assim por diante. Ou seja, <span class="math inline">\(\text{Var}(Y_1) \ge \text{Var}(Y_2) \ge \dots \ge \text{Var}(Y_p)\)</span>.</li>
 <li><strong>Não Correlacionados</strong>: Os componentes são ortogonais entre si, o que significa que <span class="math inline">\(\text{Cov}[Y_i, Y_k] = 0\)</span> para todo <span class="math inline">\(i \neq k\)</span>.</li>
 </ol>
-<section id="o-problema-de-maximização" class="level3" data-number="6.2.1">
-<h3 data-number="6.2.1" class="anchored" data-anchor-id="o-problema-de-maximização"><span class="header-section-number">6.2.1</span> O Problema de Maximização</h3>
+<section id="o-problema-de-maximização" class="level3" data-number="7.2.1">
+<h3 data-number="7.2.1" class="anchored" data-anchor-id="o-problema-de-maximização"><span class="header-section-number">7.2.1</span> O Problema de Maximização</h3>
 <p>O primeiro componente principal, <span class="math inline">\(Y_1 = \mathbf{e}_1'\mathbf{x}\)</span>, é a combinação linear com variância máxima. A variância de <span class="math inline">\(Y_1\)</span> é dada por:</p>
 <p><span class="math display">\[
 \text{Var}(Y_1) = \text{Var}(\mathbf{e}_1'\mathbf{x}) = \mathbf{e}_1' \text{Var}(\mathbf{x}) \mathbf{e}_1 = \mathbf{e}_1' \mathbf{\Sigma} \mathbf{e}_1
@@ -530,8 +542,8 @@ Nota
 </div>
 </div>
 </section>
-<section id="componentes-subsequentes" class="level3" data-number="6.2.2">
-<h3 data-number="6.2.2" class="anchored" data-anchor-id="componentes-subsequentes"><span class="header-section-number">6.2.2</span> Componentes Subsequentes</h3>
+<section id="componentes-subsequentes" class="level3" data-number="7.2.2">
+<h3 data-number="7.2.2" class="anchored" data-anchor-id="componentes-subsequentes"><span class="header-section-number">7.2.2</span> Componentes Subsequentes</h3>
 <p>Uma vez encontrada a primeira direção de máxima variância, o segundo componente principal, <span class="math inline">\(Y_2 = \mathbf{e}_2'\mathbf{x}\)</span>, busca capturar o máximo da variabilidade <em>restante</em>, sob a condição de ser não correlacionado com <span class="math inline">\(Y_1\)</span>. A condição de componentes não correlacionados garante que a informação presente no segundo componente principal não é redundante com relação aquela já presente no primeiro. Formalmente, temos:</p>
 <p><span class="math display">\[
 Cov(Y_1, Y_2) = Cov(\mathbf{e}'_1 \mathbf{x}, \mathbf{e}'_2 \mathbf{x}) = \mathbf{e}_1' \mathbf{\Sigma} \mathbf{e}_2
@@ -578,14 +590,14 @@ L(\mathbf{e}_2, \lambda_2, \phi) = \mathbf{e}_2' \mathbf{\Sigma} \mathbf{e}_2 - 
 \]</span></p>
 <p>Assim, <span class="math inline">\(\mathbf{e}_2\)</span> é o autovetor de <span class="math inline">\(\mathbf{\Sigma}\)</span> correspondente ao autovalor <span class="math inline">\(\lambda_2\)</span>. Como <span class="math inline">\(\lambda_1\)</span> foi o maior autovalor, para maximizar a variância de <span class="math inline">\(Y_2\)</span>, <span class="math inline">\(\lambda_2\)</span> deve ser o <strong>segundo maior autovalor</strong>. Este processo se generaliza para os componentes subsequentes.</p>
 <p>Este processo continua: o <span class="math inline">\(k\)</span>-ésimo componente principal (<span class="math inline">\(Y_k\)</span>) é definido pelo autovetor <span class="math inline">\(\mathbf{e}_k\)</span> associado ao <span class="math inline">\(k\)</span>-ésimo maior autovalor <span class="math inline">\(\lambda_k\)</span>, garantindo que <span class="math inline">\(\text{Var}(Y_k) = \lambda_k\)</span> e que todos os componentes sejam mutuamente não correlacionados.</p>
-<p>É neste ponto que a conexão com a <a href="../01_intro/05_algebra_matricial.html#sec-espectral" class="quarto-xref"><span>Seção 5.3</span></a> se torna explícita. A matriz <span class="math inline">\(\mathbf{P}\)</span> (<a href="#eq-pca-matriz" class="quarto-xref">Equação&nbsp;<span>6.1</span></a>), cujas colunas são os autovetores da matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>, é exatamente a mesma matriz <span class="math inline">\(\mathbf{P}\)</span> da decomposição espectral <span class="math inline">\(\mathbf{\Sigma} = \mathbf{P}\Lambda\mathbf{P}'\)</span>. Além disso, <span class="math inline">\(\Lambda\)</span> é uma matriz diagonal contendo a variância de cada componente principal. Logo, podemos obter todos os componentes principais de maneira prática e simultânea através da decomposição espectral.</p>
+<p>É neste ponto que a conexão com a <a href="../01_intro/05_algebra_matricial.html#sec-espectral" class="quarto-xref"><span>Seção 5.3</span></a> se torna explícita. A matriz <span class="math inline">\(\mathbf{P}\)</span> (<a href="#eq-pca-matriz" class="quarto-xref">Equação&nbsp;<span>7.1</span></a>), cujas colunas são os autovetores da matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>, é exatamente a mesma matriz <span class="math inline">\(\mathbf{P}\)</span> da decomposição espectral <span class="math inline">\(\mathbf{\Sigma} = \mathbf{P}\Lambda\mathbf{P}'\)</span>. Além disso, <span class="math inline">\(\Lambda\)</span> é uma matriz diagonal contendo a variância de cada componente principal. Logo, podemos obter todos os componentes principais de maneira prática e simultânea através da decomposição espectral.</p>
 </section>
 </section>
-<section id="a-importância-do-pré-processamento-dos-dados" class="level2" data-number="6.3">
-<h2 data-number="6.3" class="anchored" data-anchor-id="a-importância-do-pré-processamento-dos-dados"><span class="header-section-number">6.3</span> A Importância do Pré-processamento dos Dados</h2>
+<section id="a-importância-do-pré-processamento-dos-dados" class="level2" data-number="7.3">
+<h2 data-number="7.3" class="anchored" data-anchor-id="a-importância-do-pré-processamento-dos-dados"><span class="header-section-number">7.3</span> A Importância do Pré-processamento dos Dados</h2>
 <p>A Análise de Componentes Principais é, em sua essência, uma análise de variabilidade. A forma como medimos essa variabilidade impacta diretamente o resultado. Dois pré-processamentos são cruciais: a <strong>centralização</strong> e o <strong>escalonamento</strong>.</p>
-<section id="centralização" class="level3" data-number="6.3.1">
-<h3 data-number="6.3.1" class="anchored" data-anchor-id="centralização"><span class="header-section-number">6.3.1</span> Centralização</h3>
+<section id="centralização" class="level3" data-number="7.3.1">
+<h3 data-number="7.3.1" class="anchored" data-anchor-id="centralização"><span class="header-section-number">7.3.1</span> Centralização</h3>
 <p>Na Análise de Componentes Principais (ACP), a centralização dos dados — ou seja, a subtração da média de cada variável — é uma etapa fundamental não apenas para o cálculo da matriz de covariâncias, mas também para a projeção dos dados nos componentes principais.</p>
 <p>Ao projetar os dados em um componente <span class="math inline">\(\mathbf{e}_i\)</span>, é imprescindível que a projeção seja feita a partir dos dados centralizados, ou seja:</p>
 <p><span class="math display">\[
@@ -607,8 +619,8 @@ Importante
 </div>
 </div>
 </section>
-<section id="por-que-escalonar-o-dilema-da-covariância-vs.-correlação" class="level3" data-number="6.3.2">
-<h3 data-number="6.3.2" class="anchored" data-anchor-id="por-que-escalonar-o-dilema-da-covariância-vs.-correlação"><span class="header-section-number">6.3.2</span> Por que Escalonar? O Dilema da Covariância vs.&nbsp;Correlação</h3>
+<section id="por-que-escalonar-o-dilema-da-covariância-vs.-correlação" class="level3" data-number="7.3.2">
+<h3 data-number="7.3.2" class="anchored" data-anchor-id="por-que-escalonar-o-dilema-da-covariância-vs.-correlação"><span class="header-section-number">7.3.2</span> Por que Escalonar? O Dilema da Covariância vs.&nbsp;Correlação</h3>
 <p>A Análise de Componentes Principais (ACP) é sensível à <strong>escala</strong> das variáveis. Se uma variável tiver uma variância numericamente muito maior que as outras — mesmo que apenas por causa da sua unidade de medida — ela poderá dominar os primeiros componentes principais.</p>
 <p>Imagine incluir uma terceira variável no conjunto Altura/Peso: a <strong>renda mensal</strong>, medida em Reais. As variâncias poderiam ser aproximadamente:</p>
 <ul>
@@ -626,8 +638,8 @@ Usar a matriz de correlação “democratiza” a análise. Todas as variáveis 
 Somente quando todas as variáveis estão na <strong>mesma unidade de medida</strong> e possuem uma interpretação comparável. Por exemplo, comparar a temperatura em Celsius em diferentes regiões pode fazer sentido sem escalonamento. Fora isso, a matriz de <strong>correlação</strong> é geralmente a escolha mais robusta e segura.</p>
 </section>
 </section>
-<section id="componentes-principais-populacionais-vs.-amostrais" class="level2" data-number="6.4">
-<h2 data-number="6.4" class="anchored" data-anchor-id="componentes-principais-populacionais-vs.-amostrais"><span class="header-section-number">6.4</span> Componentes Principais Populacionais vs.&nbsp;Amostrais</h2>
+<section id="componentes-principais-populacionais-vs.-amostrais" class="level2" data-number="7.4">
+<h2 data-number="7.4" class="anchored" data-anchor-id="componentes-principais-populacionais-vs.-amostrais"><span class="header-section-number">7.4</span> Componentes Principais Populacionais vs.&nbsp;Amostrais</h2>
 <p>Até este ponto, discutimos os componentes principais em um contexto populacional, onde a matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span> (ou correlação <span class="math inline">\(\mathbf{R}\)</span>) e seus autovalores <span class="math inline">\(\lambda_k\)</span> e autovetores <span class="math inline">\(\mathbf{e}_k\)</span> são conhecidos. Na prática, quase sempre trabalhamos com uma amostra de dados. Nesse caso, não conhecemos os verdadeiros parâmetros populacionais e devemos estimá-los.</p>
 <p>Os <strong>componentes principais amostrais</strong> são obtidos da mesma maneira, mas usando a matriz de covariâncias amostral <span class="math inline">\(\mathbf{S}\)</span> (ou a matriz de correlação amostral <span class="math inline">\(\mathbf{R}\)</span>). As quantidades resultantes são estimativas dos seus análogos populacionais:</p>
 <ul>
@@ -637,23 +649,23 @@ Somente quando todas as variáveis estão na <strong>mesma unidade de medida</st
 </ul>
 <p>A teoria e a interpretação permanecem as mesmas. Para simplificar a notação, ao longo deste capítulo, omitimos o acento circunflexo (<span class="math inline">\(\hat{\phantom{a}}\)</span>), mas é importante lembrar que, na aplicação prática, estamos sempre lidando com estimativas amostrais.</p>
 </section>
-<section id="escolhendo-o-número-de-componentes" class="level2" data-number="6.5">
-<h2 data-number="6.5" class="anchored" data-anchor-id="escolhendo-o-número-de-componentes"><span class="header-section-number">6.5</span> Escolhendo o Número de Componentes</h2>
+<section id="escolhendo-o-número-de-componentes" class="level2" data-number="7.5">
+<h2 data-number="7.5" class="anchored" data-anchor-id="escolhendo-o-número-de-componentes"><span class="header-section-number">7.5</span> Escolhendo o Número de Componentes</h2>
 <p>A principal vantagem da ACP é a redução de dimensionalidade. Mas como decidimos quantos componentes (<span class="math inline">\(q &lt; p\)</span>) reter? A escolha de <span class="math inline">\(q\)</span> envolve um trade-off entre a simplicidade (poucos componentes) e a fidelidade aos dados originais (muitos componentes). Não existe uma regra única, mas sim um conjunto de critérios que devem ser avaliados em conjunto.</p>
-<section id="critério-da-variância-explicada-acumulada" class="level3" data-number="6.5.1">
-<h3 data-number="6.5.1" class="anchored" data-anchor-id="critério-da-variância-explicada-acumulada"><span class="header-section-number">6.5.1</span> Critério da Variância Explicada Acumulada</h3>
+<section id="critério-da-variância-explicada-acumulada" class="level3" data-number="7.5.1">
+<h3 data-number="7.5.1" class="anchored" data-anchor-id="critério-da-variância-explicada-acumulada"><span class="header-section-number">7.5.1</span> Critério da Variância Explicada Acumulada</h3>
 <p>Este é o critério mais comum. Calculamos a proporção da variância total explicada por cada componente e acumulamos essa proporção.</p>
 <p><span class="math display">\[
 \text{Proporção da Variância por } CP_k = \frac{\lambda_k}{\sum_{j=1}^{p} \lambda_j}
 \]</span></p>
 <p>Em seguida, escolhemos o menor número de componentes <span class="math inline">\(q\)</span> cuja variância explicada acumulada atinja um limiar satisfatório, geralmente entre 70% e 90%. A escolha do limiar depende do contexto da análise.</p>
 </section>
-<section id="critério-do-autovalor-critério-de-kaiser" class="level3" data-number="6.5.2">
-<h3 data-number="6.5.2" class="anchored" data-anchor-id="critério-do-autovalor-critério-de-kaiser"><span class="header-section-number">6.5.2</span> Critério do Autovalor (Critério de Kaiser)</h3>
+<section id="critério-do-autovalor-critério-de-kaiser" class="level3" data-number="7.5.2">
+<h3 data-number="7.5.2" class="anchored" data-anchor-id="critério-do-autovalor-critério-de-kaiser"><span class="header-section-number">7.5.2</span> Critério do Autovalor (Critério de Kaiser)</h3>
 <p>Proposto por Henry Kaiser, este critério sugere reter apenas os componentes cujos autovalores (<span class="math inline">\(\lambda_k\)</span>) são maiores que 1. A intuição por trás dessa regra é mais clara quando a ACP é aplicada sobre a matriz de correlação. Nesse caso, as variáveis originais são padronizadas para ter variância 1. Um componente com autovalor (variância) menor que 1 está, portanto, explicando menos variabilidade do que uma única variável original. Reter tal componente não traria uma “economia” de informação”, tornando-o um candidato à exclusão.</p>
 </section>
-<section id="scree-plot-gráfico-de-cotovelo" class="level3" data-number="6.5.3">
-<h3 data-number="6.5.3" class="anchored" data-anchor-id="scree-plot-gráfico-de-cotovelo"><span class="header-section-number">6.5.3</span> Scree Plot (Gráfico de Cotovelo)</h3>
+<section id="scree-plot-gráfico-de-cotovelo" class="level3" data-number="7.5.3">
+<h3 data-number="7.5.3" class="anchored" data-anchor-id="scree-plot-gráfico-de-cotovelo"><span class="header-section-number">7.5.3</span> Scree Plot (Gráfico de Cotovelo)</h3>
 <p>O Scree Plot, proposto por Raymond Cattell, é uma ferramenta visual que nos ajuda a identificar o número ideal de componentes. Ele é um gráfico de linha dos autovalores (variâncias dos componentes) em ordem decrescente.</p>
 <p>Tipicamente, o gráfico mostra uma queda acentuada nos primeiros autovalores, seguida por um nivelamento gradual para os autovalores restantes. O ponto onde a curva “dobra” ou forma um “cotovelo” (<em>elbow</em>) é considerado o ponto de corte. A ideia é reter os componentes que aparecem antes do cotovelo, pois eles são os que contribuem mais significativamente para a variância total. Os componentes após o cotovelo formam o “cascalho” (<em>scree</em>) na base de uma montanha e são considerados “ruído”.</p>
 <div id="cell-fig-scree" class="cell" data-execution_count="4">
@@ -664,7 +676,7 @@ Somente quando todas as variáveis estão na <strong>mesma unidade de medida</st
 <img src="06_acp_files/figure-html/fig-scree-output-1.png" width="951" height="567" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;6.3: Exemplo de um Scree Plot. O ‘cotovelo’ em k=3 sugere a retenção de 3 componentes.
+Figura&nbsp;7.3: Exemplo de um Scree Plot. O ‘cotovelo’ em k=3 sugere a retenção de 3 componentes.
 </figcaption>
 </figure>
 </div>
@@ -672,8 +684,8 @@ Figura&nbsp;6.3: Exemplo de um Scree Plot. O ‘cotovelo’ em k=3 sugere a rete
 </div>
 </section>
 </section>
-<section id="interpretando-os-componentes-principais" class="level2" data-number="6.6">
-<h2 data-number="6.6" class="anchored" data-anchor-id="interpretando-os-componentes-principais"><span class="header-section-number">6.6</span> Interpretando os Componentes Principais</h2>
+<section id="interpretando-os-componentes-principais" class="level2" data-number="7.6">
+<h2 data-number="7.6" class="anchored" data-anchor-id="interpretando-os-componentes-principais"><span class="header-section-number">7.6</span> Interpretando os Componentes Principais</h2>
 <p>Uma vez que selecionamos o número de componentes a reter, o passo final é a <strong>interpretação</strong>. O que esses novos eixos, que são combinações de nossas variáveis originais, realmente significam?</p>
 <p>Os coeficientes <span class="math inline">\(e_{kj}\)</span> do autovetor <span class="math inline">\(\mathbf{e}_k\)</span> são chamados de <strong>cargas</strong> (<em>loadings</em>) e representam o peso da variável original <span class="math inline">\(X_j\)</span> na formação do componente <span class="math inline">\(Y_k\)</span>. Embora as cargas sejam importantes, a sua interpretação pode ser complicada, pois sua magnitude depende das unidades das variáveis originais.</p>
 <p>Uma medida mais interpretável é a <strong>correlação entre os componentes principais e as variáveis originais</strong>, <span class="math inline">\(Cor(Y_k, X_j)\)</span>. Ela nos diz o quão “alinhado” um componente está com cada variável original, numa escala padronizada de -1 a 1. A fórmula para essa correlação é:</p>
@@ -723,7 +735,7 @@ Cor(Y_k, X_j) = \frac{e_{kj} \sqrt{\lambda_k}}{\sqrt{s_{jj}}}
 <img src="06_acp_files/figure-html/fig-generic-biplot-output-1.png" width="571" height="364" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-generic-biplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;6.4: Exemplo de um biplot genérico para ilustrar a interpretação dos seus elementos. Os pontos representam as observações e as setas, as variáveis originais.
+Figura&nbsp;7.4: Exemplo de um biplot genérico para ilustrar a interpretação dos seus elementos. Os pontos representam as observações e as setas, as variáveis originais.
 </figcaption>
 </figure>
 </div>
@@ -1135,13 +1147,13 @@ Figura&nbsp;6.4: Exemplo de um biplot genérico para ilustrar a interpretação 
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/01_intro/05_algebra_matricial.html" class="pagination-link" aria-label="Fundamentos Matemáticos: Álgebra Matricial">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span>
+      <a href="../../src/01_intro/06_distancias.html" class="pagination-link" aria-label="Medidas de Distância e Similaridade">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../src/02_tec_mult/07_af.html" class="pagination-link" aria-label="Análise Fatorial">
-        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

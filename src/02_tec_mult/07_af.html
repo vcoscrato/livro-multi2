@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>7&nbsp; Análise Fatorial – Estatística Multivariada 2</title>
+<title>8&nbsp; Análise Fatorial – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,7 +30,7 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/exemplos/acp_manual.html" rel="next">
+<link href="../../src/02_tec_mult/08_cluster.html" rel="next">
 <link href="../../src/02_tec_mult/06_acp.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Técnicas Multivariadas</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/07_af.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Métodos multivariados</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/07_af.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -184,12 +184,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/06_distancias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Parte II: Técnicas Multivariadas</span></a>
+ <span class="menu-text">Parte II: Métodos multivariados</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -198,13 +204,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/02_tec_mult/08_cluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span></a>
   </div>
 </li>
       </ul>
@@ -242,24 +254,24 @@ window.Quarto = {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#o-modelo-fatorial-ortogonal" id="toc-o-modelo-fatorial-ortogonal" class="nav-link active" data-scroll-target="#o-modelo-fatorial-ortogonal"><span class="header-section-number">7.1</span> O Modelo Fatorial Ortogonal</a></li>
-  <li><a href="#a-estrutura-de-covariância-implícita" id="toc-a-estrutura-de-covariância-implícita" class="nav-link" data-scroll-target="#a-estrutura-de-covariância-implícita"><span class="header-section-number">7.2</span> A Estrutura de Covariância Implícita</a></li>
-  <li><a href="#problemas-no-modelo-fatorial" id="toc-problemas-no-modelo-fatorial" class="nav-link" data-scroll-target="#problemas-no-modelo-fatorial"><span class="header-section-number">7.3</span> Problemas no Modelo Fatorial</a></li>
-  <li><a href="#adequabilidade-do-modelo-fatorial" id="toc-adequabilidade-do-modelo-fatorial" class="nav-link" data-scroll-target="#adequabilidade-do-modelo-fatorial"><span class="header-section-number">7.4</span> Adequabilidade do Modelo Fatorial</a>
+  <li><a href="#o-modelo-fatorial-ortogonal" id="toc-o-modelo-fatorial-ortogonal" class="nav-link active" data-scroll-target="#o-modelo-fatorial-ortogonal"><span class="header-section-number">8.1</span> O Modelo Fatorial Ortogonal</a></li>
+  <li><a href="#a-estrutura-de-covariância-implícita" id="toc-a-estrutura-de-covariância-implícita" class="nav-link" data-scroll-target="#a-estrutura-de-covariância-implícita"><span class="header-section-number">8.2</span> A Estrutura de Covariância Implícita</a></li>
+  <li><a href="#problemas-no-modelo-fatorial" id="toc-problemas-no-modelo-fatorial" class="nav-link" data-scroll-target="#problemas-no-modelo-fatorial"><span class="header-section-number">8.3</span> Problemas no Modelo Fatorial</a></li>
+  <li><a href="#adequabilidade-do-modelo-fatorial" id="toc-adequabilidade-do-modelo-fatorial" class="nav-link" data-scroll-target="#adequabilidade-do-modelo-fatorial"><span class="header-section-number">8.4</span> Adequabilidade do Modelo Fatorial</a>
   <ul class="collapse">
-  <li><a href="#teste-de-esfericidade-de-bartlett" id="toc-teste-de-esfericidade-de-bartlett" class="nav-link" data-scroll-target="#teste-de-esfericidade-de-bartlett"><span class="header-section-number">7.4.1</span> Teste de Esfericidade de Bartlett</a></li>
-  <li><a href="#medida-de-adequação-da-amostra-kmo" id="toc-medida-de-adequação-da-amostra-kmo" class="nav-link" data-scroll-target="#medida-de-adequação-da-amostra-kmo"><span class="header-section-number">7.4.2</span> Medida de Adequação da Amostra (KMO)</a></li>
+  <li><a href="#teste-de-esfericidade-de-bartlett" id="toc-teste-de-esfericidade-de-bartlett" class="nav-link" data-scroll-target="#teste-de-esfericidade-de-bartlett"><span class="header-section-number">8.4.1</span> Teste de Esfericidade de Bartlett</a></li>
+  <li><a href="#medida-de-adequação-da-amostra-kmo" id="toc-medida-de-adequação-da-amostra-kmo" class="nav-link" data-scroll-target="#medida-de-adequação-da-amostra-kmo"><span class="header-section-number">8.4.2</span> Medida de Adequação da Amostra (KMO)</a></li>
   </ul></li>
-  <li><a href="#métodos-de-estimação" id="toc-métodos-de-estimação" class="nav-link" data-scroll-target="#métodos-de-estimação"><span class="header-section-number">7.5</span> Métodos de Estimação</a>
+  <li><a href="#métodos-de-estimação" id="toc-métodos-de-estimação" class="nav-link" data-scroll-target="#métodos-de-estimação"><span class="header-section-number">8.5</span> Métodos de Estimação</a>
   <ul class="collapse">
-  <li><a href="#a-solução-por-componentes-principais" id="toc-a-solução-por-componentes-principais" class="nav-link" data-scroll-target="#a-solução-por-componentes-principais"><span class="header-section-number">7.5.1</span> A Solução por Componentes Principais</a></li>
-  <li><a href="#método-da-máxima-verossimilhança-mmv" id="toc-método-da-máxima-verossimilhança-mmv" class="nav-link" data-scroll-target="#método-da-máxima-verossimilhança-mmv"><span class="header-section-number">7.5.2</span> Método da Máxima Verossimilhança (MMV)</a></li>
+  <li><a href="#a-solução-por-componentes-principais" id="toc-a-solução-por-componentes-principais" class="nav-link" data-scroll-target="#a-solução-por-componentes-principais"><span class="header-section-number">8.5.1</span> A Solução por Componentes Principais</a></li>
+  <li><a href="#método-da-máxima-verossimilhança-mmv" id="toc-método-da-máxima-verossimilhança-mmv" class="nav-link" data-scroll-target="#método-da-máxima-verossimilhança-mmv"><span class="header-section-number">8.5.2</span> Método da Máxima Verossimilhança (MMV)</a></li>
   </ul></li>
-  <li><a href="#a-escolha-do-número-de-fatores-m" id="toc-a-escolha-do-número-de-fatores-m" class="nav-link" data-scroll-target="#a-escolha-do-número-de-fatores-m"><span class="header-section-number">7.6</span> A Escolha do Número de Fatores (m)</a></li>
-  <li><a href="#rotação-fatorial" id="toc-rotação-fatorial" class="nav-link" data-scroll-target="#rotação-fatorial"><span class="header-section-number">7.7</span> Rotação Fatorial</a>
+  <li><a href="#a-escolha-do-número-de-fatores-m" id="toc-a-escolha-do-número-de-fatores-m" class="nav-link" data-scroll-target="#a-escolha-do-número-de-fatores-m"><span class="header-section-number">8.6</span> A Escolha do Número de Fatores (m)</a></li>
+  <li><a href="#rotação-fatorial" id="toc-rotação-fatorial" class="nav-link" data-scroll-target="#rotação-fatorial"><span class="header-section-number">8.7</span> Rotação Fatorial</a>
   <ul class="collapse">
-  <li><a href="#rotações-ortogonais" id="toc-rotações-ortogonais" class="nav-link" data-scroll-target="#rotações-ortogonais"><span class="header-section-number">7.7.1</span> Rotações Ortogonais</a></li>
-  <li><a href="#rotações-oblíquas" id="toc-rotações-oblíquas" class="nav-link" data-scroll-target="#rotações-oblíquas"><span class="header-section-number">7.7.2</span> Rotações Oblíquas</a></li>
+  <li><a href="#rotações-ortogonais" id="toc-rotações-ortogonais" class="nav-link" data-scroll-target="#rotações-ortogonais"><span class="header-section-number">8.7.1</span> Rotações Ortogonais</a></li>
+  <li><a href="#rotações-oblíquas" id="toc-rotações-oblíquas" class="nav-link" data-scroll-target="#rotações-oblíquas"><span class="header-section-number">8.7.2</span> Rotações Oblíquas</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -267,9 +279,9 @@ window.Quarto = {
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Técnicas Multivariadas</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/07_af.html"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Métodos multivariados</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/07_af.html"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title"><span id="sec-af" class="quarto-section-identifier"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></h1>
+<h1 class="title"><span id="sec-af" class="quarto-section-identifier"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></h1>
 </div>
 
 
@@ -294,14 +306,14 @@ window.Quarto = {
 <li><span class="math inline">\(X_3\)</span>: Gasto em alimentação</li>
 </ul>
 <p>É razoável supor que essas variáveis sejam correlacionadas. Mais do que isso, pode existir um fator latente, como a <strong>renda familiar</strong> (<span class="math inline">\(F_1\)</span>), que influencia todos esses gastos. A Análise Fatorial busca formalizar e quantificar essa relação.</p>
-<section id="o-modelo-fatorial-ortogonal" class="level2" data-number="7.1">
-<h2 data-number="7.1" class="anchored" data-anchor-id="o-modelo-fatorial-ortogonal"><span class="header-section-number">7.1</span> O Modelo Fatorial Ortogonal</h2>
+<section id="o-modelo-fatorial-ortogonal" class="level2" data-number="8.1">
+<h2 data-number="8.1" class="anchored" data-anchor-id="o-modelo-fatorial-ortogonal"><span class="header-section-number">8.1</span> O Modelo Fatorial Ortogonal</h2>
 <p>O modelo supõe que cada variável observada é linearmente dependente de um conjunto de fatores comuns, somado a um termo de variância individual, ou específico.</p>
 <div id="def-orthogonal-factor-model" class="theorem definition" title="O Modelo Fatorial Ortogonal">
-<p><span class="theorem-title"><strong>Definição 7.1</strong></span> Seja <span class="math inline">\(\mathbf{x}\)</span> um vetor aleatório de <em>p</em> variáveis observadas com vetor de médias <span class="math inline">\(\boldsymbol{\mu}\)</span> e matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>. O modelo fatorial com <em>m</em> fatores comuns (<span class="math inline">\(m &lt; p\)</span>) postula que <span class="math inline">\(\mathbf{x}\)</span> é linearmente dependente de <em>m</em> fatores comuns <span class="math inline">\(F_1, F_2, \dots, F_m\)</span> e <em>p</em> termos de erro <span class="math inline">\(\epsilon_1, \epsilon_2, \dots, \epsilon_p\)</span>. Em notação matricial, o modelo é:</p>
+<p><span class="theorem-title"><strong>Definição 8.1</strong></span> Seja <span class="math inline">\(\mathbf{x}\)</span> um vetor aleatório de <em>p</em> variáveis observadas com vetor de médias <span class="math inline">\(\boldsymbol{\mu}\)</span> e matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>. O modelo fatorial com <em>m</em> fatores comuns (<span class="math inline">\(m &lt; p\)</span>) postula que <span class="math inline">\(\mathbf{x}\)</span> é linearmente dependente de <em>m</em> fatores comuns <span class="math inline">\(F_1, F_2, \dots, F_m\)</span> e <em>p</em> termos de erro <span class="math inline">\(\epsilon_1, \epsilon_2, \dots, \epsilon_p\)</span>. Em notação matricial, o modelo é:</p>
 <p><span id="eq-factor-model"><span class="math display">\[
 \mathbf{x}_{(p \times 1)} - \boldsymbol{\mu}_{(p \times 1)} = \mathbf{L}_{(p \times m)}\mathbf{F}_{(m \times 1)} + \boldsymbol{\epsilon}_{(p \times 1)}
-\tag{7.1}\]</span></span></p>
+\tag{8.1}\]</span></span></p>
 <p>Onde:</p>
 <ul>
 <li><span class="math inline">\(\mathbf{L}\)</span> é a matriz de <strong>cargas fatoriais</strong>: Uma matriz de pesos responsável por quantificar as relações entre as <em>p</em> variáveis e os <em>m</em> fatores.</li>
@@ -316,17 +328,17 @@ window.Quarto = {
 </ol>
 </div>
 </section>
-<section id="a-estrutura-de-covariância-implícita" class="level2" data-number="7.2">
-<h2 data-number="7.2" class="anchored" data-anchor-id="a-estrutura-de-covariância-implícita"><span class="header-section-number">7.2</span> A Estrutura de Covariância Implícita</h2>
+<section id="a-estrutura-de-covariância-implícita" class="level2" data-number="8.2">
+<h2 data-number="8.2" class="anchored" data-anchor-id="a-estrutura-de-covariância-implícita"><span class="header-section-number">8.2</span> A Estrutura de Covariância Implícita</h2>
 <p>As suposições do modelo implicam uma estrutura específica para a matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>.</p>
 <div id="thm-covariance-structure" class="theorem" title="Estrutura da Matriz de Covariâncias">
-<p><span class="theorem-title"><strong>Teorema 7.1</strong></span> Sob as premissas do modelo fatorial ortogonal (<a href="#def-orthogonal-factor-model" class="quarto-xref">Definição&nbsp;<span>7.1</span></a>), a matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span> do vetor <span class="math inline">\(\mathbf{x}\)</span> é dada por:</p>
+<p><span class="theorem-title"><strong>Teorema 8.1</strong></span> Sob as premissas do modelo fatorial ortogonal (<a href="#def-orthogonal-factor-model" class="quarto-xref">Definição&nbsp;<span>8.1</span></a>), a matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span> do vetor <span class="math inline">\(\mathbf{x}\)</span> é dada por:</p>
 <p><span id="eq-covariance-structure"><span class="math display">\[
 \mathbf{\Sigma} = \mathbf{L}\mathbf{L}' + \mathbf{\Psi}
-\tag{7.2}\]</span></span></p>
+\tag{8.2}\]</span></span></p>
 </div>
 <div class="proof">
-<p><span class="proof-title"><em>Comprovação</em>. </span>A partir do modelo fatorial em <a href="#eq-factor-model" class="quarto-xref">Equação&nbsp;<span>7.1</span></a>, temos que <span class="math inline">\(\mathbf{x} - \boldsymbol{\mu} = \mathbf{L}\mathbf{F} + \boldsymbol{\epsilon}\)</span>. A matriz de covariâncias de <span class="math inline">\(\mathbf{x}\)</span> é, por definição, <span class="math inline">\(\mathbf{\Sigma} = E[(\mathbf{x} - \boldsymbol{\mu})(\mathbf{x} - \boldsymbol{\mu})']\)</span>. Substituindo a expressão do modelo, obtemos:</p>
+<p><span class="proof-title"><em>Comprovação</em>. </span>A partir do modelo fatorial em <a href="#eq-factor-model" class="quarto-xref">Equação&nbsp;<span>8.1</span></a>, temos que <span class="math inline">\(\mathbf{x} - \boldsymbol{\mu} = \mathbf{L}\mathbf{F} + \boldsymbol{\epsilon}\)</span>. A matriz de covariâncias de <span class="math inline">\(\mathbf{x}\)</span> é, por definição, <span class="math inline">\(\mathbf{\Sigma} = E[(\mathbf{x} - \boldsymbol{\mu})(\mathbf{x} - \boldsymbol{\mu})']\)</span>. Substituindo a expressão do modelo, obtemos:</p>
 <p><span class="math display">\[
 \begin{aligned}
 \mathbf{\Sigma} &amp;= E[(\mathbf{L}\mathbf{F} + \boldsymbol{\epsilon})(\mathbf{L}\mathbf{F} + \boldsymbol{\epsilon})'] \\
@@ -335,7 +347,7 @@ window.Quarto = {
 &amp;= \mathbf{L}E[\mathbf{F}\mathbf{F}']\mathbf{L}' + \mathbf{L}E[\mathbf{F}\boldsymbol{\epsilon}'] + E[\boldsymbol{\epsilon}\mathbf{F}']\mathbf{L}' + E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}']
 \end{aligned}
 \]</span></p>
-<p>Pelas suposições do modelo ortogonal (<a href="#def-orthogonal-factor-model" class="quarto-xref">Definição&nbsp;<span>7.1</span></a>):</p>
+<p>Pelas suposições do modelo ortogonal (<a href="#def-orthogonal-factor-model" class="quarto-xref">Definição&nbsp;<span>8.1</span></a>):</p>
 <ol type="1">
 <li><span class="math inline">\(E[\mathbf{F}\mathbf{F}'] = \text{Cov}(\mathbf{F}) = \mathbf{I}\)</span> (os fatores são não correlacionados e têm variância unitária).</li>
 <li><span class="math inline">\(E[\boldsymbol{\epsilon}\boldsymbol{\epsilon}'] = \text{Cov}(\boldsymbol{\epsilon}) = \mathbf{\Psi}\)</span> (os erros são não correlacionados entre si).</li>
@@ -353,7 +365,7 @@ window.Quarto = {
 <li><strong>Variância Específica (<span class="math inline">\(\psi_i\)</span>)</strong>: A porção da variância de <span class="math inline">\(X_i\)</span> não explicada pelos fatores comuns (<span class="math inline">\(Var(X_i) = \sigma_{ii} = h_i^2 + \psi_i\)</span>).</li>
 </ul>
 <div id="exm-solucao-fatorial" class="theorem example" title="Solução de um Modelo Fatorial">
-<p><span class="theorem-title"><strong>Exemplo 7.1</strong></span> Suponha que a matriz de covariâncias de um vetor aleatório <span class="math inline">\(\mathbf{x}\)</span> com <span class="math inline">\(p=4\)</span> variáveis seja:</p>
+<p><span class="theorem-title"><strong>Exemplo 8.1</strong></span> Suponha que a matriz de covariâncias de um vetor aleatório <span class="math inline">\(\mathbf{x}\)</span> com <span class="math inline">\(p=4\)</span> variáveis seja:</p>
 <p><span class="math display">\[
 \mathbf{\Sigma} =
 \begin{pmatrix}
@@ -389,13 +401,13 @@ window.Quarto = {
 </ul>
 </div>
 </section>
-<section id="problemas-no-modelo-fatorial" class="level2" data-number="7.3">
-<h2 data-number="7.3" class="anchored" data-anchor-id="problemas-no-modelo-fatorial"><span class="header-section-number">7.3</span> Problemas no Modelo Fatorial</h2>
+<section id="problemas-no-modelo-fatorial" class="level2" data-number="8.3">
+<h2 data-number="8.3" class="anchored" data-anchor-id="problemas-no-modelo-fatorial"><span class="header-section-number">8.3</span> Problemas no Modelo Fatorial</h2>
 <ul>
 <li><strong>Existência da Solução</strong>: Nem sempre existe uma solução factível para o modelo fatorial com <em>m</em> fatores. A estimação dos parâmetros, especialmente com um número inadequado de fatores, pode levar a soluções impróprias, como uma variância específica negativa (<span class="math inline">\(\hat{\psi}_i &lt; 0\)</span>), conhecida como <strong>caso de Heywood</strong>. Isso viola a premissa de que <span class="math inline">\(\psi_i\)</span> é uma variância e, portanto, deve ser não-negativa. Geralmente, uma solução imprópria indica que o modelo é inadequado para os dados.</li>
 </ul>
 <div id="exm-improper-solution" class="theorem example" title="Exemplo de Solução Imprópria">
-<p><span class="theorem-title"><strong>Exemplo 7.2</strong></span> Considere um modelo de um fator (<span class="math inline">\(m=1\)</span>) para <span class="math inline">\(p=3\)</span> variáveis, com a seguinte matriz de correlação populacional:</p>
+<p><span class="theorem-title"><strong>Exemplo 8.2</strong></span> Considere um modelo de um fator (<span class="math inline">\(m=1\)</span>) para <span class="math inline">\(p=3\)</span> variáveis, com a seguinte matriz de correlação populacional:</p>
 <p><span class="math display">\[
 \mathbf{R} =
 \begin{pmatrix}
@@ -427,12 +439,12 @@ window.Quarto = {
 \]</span></p>
 <p>Portanto, o modelo <span class="math inline">\(\mathbf{\Sigma} = \mathbf{L}^*(\mathbf{L}^*)' + \mathbf{\Psi}\)</span> é equivalente ao modelo original. Essa propriedade é a base para a <strong>rotação fatorial</strong>, um procedimento que busca a solução <span class="math inline">\(\mathbf{L}^*\)</span> mais simples e interpretável, sem alterar o ajuste do modelo.</p>
 </section>
-<section id="adequabilidade-do-modelo-fatorial" class="level2" data-number="7.4">
-<h2 data-number="7.4" class="anchored" data-anchor-id="adequabilidade-do-modelo-fatorial"><span class="header-section-number">7.4</span> Adequabilidade do Modelo Fatorial</h2>
+<section id="adequabilidade-do-modelo-fatorial" class="level2" data-number="8.4">
+<h2 data-number="8.4" class="anchored" data-anchor-id="adequabilidade-do-modelo-fatorial"><span class="header-section-number">8.4</span> Adequabilidade do Modelo Fatorial</h2>
 <p>Antes de aplicar os métodos de estimação, pode-se avaliar se os dados são adequados para a Análise Fatorial. A lema fundamental da AF é que as variáveis observadas são correlacionadas e que essa correlação pode ser explicada por fatores latentes. Se as variáveis são ortogonais ou se a correlação entre elas é espúria, o modelo fatorial não é apropriado.</p>
 <p>Dois dos principais diagnósticos para verificar a adequabilidade dos dados são o Teste de Esfericidade de Bartlett e a medida de adequação da amostra de Kaiser-Meyer-Olkin (KMO).</p>
-<section id="teste-de-esfericidade-de-bartlett" class="level3" data-number="7.4.1">
-<h3 data-number="7.4.1" class="anchored" data-anchor-id="teste-de-esfericidade-de-bartlett"><span class="header-section-number">7.4.1</span> Teste de Esfericidade de Bartlett</h3>
+<section id="teste-de-esfericidade-de-bartlett" class="level3" data-number="8.4.1">
+<h3 data-number="8.4.1" class="anchored" data-anchor-id="teste-de-esfericidade-de-bartlett"><span class="header-section-number">8.4.1</span> Teste de Esfericidade de Bartlett</h3>
 <p>O Teste de Esfericidade de Bartlett avalia a hipótese nula (<span class="math inline">\(H_0\)</span>) de que a matriz de correlação populacional <span class="math inline">\(\mathbf{P}\)</span> é uma matriz identidade (<span class="math inline">\(H_0: \mathbf{P} = \mathbf{I}\)</span>). Se essa hipótese for verdadeira, as variáveis são não correlacionadas, e não há estrutura latente para ser extraída.</p>
 <p>A estatística de teste é baseada no determinante da matriz de correlação amostral <span class="math inline">\(\mathbf{R}\)</span> e, sob <span class="math inline">\(H_0\)</span>, segue aproximadamente uma distribuição Qui-quadrado. Para uma amostra de tamanho <em>n</em> e <em>p</em> variáveis, a estatística é:</p>
 <p><span class="math display">\[
@@ -440,8 +452,8 @@ window.Quarto = {
 \]</span></p>
 <p>Esta estatística tem, aproximadamente, uma distribuição <span class="math inline">\(\chi^2\)</span> com <span class="math inline">\(p(p-1)/2\)</span> graus de liberdade. Um p-valor baixo (e.g., &lt; 0.05) leva à rejeição de <span class="math inline">\(H_0\)</span>, indicando que existe correlação suficiente entre as variáveis para justificar a aplicação da Análise Fatorial.</p>
 </section>
-<section id="medida-de-adequação-da-amostra-kmo" class="level3" data-number="7.4.2">
-<h3 data-number="7.4.2" class="anchored" data-anchor-id="medida-de-adequação-da-amostra-kmo"><span class="header-section-number">7.4.2</span> Medida de Adequação da Amostra (KMO)</h3>
+<section id="medida-de-adequação-da-amostra-kmo" class="level3" data-number="8.4.2">
+<h3 data-number="8.4.2" class="anchored" data-anchor-id="medida-de-adequação-da-amostra-kmo"><span class="header-section-number">8.4.2</span> Medida de Adequação da Amostra (KMO)</h3>
 <p>Enquanto o teste de Bartlett avalia se a matriz de correlação como um todo se desvia significativamente da identidade, a medida de Kaiser-Meyer-Olkin (KMO) quantifica o quão adequados os dados são para a fatorização. O KMO compara a magnitude dos coeficientes de correlação observados com a magnitude dos coeficientes de correlação parcial.</p>
 <p>A lógica é que, se as variáveis compartilham fatores comuns, as correlações parciais entre pares de variáveis (controlando pelas outras variáveis) devem ser pequenas. A estatística KMO é calculada como:</p>
 <p><span class="math display">\[
@@ -460,8 +472,8 @@ window.Quarto = {
 <p>Valores abaixo de 0.5 sugerem que a Análise Fatorial pode não ser uma boa ideia.</p>
 </section>
 </section>
-<section id="métodos-de-estimação" class="level2" data-number="7.5">
-<h2 data-number="7.5" class="anchored" data-anchor-id="métodos-de-estimação"><span class="header-section-number">7.5</span> Métodos de Estimação</h2>
+<section id="métodos-de-estimação" class="level2" data-number="8.5">
+<h2 data-number="8.5" class="anchored" data-anchor-id="métodos-de-estimação"><span class="header-section-number">8.5</span> Métodos de Estimação</h2>
 <p>Assumindo uma amostra aleatória <span class="math inline">\(\mathbf{x}_1, \dots, \mathbf{x}_n\)</span> de uma população com matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}\)</span>, o desafio é estimar <span class="math inline">\(\mathbf{L}\)</span> e <span class="math inline">\(\mathbf{\Psi}\)</span> usando a matriz de covariâncias amostral <span class="math inline">\(\mathbf{S}\)</span> ou a matriz de correlação amostral <span class="math inline">\(\mathbf{R}\)</span>.</p>
 <p>Existem diversos métodos para estimar os parâmetros do modelo fatorial, cada um com suas próprias premissas e propriedades. Alguns dos mais conhecidos incluem:</p>
 <ul>
@@ -472,8 +484,8 @@ window.Quarto = {
 <li>Mínimos Quadrados Generalizados</li>
 </ul>
 <p>Neste capítulo, focaremos nos dois métodos mais amplamente utilizados na prática: o Método de Componentes Principais, por sua simplicidade computacional, e o Método da Máxima Verossimilhança, por sua fundamentação estatística robusta.</p>
-<section id="a-solução-por-componentes-principais" class="level3" data-number="7.5.1">
-<h3 data-number="7.5.1" class="anchored" data-anchor-id="a-solução-por-componentes-principais"><span class="header-section-number">7.5.1</span> A Solução por Componentes Principais</h3>
+<section id="a-solução-por-componentes-principais" class="level3" data-number="8.5.1">
+<h3 data-number="8.5.1" class="anchored" data-anchor-id="a-solução-por-componentes-principais"><span class="header-section-number">8.5.1</span> A Solução por Componentes Principais</h3>
 <p>O método de componentes principais (MCP) provê uma solução para <span class="math inline">\(\mathbf{L}\)</span> e <span class="math inline">\(\mathbf{\Psi}\)</span> a partir da decomposição espectral da matriz de covariâncias amostral <span class="math inline">\(\mathbf{S}\)</span> (ou da matriz de correlações <span class="math inline">\(\mathbf{R}\)</span>).</p>
 <p>A ideia é que a matriz <span class="math inline">\(\mathbf{S}\)</span> pode ser decomposta em termos de seus pares de autovalor-autovetor <span class="math inline">\((\hat{\lambda}_i, \hat{\mathbf{e}}_i)\)</span>:</p>
 <p><span class="math display">\[
@@ -486,7 +498,7 @@ window.Quarto = {
 <p>Uma solução explícita para <span class="math inline">\(\hat{\mathbf{L}}\)</span> que satisfaz essa equação é uma matriz <span class="math inline">\(p \times m\)</span> cujas colunas são os autovetores reescalados pelos respectivos autovalores. A matriz <span class="math inline">\(\hat{\mathbf{\Psi}}\)</span> é então definida para garantir que as variâncias do modelo (<span class="math inline">\(\text{diag}(\hat{\mathbf{L}}\hat{\mathbf{L}}' + \hat{\mathbf{\Psi}})\)</span>) sejam iguais às variâncias amostrais (<span class="math inline">\(\text{diag}(\mathbf{S})\)</span>).</p>
 <p>Isso nos leva à seguinte definição formal.</p>
 <div id="def-pc-solution" class="theorem definition" title="A Solução de Componentes Principais (m < p)">
-<p><span class="theorem-title"><strong>Definição 7.2</strong></span> Seja <span class="math inline">\(\mathbf{S}\)</span> a matriz de covariância amostral com pares de autovalor-autovetor <span class="math inline">\((\hat{\lambda}_i, \hat{\mathbf{e}}_i)\)</span>. A solução de componentes principais com <em>m</em> fatores é definida por:</p>
+<p><span class="theorem-title"><strong>Definição 8.2</strong></span> Seja <span class="math inline">\(\mathbf{S}\)</span> a matriz de covariância amostral com pares de autovalor-autovetor <span class="math inline">\((\hat{\lambda}_i, \hat{\mathbf{e}}_i)\)</span>. A solução de componentes principais com <em>m</em> fatores é definida por:</p>
 <ul>
 <li><p><strong>Matriz de Cargas Estimada (<span class="math inline">\(\hat{\mathbf{L}}\)</span>)</strong>: <span class="math display">\[
 \hat{\mathbf{L}} = [\sqrt{\hat{\lambda}_1}\hat{\mathbf{e}}_1 | \sqrt{\hat{\lambda}_2}\hat{\mathbf{e}}_2 | \dots | \sqrt{\hat{\lambda}_m}\hat{\mathbf{e}}_m]
@@ -508,8 +520,8 @@ window.Quarto = {
 \]</span></p>
 <p>Isso mostra que, para que o ajuste seja bom, a soma dos autovalores descartados (<span class="math inline">\(\hat{\lambda}_{m+1}, \dots, \hat{\lambda}_p\)</span>) deve ser pequena.</p>
 </section>
-<section id="método-da-máxima-verossimilhança-mmv" class="level3" data-number="7.5.2">
-<h3 data-number="7.5.2" class="anchored" data-anchor-id="método-da-máxima-verossimilhança-mmv"><span class="header-section-number">7.5.2</span> Método da Máxima Verossimilhança (MMV)</h3>
+<section id="método-da-máxima-verossimilhança-mmv" class="level3" data-number="8.5.2">
+<h3 data-number="8.5.2" class="anchored" data-anchor-id="método-da-máxima-verossimilhança-mmv"><span class="header-section-number">8.5.2</span> Método da Máxima Verossimilhança (MMV)</h3>
 <p>O método da máxima verossimilhança (MMV) é uma abordagem mais rigorosa para a estimação, baseada em suposições sobre a distribuição dos dados.</p>
 <p><strong>Suposições Adicionais:</strong></p>
 <ol type="1">
@@ -530,10 +542,10 @@ window.Quarto = {
 <p>A principal vantagem do MMV é que ele permite um teste de hipóteses para a adequação do número de fatores <em>m</em>, comparando a matriz de covariâncias do modelo, <span class="math inline">\(\hat{\mathbf{\Sigma}} = \hat{\mathbf{L}}\hat{\mathbf{L}}' + \hat{\mathbf{\Psi}}\)</span>, com a matriz amostral <span class="math inline">\(\mathbf{S}\)</span>. Isso é fundamental na <strong>Análise Fatorial Confirmatória (AFC)</strong></p>
 </section>
 </section>
-<section id="a-escolha-do-número-de-fatores-m" class="level2" data-number="7.6">
-<h2 data-number="7.6" class="anchored" data-anchor-id="a-escolha-do-número-de-fatores-m"><span class="header-section-number">7.6</span> A Escolha do Número de Fatores (m)</h2>
+<section id="a-escolha-do-número-de-fatores-m" class="level2" data-number="8.6">
+<h2 data-number="8.6" class="anchored" data-anchor-id="a-escolha-do-número-de-fatores-m"><span class="header-section-number">8.6</span> A Escolha do Número de Fatores (m)</h2>
 <p>A determinação do número de fatores, <em>m</em>, é uma das decisões mais importantes na Análise Fatorial. Um número muito baixo de fatores pode não capturar a estrutura de covariância subjacente, enquanto um número muito alto pode levar a um modelo superajustado e de difícil interpretação, violando o princípio da parcimônia.</p>
-<p>A escolha de <em>m</em> geralmente envolve uma combinação de critérios estatísticos e julgamento prático. Vários dos métodos utilizados são análogos aos empregados na Análise de Componentes Principais (<a href="06_acp.html" class="quarto-xref"><span>Capítulo 6</span></a>). Os mais comuns são:</p>
+<p>A escolha de <em>m</em> geralmente envolve uma combinação de critérios estatísticos e julgamento prático. Vários dos métodos utilizados são análogos aos empregados na Análise de Componentes Principais (<a href="06_acp.html" class="quarto-xref"><span>Capítulo 7</span></a>). Os mais comuns são:</p>
 <ol type="1">
 <li><p><strong>Proporção da Variância Total Explicada</strong>: Um critério comum é reter fatores suficientes para explicar uma proporção substancial (e.g., 70-90%) da variância total. No contexto do método de componentes principais para AF, a proporção da variância explicada pelo fator <em>j</em> é <span class="math inline">\(\hat{\lambda}_j / \text{tr}(\mathbf{S})\)</span>.</p></li>
 <li><p><strong>Critério de Kaiser (Autovalores &gt; 1)</strong>: Ao trabalhar com a matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>, o critério de Kaiser sugere reter apenas os fatores correspondentes a autovalores maiores que 1. A lógica é que um fator deve explicar pelo menos a variância de uma variável original.</p></li>
@@ -542,8 +554,8 @@ window.Quarto = {
 </ol>
 <p>Na prática, é recomendável utilizar uma combinação desses critérios. A interpretabilidade da solução fatorial resultante é, em última análise, o guia mais importante.</p>
 </section>
-<section id="rotação-fatorial" class="level2" data-number="7.7">
-<h2 data-number="7.7" class="anchored" data-anchor-id="rotação-fatorial"><span class="header-section-number">7.7</span> Rotação Fatorial</h2>
+<section id="rotação-fatorial" class="level2" data-number="8.7">
+<h2 data-number="8.7" class="anchored" data-anchor-id="rotação-fatorial"><span class="header-section-number">8.7</span> Rotação Fatorial</h2>
 <p>Como visto anteriormente, a solução para a matriz de cargas fatoriais <span class="math inline">\(\hat{\mathbf{L}}\)</span> não é única. Qualquer rotação ortogonal dos fatores resulta em uma nova matriz de cargas <span class="math inline">\(\hat{\mathbf{L}}^* = \hat{\mathbf{L}}\mathbf{T}\)</span> que explica a estrutura de covariâncias dos dados exatamente da mesma forma, pois <span class="math inline">\(\hat{\mathbf{L}}\hat{\mathbf{L}}' = \hat{\mathbf{L}}^* (\hat{\mathbf{L}}^*)'\)</span>.</p>
 <p>Essa indeterminação, que a princípio parece um problema, é na verdade uma das ferramentas mais poderosas da Análise Fatorial. Ela nos permite girar a estrutura fatorial para uma posição que seja mais <strong>simples e interpretável</strong>, sem sacrificar o ajuste do modelo. O objetivo é alcançar o que o psicólogo Louis Thurstone chamou de <strong>estrutura simples</strong>.</p>
 <p>A estrutura simples ideal teria as seguintes propriedades:</p>
@@ -554,8 +566,8 @@ window.Quarto = {
 </ol>
 <p>Em suma, busca-se uma matriz de cargas onde cada variável esteja fortemente associada a apenas um ou poucos fatores, e cada fator represente claramente um subconjunto de variáveis. Os métodos de rotação são algoritmos que buscam, de forma objetiva, uma matriz <span class="math inline">\(\mathbf{T}\)</span> que aproxime a matriz de cargas rotacionada <span class="math inline">\(\hat{\mathbf{L}}^*\)</span> a essa estrutura ideal.</p>
 <p>As rotações dividem-se em duas categorias principais.</p>
-<section id="rotações-ortogonais" class="level3" data-number="7.7.1">
-<h3 data-number="7.7.1" class="anchored" data-anchor-id="rotações-ortogonais"><span class="header-section-number">7.7.1</span> Rotações Ortogonais</h3>
+<section id="rotações-ortogonais" class="level3" data-number="8.7.1">
+<h3 data-number="8.7.1" class="anchored" data-anchor-id="rotações-ortogonais"><span class="header-section-number">8.7.1</span> Rotações Ortogonais</h3>
 <p>Neste tipo de rotação, a matriz de transformação <span class="math inline">\(\mathbf{T}\)</span> é ortogonal, o que significa que os eixos dos fatores são girados, mas mantidos em um ângulo de 90 graus entre si. A consequência fundamental é que os fatores rotacionados <strong>permanecem não correlacionados</strong>.</p>
 <p>Os métodos mais comuns de rotação ortogonal são:</p>
 <ul>
@@ -568,8 +580,8 @@ V = \sum_{j=1}^{m} \left[ \frac{1}{p} \sum_{i=1}^{p} (\hat{l}_{ij}^* / h_i)^4 - 
 <li><p><strong>Equimax</strong>: É um meio termo entre o Varimax e o Quartimax. Ele tenta simplificar tanto as linhas quanto as colunas da matriz de cargas simultaneamente.</p></li>
 </ul>
 </section>
-<section id="rotações-oblíquas" class="level3" data-number="7.7.2">
-<h3 data-number="7.7.2" class="anchored" data-anchor-id="rotações-oblíquas"><span class="header-section-number">7.7.2</span> Rotações Oblíquas</h3>
+<section id="rotações-oblíquas" class="level3" data-number="8.7.2">
+<h3 data-number="8.7.2" class="anchored" data-anchor-id="rotações-oblíquas"><span class="header-section-number">8.7.2</span> Rotações Oblíquas</h3>
 <p>Em muitos campos, especialmente nas ciências sociais, é teoricamente razoável esperar que os fatores latentes sejam correlacionados. Por exemplo, os fatores “habilidade verbal” e “habilidade matemática” são distintos, mas é provável que sejam positivamente correlacionados.</p>
 <p>As rotações oblíquas permitem que os fatores se tornem correlacionados. A matriz de transformação <span class="math inline">\(\mathbf{T}\)</span> não é mais ortogonal, e os eixos dos fatores podem ter ângulos diferentes de 90 graus. A vantagem é a capacidade de encontrar uma estrutura mais simples e teoricamente mais realista, ao custo de uma complexidade maior na interpretação, pois é preciso analisar tanto a matriz de cargas quanto a matriz de correlação entre os fatores.</p>
 <p>Os métodos mais comuns incluem:</p>
@@ -986,12 +998,12 @@ V = \sum_{j=1}^{m} \left[ \frac{1}{p} \sum_{i=1}^{p} (\hat{l}_{ij}^* / h_i)^4 - 
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../src/02_tec_mult/06_acp.html" class="pagination-link" aria-label="Análise de Componentes Principais">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/exemplos/acp_manual.html" class="pagination-link" aria-label="Exemplo manual: ACP">
-        <span class="nav-page-text">Exemplo manual: ACP</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/02_tec_mult/08_cluster.html" class="pagination-link" aria-label="Análise de Agrupamentos">
+        <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
