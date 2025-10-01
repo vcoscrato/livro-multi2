@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exemplo manual: ACP – Estatística Multivariada 2</title>
+<title>9&nbsp; Análise de Agrupamentos – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/exemplos/af_big_five.html" rel="next">
-<link href="../../src/02_tec_mult/08_cluster.html" rel="prev">
+<link href="../../src/exemplos/acp_manual.html" rel="next">
+<link href="../../src/02_tec_mult/07_af.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplo manual: ACP</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Métodos multivariados</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/08_cluster.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -195,7 +195,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">src/02_tec_mult/</span></a>
+ <span class="menu-text">Parte II: Métodos multivariados</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -215,7 +215,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/02_tec_mult/08_cluster.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/02_tec_mult/08_cluster.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span></a>
   </div>
 </li>
@@ -232,7 +232,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exemplo manual: ACP</span></a>
   </div>
 </li>
@@ -254,30 +254,26 @@ window.Quarto = {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#o-cenário" id="toc-o-cenário" class="nav-link active" data-scroll-target="#o-cenário">O Cenário</a></li>
-  <li><a href="#passo-1-preparação-dos-dados" id="toc-passo-1-preparação-dos-dados" class="nav-link" data-scroll-target="#passo-1-preparação-dos-dados">Passo 1: Preparação dos Dados</a>
+  <li><a href="#decomposição-da-variabilidade" id="toc-decomposição-da-variabilidade" class="nav-link active" data-scroll-target="#decomposição-da-variabilidade"><span class="header-section-number">9.1</span> Decomposição da Variabilidade</a></li>
+  <li><a href="#agrupamentos-hierárquicos" id="toc-agrupamentos-hierárquicos" class="nav-link" data-scroll-target="#agrupamentos-hierárquicos"><span class="header-section-number">9.2</span> Agrupamentos Hierárquicos</a>
   <ul class="collapse">
-  <li><a href="#calcular-a-média-e-o-desvio-padrão" id="toc-calcular-a-média-e-o-desvio-padrão" class="nav-link" data-scroll-target="#calcular-a-média-e-o-desvio-padrão">1.1. Calcular a Média e o Desvio Padrão</a></li>
-  <li><a href="#padronizar-os-dados" id="toc-padronizar-os-dados" class="nav-link" data-scroll-target="#padronizar-os-dados">1.2. Padronizar os Dados</a></li>
+  <li><a href="#métodos-de-ligação-linkage" id="toc-métodos-de-ligação-linkage" class="nav-link" data-scroll-target="#métodos-de-ligação-linkage"><span class="header-section-number">9.2.1</span> Métodos de Ligação (<em>Linkage</em>)</a></li>
+  <li><a href="#o-dendograma" id="toc-o-dendograma" class="nav-link" data-scroll-target="#o-dendograma"><span class="header-section-number">9.2.2</span> O dendograma</a></li>
   </ul></li>
-  <li><a href="#passo-2-calcular-a-matriz-de-correlação" id="toc-passo-2-calcular-a-matriz-de-correlação" class="nav-link" data-scroll-target="#passo-2-calcular-a-matriz-de-correlação">Passo 2: Calcular a Matriz de Correlação</a></li>
-  <li><a href="#passo-3-decomposição-espectral-da-matriz-de-correlação" id="toc-passo-3-decomposição-espectral-da-matriz-de-correlação" class="nav-link" data-scroll-target="#passo-3-decomposição-espectral-da-matriz-de-correlação">Passo 3: Decomposição Espectral da Matriz de Correlação</a>
+  <li><a href="#agrupamento-não-hierárquico-k-médias-k-means" id="toc-agrupamento-não-hierárquico-k-médias-k-means" class="nav-link" data-scroll-target="#agrupamento-não-hierárquico-k-médias-k-means"><span class="header-section-number">9.3</span> Agrupamento Não-Hierárquico: K-Médias (<em>K-Means</em>)</a>
   <ul class="collapse">
-  <li><a href="#interpretação-dos-autovalores" id="toc-interpretação-dos-autovalores" class="nav-link" data-scroll-target="#interpretação-dos-autovalores">Interpretação dos Autovalores</a></li>
+  <li><a href="#o-algoritmo-k-médias" id="toc-o-algoritmo-k-médias" class="nav-link" data-scroll-target="#o-algoritmo-k-médias"><span class="header-section-number">9.3.1</span> O Algoritmo K-Médias</a></li>
+  <li><a href="#escolhendo-o-número-de-clusters-k" id="toc-escolhendo-o-número-de-clusters-k" class="nav-link" data-scroll-target="#escolhendo-o-número-de-clusters-k"><span class="header-section-number">9.3.2</span> Escolhendo o Número de Clusters K</a></li>
   </ul></li>
-  <li><a href="#passo-4-calcular-os-autovetores" id="toc-passo-4-calcular-os-autovetores" class="nav-link" data-scroll-target="#passo-4-calcular-os-autovetores">Passo 4: Calcular os Autovetores</a></li>
-  <li><a href="#passo-5-interpretação-dos-componentes" id="toc-passo-5-interpretação-dos-componentes" class="nav-link" data-scroll-target="#passo-5-interpretação-dos-componentes">Passo 5: Interpretação dos Componentes</a></li>
-  <li><a href="#passo-6-calcular-os-scores-dos-componentes" id="toc-passo-6-calcular-os-scores-dos-componentes" class="nav-link" data-scroll-target="#passo-6-calcular-os-scores-dos-componentes">Passo 6: Calcular os Scores dos Componentes</a></li>
-  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplo manual: ACP</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/02_tec_mult/06_acp.html">Parte II: Métodos multivariados</a></li><li class="breadcrumb-item"><a href="../../src/02_tec_mult/08_cluster.html"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exemplo manual: ACP</h1>
+<h1 class="title"><span id="sec-cluster" class="quarto-section-identifier"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span></h1>
 </div>
 
 
@@ -294,253 +290,148 @@ window.Quarto = {
 </header>
 
 
-<p>Neste exemplo, vamos detalhar passo a passo a aplicação da Análise de Componentes Principais (ACP) em um pequeno conjunto de dados. O objetivo é demonstrar manualmente todos os cálculos, desde a preparação dos dados até a interpretação dos resultados, seguindo a metodologia apresentada no Capítulo 3.</p>
-<section id="o-cenário" class="level2">
-<h2 class="anchored" data-anchor-id="o-cenário">O Cenário</h2>
-<p>Vamos expandir o exemplo da intuição geométrica, que usava <strong>Peso</strong> e <strong>Altura</strong>. Adicionaremos uma terceira variável, <strong>Renda</strong> (em milhares de R$), para um grupo de 5 indivíduos. A ideia é que Peso e Altura sejam correlacionados, mas a Renda não tenha uma correlação forte com eles.</p>
-<p>Nosso conjunto de dados inicial é:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Indivíduo</th>
-<th style="text-align: left;">Peso (kg)</th>
-<th style="text-align: left;">Altura (cm)</th>
-<th style="text-align: left;">Renda (R$ 1000)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">65</td>
-<td style="text-align: left;">170</td>
-<td style="text-align: left;">5.5</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">72</td>
-<td style="text-align: left;">182</td>
-<td style="text-align: left;">4.0</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">58</td>
-<td style="text-align: left;">165</td>
-<td style="text-align: left;">7.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">81</td>
-<td style="text-align: left;">190</td>
-<td style="text-align: left;">3.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">75</td>
-<td style="text-align: left;">178</td>
-<td style="text-align: left;">5.0</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="passo-1-preparação-dos-dados" class="level2">
-<h2 class="anchored" data-anchor-id="passo-1-preparação-dos-dados">Passo 1: Preparação dos Dados</h2>
-<p>Conforme discutido no Capítulo 3, a ACP é sensível à escala das variáveis. Portanto, o primeiro passo é <strong>padronizar</strong> os dados. Isso envolve duas etapas: centralizar (subtrair a média) e escalonar (dividir pelo desvio padrão).</p>
-<section id="calcular-a-média-e-o-desvio-padrão" class="level3">
-<h3 class="anchored" data-anchor-id="calcular-a-média-e-o-desvio-padrão">1.1. Calcular a Média e o Desvio Padrão</h3>
-<p>Primeiro, calculamos a média e o desvio padrão para cada variável.</p>
-<p><span class="math display">\[
-\bar{x}_{peso} = \frac{65+72+58+81+75}{5} = 70.2 \, \text{kg}
-\]</span> <span class="math display">\[
-\bar{x}_{altura} = \frac{170+182+165+190+178}{5} = 177.0 \, \text{cm}
-\]</span> <span class="math display">\[
-\bar{x}_{renda} = \frac{5.5+4.0+7.0+3.5+5.0}{5} = 5.0 \, (RS 1000)
-\]</span></p>
-<p>Agora, os desvios padrão (usando a fórmula com denominador <span class="math inline">\(n-1\)</span>):</p>
-<p><span class="math display">\[
-s_{peso} = \sqrt{\frac{(65-70.2)^2 + ... + (75-70.2)^2}{4}} = 8.64 \, \text{kg}
-\]</span> <span class="math display">\[
-s_{altura} = \sqrt{\frac{(170-177)^2 + ... + (178-177)^2}{4}} = 9.67 \, \text{cm}
-\]</span> <span class="math display">\[
-s_{renda} = \sqrt{\frac{(5.5-5.0)^2 + ... + (5.0-5.0)^2}{4}} = 1.35 \, (RS 1000)
-\]</span></p>
-</section>
-<section id="padronizar-os-dados" class="level3">
-<h3 class="anchored" data-anchor-id="padronizar-os-dados">1.2. Padronizar os Dados</h3>
-<p>Com as médias e desvios padrão, podemos padronizar cada observação <span class="math inline">\(x_{ij}\)</span> usando a fórmula <span class="math inline">\(z_{ij} = (x_{ij} - \bar{x}_j) / s_j\)</span>.</p>
-<p>Por exemplo, para o Indivíduo 1: <span class="math display">\[
-z_{1, peso} = \frac{65 - 70.2}{8.64} = -0.60
-\]</span> <span class="math display">\[
-z_{1, altura} = \frac{170 - 177}{9.67} = -0.72
-\]</span> <span class="math display">\[
-z_{1, renda} = \frac{5.5 - 5.0}{1.35} = 0.37
-\]</span></p>
-<p>Aplicando isso a todos os dados, obtemos a matriz de dados padronizados <span class="math inline">\(\mathbf{Z}\)</span>:</p>
-<p><span class="math display">\[
-\mathbf{Z} = \begin{pmatrix}
--0.60 &amp; -0.72 &amp; 0.37 \\
-0.21 &amp; 0.52 &amp; -0.74 \\
--1.41 &amp; -1.24 &amp; 1.48 \\
-1.25 &amp; 1.34 &amp; -1.11 \\
-0.56 &amp; 0.10 &amp; 0.00
-\end{pmatrix}
-\]</span></p>
-</section>
-</section>
-<section id="passo-2-calcular-a-matriz-de-correlação" class="level2">
-<h2 class="anchored" data-anchor-id="passo-2-calcular-a-matriz-de-correlação">Passo 2: Calcular a Matriz de Correlação</h2>
-<p>Como estamos trabalhando com dados padronizados, a ACP será realizada sobre a <strong>matriz de correlação</strong> <span class="math inline">\(\mathbf{R}\)</span>. A matriz de correlação pode ser calculada como:</p>
-<p><span class="math display">\[
-\mathbf{R} = \frac{1}{n-1} \mathbf{Z}' \mathbf{Z}
-\]</span></p>
-<p>Calculando <span class="math inline">\(\mathbf{Z}' \mathbf{Z}\)</span>: <span class="math display">\[
-\mathbf{Z}' \mathbf{Z} = \begin{pmatrix}
-4.00 &amp; 3.85 &amp; -0.81 \\
-3.85 &amp; 4.00 &amp; -1.18 \\
--0.81 &amp; -1.18 &amp; 4.00
-\end{pmatrix}
-\]</span></p>
-<p>Dividindo por <span class="math inline">\(n-1 = 4\)</span>, obtemos a matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>:</p>
-<p><span class="math display">\[
-\mathbf{R} = \begin{pmatrix}
-1.00 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 1.00 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 1.00
-\end{pmatrix}
-\]</span></p>
-<p>Como esperado, a correlação entre Peso e Altura (0.96) é muito alta, enquanto a Renda tem uma correlação fraca e negativa com as outras duas variáveis.</p>
-</section>
-<section id="passo-3-decomposição-espectral-da-matriz-de-correlação" class="level2">
-<h2 class="anchored" data-anchor-id="passo-3-decomposição-espectral-da-matriz-de-correlação">Passo 3: Decomposição Espectral da Matriz de Correlação</h2>
-<p>O próximo passo é encontrar os autovalores (<span class="math inline">\(\lambda\)</span>) e autovetores (<span class="math inline">\(\mathbf{e}\)</span>) da matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>. Eles são a solução da equação <span class="math inline">\(\mathbf{R}\mathbf{e} = \lambda\mathbf{e}\)</span>, que é equivalente a resolver <span class="math inline">\((\mathbf{R} - \lambda\mathbf{I})\mathbf{e} = \mathbf{0}\)</span>.</p>
-<p>Isso requer encontrar as raízes do polinômio característico <span class="math inline">\(det(\mathbf{R} - \lambda\mathbf{I}) = 0\)</span>.</p>
-<p><span class="math display">\[
-det \begin{pmatrix}
-1.00 - \lambda &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 1.00 - \lambda &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 1.00 - \lambda
-\end{pmatrix} = 0
-\]</span></p>
-<p>Resolver este determinante cúbico manualmente é trabalhoso. Usando uma calculadora ou software, encontramos os seguintes autovalores:</p>
-<p><span class="math display">\[
-\lambda_1 = 1.98 \quad \lambda_2 = 1.00 \quad \lambda_3 = 0.02
-\]</span></p>
-<section id="interpretação-dos-autovalores" class="level3">
-<h3 class="anchored" data-anchor-id="interpretação-dos-autovalores">Interpretação dos Autovalores</h3>
-<p>A variância total no sistema é a soma dos autovalores (que é igual ao traço da matriz <span class="math inline">\(\mathbf{R}\)</span>, ou seja, 3). - <strong>Variância Total</strong> = <span class="math inline">\(1.98 + 1.00 + 0.02 = 3.00\)</span></p>
-<p>A proporção da variância explicada por cada componente é: - <strong>CP1</strong>: <span class="math inline">\(\frac{1.98}{3.00} = 66.0\%\)</span> - <strong>CP2</strong>: <span class="math inline">\(\frac{1.00}{3.00} = 33.3\%\)</span> - <strong>CP3</strong>: <span class="math inline">\(\frac{0.02}{3.00} = 0.7\%\)</span></p>
-<p>Os dois primeiros componentes juntos explicam <span class="math inline">\(66.0\% + 33.3\% = 99.3\%\)</span> da variância total. Isso indica que podemos reduzir a dimensionalidade de 3 para 2 com uma perda mínima de informação.</p>
-</section>
-</section>
-<section id="passo-4-calcular-os-autovetores" class="level2">
-<h2 class="anchored" data-anchor-id="passo-4-calcular-os-autovetores">Passo 4: Calcular os Autovetores</h2>
-<p>Agora, para cada autovalor, resolvemos o sistema <span class="math inline">\((\mathbf{R} - \lambda_i\mathbf{I})\mathbf{e}_i = \mathbf{0}\)</span> para encontrar o autovetor correspondente <span class="math inline">\(\mathbf{e}_i\)</span>.</p>
+<p>A Análise de Agrupamentos, ou Análise de <em>Clusters</em>, é uma técnica exploratória multivariada cujo objetivo é particionar um conjunto de observações em subgrupos (os <em>clusters</em>). A partição é feita de tal forma que as observações dentro de um mesmo grupo sejam semelhantes entre si, enquanto observações em grupos diferentes sejam o mais distintas possível.</p>
+<p>Diferentemente de outras técnicas como a análise de regressão ou a análise discriminante, a análise de agrupamentos é um método de <strong>aprendizagem não supervisionada</strong>. Isso significa que não temos uma variável resposta ou rótulos pré-definidos para os grupos; o objetivo é descobrir a estrutura de agrupamentos inerente aos próprios dados.</p>
+<p>O princípio fundamental é a maximização da homogeneidade intra-grupo e, ao mesmo tempo, a maximização da heterogeneidade entre grupos.</p>
+<p>Diversas técnicas apresentadas nesse capítulo dependem da definição de uma medida para quantificar o quão semelhantes ou diferentes as observações são. Essa medida é formalizada como uma <strong>medida de dissimilaridade</strong> ou <strong>distância</strong>. Uma discussão detalhada sobre as diferentes métricas de distância pode ser encontrada na <a href="../01_intro/06_distancias.html" class="quarto-xref"><span>Capítulo 6</span></a>.</p>
+<div id="def-agrupamento" class="theorem definition" title="Agrupamento">
+<p><span class="theorem-title"><strong>Definição 9.1</strong></span> Dado um conjunto de dados com <span class="math inline">\(n\)</span> observações <span class="math inline">\(\mathbf{X} = \{\mathbf{x}_1, \dots, \mathbf{x}_n\}\)</span>, um <strong>agrupamento</strong> (ou <em>clustering</em>) é uma partição de <span class="math inline">\(\mathbf{X}\)</span> em <span class="math inline">\(K\)</span> subconjuntos disjuntos <span class="math inline">\(C_1, C_2, \dots, C_K\)</span>, chamados de <em>clusters</em>, tal que:</p>
+<ol type="1">
+<li><span class="math inline">\(C_k \neq \emptyset\)</span> para <span class="math inline">\(k=1, \dots, K\)</span></li>
+<li><span class="math inline">\(C_k \cap C_j = \emptyset\)</span> para <span class="math inline">\(k \neq j\)</span></li>
+<li><span class="math inline">\(\bigcup_{k=1}^{K} C_k = \mathbf{X}\)</span></li>
+</ol>
+<p>Para cada cluster <span class="math inline">\(C_k\)</span>, definimos:</p>
 <ul>
-<li><p>Para <span class="math inline">\(\lambda_1 = 1.98\)</span>: <span class="math display">\[
-\begin{pmatrix}
--0.98 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; -0.98 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; -0.98
-\end{pmatrix}
-\begin{pmatrix} e_{11} \\ e_{12} \\ e_{13} \end{pmatrix} =
-\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
-\]</span> A solução, após normalização (para que <span class="math inline">\(\mathbf{e}_1'\mathbf{e}_1 = 1\)</span>), é: <span class="math display">\[
-\mathbf{e}_1 = \begin{pmatrix} 0.69 \\ 0.71 \\ -0.15 \end{pmatrix}
+<li><strong>Tamanho:</strong> <span class="math inline">\(n_k = \#C_k\)</span>, o número de observações no cluster.</li>
+<li><strong>Centroide:</strong> <span class="math inline">\(\bar{\mathbf{x}}_k = \frac{1}{n_k} \sum_{\mathbf{x}_i \in C_k} \mathbf{x}_i\)</span>, o centóide, ou vetor de médias, do cluster.</li>
+</ul>
+</div>
+<section id="decomposição-da-variabilidade" class="level2" data-number="9.1">
+<h2 data-number="9.1" class="anchored" data-anchor-id="decomposição-da-variabilidade"><span class="header-section-number">9.1</span> Decomposição da Variabilidade</h2>
+<p>Podemos formalizar o critério de “boa separação” dos grupos através de uma decomposição da variabilidade total dos dados, análoga à Análise de Variância (ANOVA).</p>
+<div id="def-somas-quadrados" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 9.2</strong></span> Dado um conjunto de <span class="math inline">\(n\)</span> observações e uma partição em <span class="math inline">\(K\)</span> clusters <span class="math inline">\(C_1, \dots, C_K\)</span>:</p>
+<ul>
+<li><p><strong>Soma de Quadrados Total (SQT):</strong> Mede a dispersão total dos dados em torno da média geral <span class="math inline">\(\bar{\mathbf{x}}\)</span>. <span class="math display">\[
+SQT = \sum_{i=1}^{n} (\mathbf{x}_i - \bar{\mathbf{x}})'(\mathbf{x}_i - \bar{\mathbf{x}})
 \]</span></p></li>
-<li><p>Para <span class="math inline">\(\lambda_2 = 1.00\)</span>: <span class="math display">\[
-\begin{pmatrix}
-0.00 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 0.00 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 0.00
-\end{pmatrix}
-\begin{pmatrix} e_{21} \\ e_{22} \\ e_{23} \end{pmatrix} =
-\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
-\]</span> A solução normalizada é: <span class="math display">\[
-\mathbf{e}_2 = \begin{pmatrix} 0.18 \\ -0.22 \\ -0.96 \end{pmatrix}
+<li><p><strong>Soma de Quadrados Intra-grupos (SQI):</strong> Mede a dispersão dentro dos clusters. É a soma das dispersões de cada observação em relação ao centroide do seu próprio cluster, <span class="math inline">\(\bar{\mathbf{x}}_k\)</span>. Também é conhecida como <em>Within-Cluster Sum of Squares</em> (WCSS). <span class="math display">\[
+SQI = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\mathbf{x}_i - \bar{\mathbf{x}}_k)
 \]</span></p></li>
-<li><p>Para <span class="math inline">\(\lambda_3 = 0.02\)</span>: <span class="math display">\[
-\begin{pmatrix}
-0.98 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 0.98 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 0.98
-\end{pmatrix}
-\begin{pmatrix} e_{31} \\ e_{32} \\ e_{33} \end{pmatrix} =
-\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
-\]</span> A solução normalizada é: <span class="math display">\[
-\mathbf{e}_3 = \begin{pmatrix} -0.70 \\ 0.67 \\ -0.24 \end{pmatrix}
-\]</span></p></li>
+<li><p><strong>Soma de Quadrados Entre-grupos (SQE):</strong> Mede a dispersão entre os centroides dos clusters em relação à média geral. <span class="math display">\[
+SQE = \sum_{k=1}^{K} n_k (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})
+\]</span> Onde <span class="math inline">\(n_k\)</span> é o número de observações no cluster <span class="math inline">\(C_k\)</span>.</p></li>
+</ul>
+</div>
+<p>O objetivo da análise de agrupamentos pode ser visto como encontrar a partição que <strong>minimiza a SQI</strong> (grupos coesos) e <strong>maximiza a SQE</strong> (grupos separados).</p>
+<div id="thm-decomp-var" class="theorem" title="Teorema da Decomposição da Variância">
+<p><span class="theorem-title"><strong>Teorema 9.1</strong></span> A soma de quadrados total pode ser decomposta como a soma da variabilidade dentro dos grupos e entre os grupos.</p>
+<p><span class="math display">\[
+SQT = SQI + SQE
+\]</span></p>
+<div class="proof">
+<p><span class="proof-title"><em>Comprovação</em>. </span>A prova parte da decomposição do desvio de uma observação <span class="math inline">\(\mathbf{x}_i \in C_k\)</span> em relação à média geral <span class="math inline">\(\bar{\mathbf{x}}\)</span>:</p>
+<p><span class="math display">\[
+(\mathbf{x}_i - \bar{\mathbf{x}}) = (\mathbf{x}_i - \bar{\mathbf{x}}_k) + (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})
+\]</span></p>
+<p>Elevando ao quadrado (no sentido de produto vetorial), temos:</p>
+<p><span class="math display">\[
+(\mathbf{x}_i - \bar{\mathbf{x}})'(\mathbf{x}_i - \bar{\mathbf{x}}) = [(\mathbf{x}_i - \bar{\mathbf{x}}_k) + (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})]'[(\mathbf{x}_i - \bar{\mathbf{x}}_k) + (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})]
+\]</span></p>
+<p><span class="math display">\[
+= (\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\mathbf{x}_i - \bar{\mathbf{x}}_k) + (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}}) + 2(\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})
+\]</span></p>
+<p>Agora, somamos sobre todas as observações <span class="math inline">\(i=1, \dots, n\)</span>. Para fazer isso, somamos primeiro dentro de cada cluster <span class="math inline">\(k\)</span> e depois somamos os resultados sobre todos os clusters:</p>
+<p><span class="math display">\[
+SQT = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}})'(\mathbf{x}_i - \bar{\mathbf{x}})
+\]</span></p>
+<p><span class="math display">\[
+= \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\mathbf{x}_i - \bar{\mathbf{x}}_k) + \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}}) + \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} 2(\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})
+\]</span></p>
+<p>Analisando cada termo:</p>
+<ol type="1">
+<li>O primeiro termo é, por definição, a Soma de Quadrados Intra-grupos (SQI).</li>
+<li>No segundo termo, a expressão <span class="math inline">\((\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})\)</span> é constante para todas as <span class="math inline">\(n_k\)</span> observações no cluster <span class="math inline">\(C_k\)</span>. Portanto, a soma interna resulta em <span class="math inline">\(n_k (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})\)</span>. Somar sobre <span class="math inline">\(k\)</span> nos dá a Soma de Quadrados Entre-grupos (SQE).</li>
+<li>Para o terceiro termo (o termo cruzado), podemos reescrevê-lo como: <span class="math display">\[
+2 \sum_{k=1}^{K} \left[ \left( \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k) \right)' (\bar{\mathbf{x}}_k - \bar{\mathbf{x}}) \right]
+\]</span> Pela definição do centroide <span class="math inline">\(\bar{\mathbf{x}}_k\)</span>, a soma dos desvios em torno dele dentro de um cluster é zero: <span class="math inline">\(\sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k) = \mathbf{0}\)</span>. Portanto, todo o terceiro termo é igual a zero.</li>
+</ol>
+<p>Juntando os resultados, obtemos <span class="math inline">\(SQT = SQI + SQE\)</span>.</p>
+</div>
+</div>
+<p>A prova deste teorema mostra que a variabilidade total é conservada e apenas particionada, de forma que minimizar a SQI é equivalente a maximizar a SQE.</p>
+</section>
+<section id="agrupamentos-hierárquicos" class="level2" data-number="9.2">
+<h2 data-number="9.2" class="anchored" data-anchor-id="agrupamentos-hierárquicos"><span class="header-section-number">9.2</span> Agrupamentos Hierárquicos</h2>
+<p>Os métodos de agrupamento hierárquico criam uma sequência de partições aninhadas, que pode ser representada visualmente por uma árvore chamada <strong>dendrograma</strong>. Existem duas abordagens principais:</p>
+<ol type="1">
+<li><strong>Aglomerativa (Bottom-Up):</strong> Começa com cada observação em seu próprio cluster e, a cada passo, funde os dois clusters mais próximos até que reste apenas um único cluster contendo todas as observações.</li>
+<li><strong>Divisiva (Top-Down):</strong> Começa com todas as observações em um único cluster e, a cada passo, divide um cluster em dois até que cada observação esteja em seu próprio cluster.</li>
+</ol>
+<p>A abordagem aglomerativa é a mais comum. O ponto crucial do algoritmo é definir a “proximidade” entre dois clusters.</p>
+<section id="métodos-de-ligação-linkage" class="level3" data-number="9.2.1">
+<h3 data-number="9.2.1" class="anchored" data-anchor-id="métodos-de-ligação-linkage"><span class="header-section-number">9.2.1</span> Métodos de Ligação (<em>Linkage</em>)</h3>
+<p>O método de ligação é a regra que define a distância entre dois clusters.</p>
+<ul>
+<li><p><strong>Ligação Simples (<em>Single Linkage</em>):</strong> A distância entre dois clusters é a distância mínima entre quaisquer dois pontos dos clusters. Tende a produzir clusters “alongados” e é sensível a ruído. <span class="math display">\[ d(A, B) = \min_{\mathbf{a} \in A, \mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
+<li><p><strong>Ligação Completa (<em>Complete Linkage</em>):</strong> A distância é o máximo da distância entre quaisquer dois pontos. Produz clusters mais compactos e esféricos. <span class="math display">\[ d(A, B) = \max_{\mathbf{a} \in A, \mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
+<li><p><strong>Ligação Média (<em>Average Linkage</em>):</strong> A distância é a média de todas as distâncias entre os pares de pontos dos dois clusters. É um meio-termo entre a simples e a completa. <span class="math display">\[ d(A, B) = \frac{1}{n_A n_B} \sum_{\mathbf{a} \in A} \sum_{\mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
+<li><p><strong>Método de Ward:</strong> Este método se baseia em um critério de minimização da variância. A cada passo do algoritmo aglomerativo, ele funde o par de clusters que leva ao <strong>menor aumento possível na Soma de Quadrados Intra-grupos (SQI)</strong>. O objetivo é encontrar, a cada passo, a fusão mais “econômica” em termos de perda de coesão interna.</p>
+<p>Vamos formalizar esse aumento. Suponha que estejamos considerando fundir dois clusters, <span class="math inline">\(C_i\)</span> e <span class="math inline">\(C_j\)</span>. O aumento na SQI, que denotamos por <span class="math inline">\(\Delta(C_i, C_j)\)</span>, é a diferença entre a SQI do novo cluster fundido (<span class="math inline">\(C_{ij}\)</span>) e a soma das SQIs dos clusters individuais antes da fusão.</p>
+<p><span class="math display">\[
+\Delta(C_i, C_j) = \text{SQI}(C_{ij}) - (\text{SQI}(C_i) + \text{SQI}(C_j))
+\]</span></p>
+<p>Pode-se demonstrar que esse aumento é diretamente proporcional à distância euclidiana quadrada entre os centroides dos clusters que estão sendo fundidos.</p>
+<div class="proof" title="Demonstração da fórmula de Ward">
+<p><span class="proof-title"><em>Comprovação</em>. </span>A SQI para o novo cluster <span class="math inline">\(C_{ij} = C_i \cup C_j\)</span> é <span class="math inline">\(\sum_{\mathbf{x} \in C_{ij}} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij})\)</span>. Podemos reescrever essa soma como: <span class="math display">\[
+\sum_{\mathbf{x} \in C_i} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij}) + \sum_{\mathbf{x} \in C_j} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij})
+\]</span> Usando a mesma lógica da decomposição da variância, podemos mostrar que <span class="math inline">\(\sum_{\mathbf{x} \in C_i} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij}) = \text{SQI}(C_i) + n_i (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})\)</span>.</p>
+<p>Aplicando o resultado para ambos os termos, a SQI do novo cluster é: <span class="math display">\[
+\text{SQI}(C_{ij}) = \text{SQI}(C_i) + \text{SQI}(C_j) + n_i (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij}) + n_j (\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})
+\]</span> Portanto, o aumento na SQI é: <span class="math display">\[
+\Delta(C_i, C_j) = n_i (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij}) + n_j (\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})
+\]</span> Substituindo <span class="math inline">\(\bar{\mathbf{x}}_{ij} = \frac{n_i\bar{\mathbf{x}}_i + n_j\bar{\mathbf{x}}_j}{n_i+n_j}\)</span> e simplificando a álgebra, chegamos a: <span class="math display">\[
+\Delta(C_i, C_j) = \frac{n_i n_j}{n_i + n_j} (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_j)'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_j)
+\]</span></p>
+</div>
+<p>A fórmula final nos dá uma maneira eficiente de calcular o critério de Ward. A cada passo, o algoritmo calcula <span class="math inline">\(\Delta(C_i, C_j)\)</span> para todos os pares de clusters e realiza a fusão para o par que tiver o menor valor. Como a fórmula depende da distância entre centroides, o método de Ward tende a produzir clusters de tamanho semelhante e formato esférico.</p></li>
 </ul>
 </section>
-<section id="passo-5-interpretação-dos-componentes" class="level2">
-<h2 class="anchored" data-anchor-id="passo-5-interpretação-dos-componentes">Passo 5: Interpretação dos Componentes</h2>
-<p>Os autovetores (ou <em>loadings</em>) nos dizem como as variáveis originais se combinam para formar cada componente.</p>
-<ul>
-<li><p><strong>Componente Principal 1 (<span class="math inline">\(CP_1\)</span>)</strong>: <span class="math display">\[
-Y_1 = 0.69 \cdot Z_{peso} + 0.71 \cdot Z_{altura} - 0.15 \cdot Z_{renda}
-\]</span> Este componente é basicamente uma média ponderada de Peso e Altura, com uma pequena contribuição negativa da Renda. Podemos interpretá-lo como um índice de <strong>“Tamanho Corporal”</strong>. As cargas altas e positivas para Peso e Altura confirmam a alta correlação entre essas variáveis.</p></li>
-<li><p><strong>Componente Principal 2 (<span class="math inline">\(CP_2\)</span>)</strong>: <span class="math display">\[
-Y_2 = 0.18 \cdot Z_{peso} - 0.22 \cdot Z_{altura} - 0.96 \cdot Z_{renda}
-\]</span> Este componente é dominado pela Renda, com uma carga muito alta e negativa. As cargas para Peso e Altura são pequenas. Podemos interpretar o <span class="math inline">\(CP_2\)</span> como um índice de <strong>“Status Socioeconômico Inverso”</strong>, já que ele é quase que inteiramente uma representação da Renda (com sinal trocado).</p></li>
-</ul>
+<section id="o-dendograma" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="o-dendograma"><span class="header-section-number">9.2.2</span> O dendograma</h3>
+<p><strong>TBD</strong></p>
 </section>
-<section id="passo-6-calcular-os-scores-dos-componentes" class="level2">
-<h2 class="anchored" data-anchor-id="passo-6-calcular-os-scores-dos-componentes">Passo 6: Calcular os Scores dos Componentes</h2>
-<p>Finalmente, podemos calcular os valores (scores) dos componentes principais para cada indivíduo. Usamos a fórmula <span class="math inline">\(\mathbf{Y} = \mathbf{Z} \mathbf{P}\)</span>, onde <span class="math inline">\(\mathbf{P}\)</span> é a matriz cujas colunas são os autovetores.</p>
+</section>
+<section id="agrupamento-não-hierárquico-k-médias-k-means" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="agrupamento-não-hierárquico-k-médias-k-means"><span class="header-section-number">9.3</span> Agrupamento Não-Hierárquico: K-Médias (<em>K-Means</em>)</h2>
+<p>Diferente dos métodos hierárquicos, os métodos particionais, como o K-Médias, dividem os dados em um número <span class="math inline">\(K\)</span> de clusters pré-especificado. O K-Médias é um dos algoritmos de agrupamento mais populares e eficientes.</p>
+<p>O objetivo do K-Médias é particionar as <span class="math inline">\(n\)</span> observações em <span class="math inline">\(K\)</span> clusters de modo a minimizar a Soma de Quadrados Intra-grupos (SQI), também chamada de inércia ou <em>Within-Cluster Sum of Squares</em> (WCSS).</p>
 <p><span class="math display">\[
-\mathbf{P} = \begin{pmatrix}
-0.69 &amp; 0.18 &amp; -0.70 \\
-0.71 &amp; -0.22 &amp; 0.67 \\
--0.15 &amp; -0.96 &amp; -0.24
-\end{pmatrix}
+\text{SQI} = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\mathbf{x}_i - \bar{\mathbf{x}}_k)
 \]</span></p>
-<p>Para o Indivíduo 1, com dados padronizados <span class="math inline">\((-0.60, -0.72, 0.37)\)</span>: <span class="math display">\[
-y_{11} = (-0.60)(0.69) + (-0.72)(0.71) + (0.37)(-0.15) = -0.98
-\]</span> <span class="math display">\[
-y_{12} = (-0.60)(0.18) + (-0.72)(-0.22) + (0.37)(-0.96) = -0.31
-\]</span></p>
-<p>Calculando para todos os indivíduos, obtemos a matriz de scores <span class="math inline">\(\mathbf{Y}\)</span>:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Indivíduo</th>
-<th style="text-align: left;">CP1 (Tamanho)</th>
-<th style="text-align: left;">CP2 (Renda Inversa)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">-0.98</td>
-<td style="text-align: left;">-0.31</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">0.57</td>
-<td style="text-align: left;">0.85</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">-2.19</td>
-<td style="text-align: left;">-1.18</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">2.09</td>
-<td style="text-align: left;">1.35</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">0.46</td>
-<td style="text-align: left;">0.08</td>
-</tr>
-</tbody>
-</table>
+<p>Onde <span class="math inline">\(\bar{\mathbf{x}}_k\)</span> é o centroide (média) do cluster <span class="math inline">\(C_k\)</span>.</p>
+<section id="o-algoritmo-k-médias" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="o-algoritmo-k-médias"><span class="header-section-number">9.3.1</span> O Algoritmo K-Médias</h3>
+<p>O algoritmo é iterativo e funciona da seguinte forma:</p>
+<ol type="1">
+<li><strong>Inicialização:</strong> Escolha <span class="math inline">\(K\)</span> centroides iniciais. Isso pode ser feito selecionando <span class="math inline">\(K\)</span> observações aleatórias dos dados.</li>
+<li><strong>Atribuição:</strong> Atribua cada observação ao cluster cujo centroide é o mais próximo (usando, por exemplo, a distância Euclidiana).</li>
+<li><strong>Atualização:</strong> Recalcule o centroide de cada um dos <span class="math inline">\(K\)</span> clusters como a média de todas as observações atribuídas a ele.</li>
+<li><strong>Repetição:</strong> Repita os passos 2 e 3 até que as atribuições dos clusters não mudem mais ou um número máximo de iterações seja atingido.</li>
+</ol>
+<p>O algoritmo tem a garantia de convergir, mas pode chegar a um mínimo local, não necessariamente o mínimo global da WCSS. Por isso, é comum executar o algoritmo várias vezes com diferentes inicializações e escolher o resultado com a menor WCSS.</p>
 </section>
-<section id="conclusão" class="level2">
-<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
-<p>Este exemplo demonstra o poder da ACP. Começamos com três variáveis e, através de uma derivação passo a passo, conseguimos: 1. <strong>Reduzir a dimensionalidade</strong>: Mostramos que 99.3% da informação está contida em dois componentes. 2. <strong>Criar variáveis não correlacionadas</strong>: O <span class="math inline">\(CP_1\)</span> e o <span class="math inline">\(CP_2\)</span> são, por construção, ortogonais. 3. <strong>Interpretar a estrutura latente</strong>: Identificamos que a principal fonte de variação nos dados é o “Tamanho Corporal” (uma combinação de Peso e Altura), seguida pelo “Status Socioeconômico” (representado pela Renda).</p>
-<p>A análise manual, embora trabalhosa, revela a mecânica exata da técnica, solidificando a compreensão teórica apresentada no capítulo principal.</p>
+<section id="escolhendo-o-número-de-clusters-k" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="escolhendo-o-número-de-clusters-k"><span class="header-section-number">9.3.2</span> Escolhendo o Número de Clusters K</h3>
+<p>A escolha de <span class="math inline">\(K\)</span> é um passo crítico. Dois métodos comuns são:</p>
+<ul>
+<li><p><strong>Método do Cotovelo (<em>Elbow Method</em>):</strong> Plota-se a WCSS para diferentes valores de <span class="math inline">\(K\)</span>. O gráfico tipicamente se parece com um braço. O “cotovelo” nesse gráfico, o ponto onde a taxa de diminuição da WCSS se torna abruptamente menor, é um bom candidato para o número ideal de clusters.</p></li>
+<li><p><strong>Análise de Silhueta:</strong> O coeficiente de silhueta de uma observação mede o quão bem ela se encaixa em seu cluster em comparação com os clusters vizinhos. Ele varia de -1 a 1, onde valores altos indicam que a observação está bem agrupada. Pode-se calcular a média do coeficiente de silhueta para todos os pontos para um dado <span class="math inline">\(K\)</span>, e o <span class="math inline">\(K\)</span> que maximiza essa média é considerado o ideal.</p></li>
+</ul>
 
 
+</section>
 </section>
 
 </main> <!-- /main -->
@@ -945,13 +836,13 @@ y_{12} = (-0.60)(0.18) + (-0.72)(-0.22) + (0.37)(-0.96) = -0.31
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/02_tec_mult/08_cluster.html" class="pagination-link" aria-label="Análise de Agrupamentos">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span>
+      <a href="../../src/02_tec_mult/07_af.html" class="pagination-link" aria-label="Análise Fatorial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/exemplos/af_big_five.html" class="pagination-link" aria-label="Rotação fatorial em R">
-        <span class="nav-page-text">Rotação fatorial em R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/exemplos/acp_manual.html" class="pagination-link" aria-label="Exemplo manual: ACP">
+        <span class="nav-page-text">Exemplo manual: ACP</span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

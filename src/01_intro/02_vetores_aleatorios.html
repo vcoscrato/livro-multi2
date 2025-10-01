@@ -184,12 +184,18 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/01_intro/06_distancias.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">Parte II: Técnicas Multivariadas</span></a>
+ <span class="menu-text">Parte II: Métodos multivariados</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -198,13 +204,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/02_tec_mult/06_acp.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
+ <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/02_tec_mult/07_af.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
+ <span class="menu-text"><span class="chapter-number">8</span>&nbsp; <span class="chapter-title">Análise Fatorial</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/02_tec_mult/08_cluster.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span></a>
   </div>
 </li>
       </ul>
@@ -286,7 +298,7 @@ X_p
 \]</span></p>
 </div>
 <p>Este vetor é a representação matemática de uma “observação multivariada” em nível populacional. Toda a teoria da análise multivariada se baseia na compreensão das propriedades e da estrutura de distribuição deste vetor.</p>
-<div class="callout callout-style-default callout-caution callout-titled">
+<div class="callout callout-style-default callout-caution callout-titled" title="Cuidado com a Notação">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
 <i class="callout-icon"></i>
@@ -296,7 +308,11 @@ Cuidado com a Notação
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>A notação em análise multivariada exige atenção. - Uma letra minúscula em negrito (e.g., <span class="math inline">\(\mathbf{x}\)</span>) denota um <strong>vetor aleatório</strong>. - Uma letra maiúscula comum (e.g., <span class="math inline">\(X_j\)</span>) denota uma <strong>variável aleatória</strong> escalar, o <span class="math inline">\(j\)</span>-ésimo componente do vetor. - Mais adiante, uma letra maiúscula em negrito (e.g., <span class="math inline">\(\mathbf{X}\)</span>) será usada para a <strong>matriz de dados</strong> (amostral).</p>
+<ul>
+<li>Uma letra minúscula em negrito (e.g., <span class="math inline">\(\mathbf{x}\)</span>) denota um <strong>vetor aleatório</strong>.</li>
+<li>Uma letra maiúscula comum (e.g., <span class="math inline">\(X_j\)</span>) denota uma <strong>variável aleatória</strong> escalar, o <span class="math inline">\(j\)</span>-ésimo componente do vetor.</li>
+<li>Mais adiante, uma letra maiúscula em negrito (e.g., <span class="math inline">\(\mathbf{X}\)</span>) será usada para a <strong>matriz de dados</strong> (amostral).</li>
+</ul>
 </div>
 </div>
 </section>

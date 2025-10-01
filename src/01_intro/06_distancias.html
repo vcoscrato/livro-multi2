@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Exemplo manual: ACP – Estatística Multivariada 2</title>
+<title>6&nbsp; Medidas de Distância e Similaridade – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -30,8 +30,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
-<link href="../../src/exemplos/af_big_five.html" rel="next">
-<link href="../../src/02_tec_mult/08_cluster.html" rel="prev">
+<link href="../../src/02_tec_mult/06_acp.html" rel="next">
+<link href="../../src/01_intro/05_algebra_matricial.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
@@ -111,7 +111,7 @@ window.Quarto = {
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplo manual: ACP</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/01_intro/01_introducao.html">Parte I: Introdução</a></li><li class="breadcrumb-item"><a href="../../src/01_intro/06_distancias.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -186,7 +186,7 @@ window.Quarto = {
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/01_intro/06_distancias.html" class="sidebar-item-text sidebar-link">
+  <a href="../../src/01_intro/06_distancias.html" class="sidebar-item-text sidebar-link active">
  <span class="menu-text"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></span></a>
   </div>
 </li>
@@ -195,7 +195,7 @@ window.Quarto = {
         <li class="sidebar-item sidebar-item-section">
       <div class="sidebar-item-container"> 
             <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
- <span class="menu-text">src/02_tec_mult/</span></a>
+ <span class="menu-text">Parte II: Métodos multivariados</span></a>
           <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Alternar seção">
             <i class="bi bi-chevron-right ms-2"></i>
           </a> 
@@ -232,7 +232,7 @@ window.Quarto = {
       <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 show">  
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
-  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link active">
+  <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
  <span class="menu-text">Exemplo manual: ACP</span></a>
   </div>
 </li>
@@ -254,30 +254,19 @@ window.Quarto = {
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#o-cenário" id="toc-o-cenário" class="nav-link active" data-scroll-target="#o-cenário">O Cenário</a></li>
-  <li><a href="#passo-1-preparação-dos-dados" id="toc-passo-1-preparação-dos-dados" class="nav-link" data-scroll-target="#passo-1-preparação-dos-dados">Passo 1: Preparação dos Dados</a>
-  <ul class="collapse">
-  <li><a href="#calcular-a-média-e-o-desvio-padrão" id="toc-calcular-a-média-e-o-desvio-padrão" class="nav-link" data-scroll-target="#calcular-a-média-e-o-desvio-padrão">1.1. Calcular a Média e o Desvio Padrão</a></li>
-  <li><a href="#padronizar-os-dados" id="toc-padronizar-os-dados" class="nav-link" data-scroll-target="#padronizar-os-dados">1.2. Padronizar os Dados</a></li>
-  </ul></li>
-  <li><a href="#passo-2-calcular-a-matriz-de-correlação" id="toc-passo-2-calcular-a-matriz-de-correlação" class="nav-link" data-scroll-target="#passo-2-calcular-a-matriz-de-correlação">Passo 2: Calcular a Matriz de Correlação</a></li>
-  <li><a href="#passo-3-decomposição-espectral-da-matriz-de-correlação" id="toc-passo-3-decomposição-espectral-da-matriz-de-correlação" class="nav-link" data-scroll-target="#passo-3-decomposição-espectral-da-matriz-de-correlação">Passo 3: Decomposição Espectral da Matriz de Correlação</a>
-  <ul class="collapse">
-  <li><a href="#interpretação-dos-autovalores" id="toc-interpretação-dos-autovalores" class="nav-link" data-scroll-target="#interpretação-dos-autovalores">Interpretação dos Autovalores</a></li>
-  </ul></li>
-  <li><a href="#passo-4-calcular-os-autovetores" id="toc-passo-4-calcular-os-autovetores" class="nav-link" data-scroll-target="#passo-4-calcular-os-autovetores">Passo 4: Calcular os Autovetores</a></li>
-  <li><a href="#passo-5-interpretação-dos-componentes" id="toc-passo-5-interpretação-dos-componentes" class="nav-link" data-scroll-target="#passo-5-interpretação-dos-componentes">Passo 5: Interpretação dos Componentes</a></li>
-  <li><a href="#passo-6-calcular-os-scores-dos-componentes" id="toc-passo-6-calcular-os-scores-dos-componentes" class="nav-link" data-scroll-target="#passo-6-calcular-os-scores-dos-componentes">Passo 6: Calcular os Scores dos Componentes</a></li>
-  <li><a href="#conclusão" id="toc-conclusão" class="nav-link" data-scroll-target="#conclusão">Conclusão</a></li>
+  <li><a href="#distâncias-vs.-dissimilaridades" id="toc-distâncias-vs.-dissimilaridades" class="nav-link active" data-scroll-target="#distâncias-vs.-dissimilaridades"><span class="header-section-number">6.1</span> Distâncias vs.&nbsp;Dissimilaridades</a></li>
+  <li><a href="#medidas-para-dados-contínuos" id="toc-medidas-para-dados-contínuos" class="nav-link" data-scroll-target="#medidas-para-dados-contínuos"><span class="header-section-number">6.2</span> Medidas para Dados Contínuos</a></li>
+  <li><a href="#medidas-para-variáveis-binárias" id="toc-medidas-para-variáveis-binárias" class="nav-link" data-scroll-target="#medidas-para-variáveis-binárias"><span class="header-section-number">6.3</span> Medidas para Variáveis Binárias</a></li>
+  <li><a href="#matriz-de-distâncias" id="toc-matriz-de-distâncias" class="nav-link" data-scroll-target="#matriz-de-distâncias"><span class="header-section-number">6.4</span> Matriz de Distâncias</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplo manual: ACP</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/01_intro/01_introducao.html">Parte I: Introdução</a></li><li class="breadcrumb-item"><a href="../../src/01_intro/06_distancias.html"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Exemplo manual: ACP</h1>
+<h1 class="title"><span id="sec-distancias" class="quarto-section-identifier"><span class="chapter-number">6</span>&nbsp; <span class="chapter-title">Medidas de Distância e Similaridade</span></span></h1>
 </div>
 
 
@@ -294,251 +283,150 @@ window.Quarto = {
 </header>
 
 
-<p>Neste exemplo, vamos detalhar passo a passo a aplicação da Análise de Componentes Principais (ACP) em um pequeno conjunto de dados. O objetivo é demonstrar manualmente todos os cálculos, desde a preparação dos dados até a interpretação dos resultados, seguindo a metodologia apresentada no Capítulo 3.</p>
-<section id="o-cenário" class="level2">
-<h2 class="anchored" data-anchor-id="o-cenário">O Cenário</h2>
-<p>Vamos expandir o exemplo da intuição geométrica, que usava <strong>Peso</strong> e <strong>Altura</strong>. Adicionaremos uma terceira variável, <strong>Renda</strong> (em milhares de R$), para um grupo de 5 indivíduos. A ideia é que Peso e Altura sejam correlacionados, mas a Renda não tenha uma correlação forte com eles.</p>
-<p>Nosso conjunto de dados inicial é:</p>
+<p>Um conceito fundamental que permeia quase todas as técnicas de análise multivariada é a medição da “proximidade” ou “distância” entre observações. Seja para agrupar dados semelhantes, classificar uma nova observação ou entender a estrutura de um conjunto de dados, essas medidas determinam uma forma quantitativa para expressar o quão perto ou longe duas observações estão uma da outra no espaço p-dimensional.</p>
+<section id="distâncias-vs.-dissimilaridades" class="level2" data-number="6.1">
+<h2 data-number="6.1" class="anchored" data-anchor-id="distâncias-vs.-dissimilaridades"><span class="header-section-number">6.1</span> Distâncias vs.&nbsp;Dissimilaridades</h2>
+<p>Formalmente, uma função <span class="math inline">\(d(\cdot, \cdot)\)</span> é considerada uma <strong>métrica de distância</strong> se satisfaz as seguintes propriedades para quaisquer pontos <span class="math inline">\(\mathbf{x}, \mathbf{y}, \mathbf{z}\)</span>:</p>
+<ol type="1">
+<li><strong>Não-negatividade:</strong> <span class="math inline">\(d(\mathbf{x}, \mathbf{y}) \ge 0\)</span></li>
+<li><strong>Identidade:</strong> <span class="math inline">\(d(\mathbf{x}, \mathbf{y}) = 0 \iff \mathbf{x} = \mathbf{y}\)</span></li>
+<li><strong>Simetria:</strong> <span class="math inline">\(d(\mathbf{x}, \mathbf{y}) = d(\mathbf{y}, \mathbf{x})\)</span></li>
+<li><strong>Desigualdade Triangular:</strong> <span class="math inline">\(d(\mathbf{x}, \mathbf{z}) \le d(\mathbf{x}, \mathbf{y}) + d(\mathbf{y}, \mathbf{z})\)</span></li>
+</ol>
+<p>No entanto, em muitos contextos práticos, utilizamos medidas que não satisfazem todas essas propriedades, mas que ainda são extremamente úteis para quantificar o quão diferentes dois objetos são. Usamos o termo mais geral <strong>medida de dissimilaridade</strong> para nos referirmos a qualquer função que indique o grau de diferença entre dois pontos, onde valores pequenos indicam semelhança e valores grandes indicam diferença.</p>
+<p>Um exemplo clássico de uma medida de dissimilaridade que não é uma métrica de distância estrita é a <strong>distância Euclidiana quadrática</strong>, <span class="math inline">\(d^2(\mathbf{x}, \mathbf{y}) = (\mathbf{x} - \mathbf{y})'(\mathbf{x} - \mathbf{y})\)</span>. Ela viola a propriedade da desigualdade triangular, mas pode ser usada em algoritmos como o K-médias e o método de Ward por suas convenientes propriedades computacionais (evitar o cálculo da raiz quadrada economiza tempo).</p>
+<p>Nas seções a seguir, apresentamos algumas das medidas de dissimilaridade e distância mais populares. A escolha da medida ideal é um campo vasto e depende fundamentalmente da natureza dos dados e do objetivo da análise.</p>
+</section>
+<section id="medidas-para-dados-contínuos" class="level2" data-number="6.2">
+<h2 data-number="6.2" class="anchored" data-anchor-id="medidas-para-dados-contínuos"><span class="header-section-number">6.2</span> Medidas para Dados Contínuos</h2>
+<div id="def-dist-euclidiana" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6.1</strong></span> A <strong>Distância Euclidiana</strong> é a métrica de distância mais comum e corresponde à noção intuitiva de distância em linha reta entre dois pontos.</p>
+<p><span class="math display">\[
+d(\mathbf{x}_i, \mathbf{x}_j) = \sqrt{\sum_{k=1}^{p} (x_{ik} - x_{jk})^2} = \sqrt{(\mathbf{x}_i - \mathbf{x}_j)'(\mathbf{x}_i - \mathbf{x}_j)}
+\]</span></p>
+</div>
+<div id="def-dist-manhattan" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6.2</strong></span> A <strong>Distância de Manhattan</strong> (ou <em>City-Block</em>) calcula a distância como a soma das diferenças absolutas entre as coordenadas dos pontos. É como se deslocar entre dois pontos em uma cidade, movendo-se apenas ao longo das ruas (horizontais e verticais).</p>
+<p><span class="math display">\[
+d(\mathbf{x}_i, \mathbf{x}_j) = \sum_{k=1}^{p} |x_{ik} - x_{jk}|
+\]</span></p>
+<p>Esta medida é, em geral, mais robusta a <em>outliers</em> do que a distância Euclidiana.</p>
+</div>
+<div id="def-dist-minkowski" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6.3</strong></span> A <strong>Distância de Minkowski</strong> é uma generalização tanto da Euclidiana quanto da de Manhattan.</p>
+<p><span class="math display">\[
+d(\mathbf{x}_i, \mathbf{x}_j) = \left( \sum_{k=1}^{p} |x_{ik} - x_{jk}|^m \right)^{1/m}
+\]</span></p>
+<ul>
+<li>Se <span class="math inline">\(m=2\)</span>, temos a distância Euclidiana.</li>
+<li>Se <span class="math inline">\(m=1\)</span>, temos a distância de Manhattan.</li>
+</ul>
+<p>Quanto maior o valor de <span class="math inline">\(m\)</span>, mais peso é dado às maiores diferenças entre as coordenadas.</p>
+</div>
+<div class="callout callout-style-default callout-warning callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Limitação das Distâncias Comuns
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>As distâncias Euclidiana, de Manhattan e de Minkowski são sensíveis às escalas das variáveis. Se uma variável tiver uma magnitude muito maior que as outras, ela dominará o cálculo da distância. Por isso, é prática comum <strong>padronizar</strong> as variáveis (subtrair a média e dividir pelo desvio padrão) antes de calcular a matriz de distâncias.</p>
+</div>
+</div>
+<div class="{\#def-dist-mahalanobis}">
+<p>A <strong>Distância de Mahalanobis</strong> é uma medida de distância estatística que leva em conta a correlação entre as variáveis e é invariante à escala.</p>
+<p><span class="math display">\[
+d(\mathbf{x}_i, \mathbf{x}_j) = \sqrt{(\mathbf{x}_i - \mathbf{x}_j)' \mathbf{S}^{-1} (\mathbf{x}_i - \mathbf{x}_j)}
+\]</span></p>
+<p>Onde <span class="math inline">\(\mathbf{S}^{-1}\)</span> é a inversa da matriz de covariâncias amostral. Ela mede a distância entre os pontos em unidades de desvio padrão, ajustando a contribuição de cada variável pela estrutura de covariância dos dados. Já encontramos essa forma quadrática no expoente da distribuição Normal Multivariada (<span class="quarto-unresolved-ref">?sec-normal-multivariada</span>).</p>
+</div>
+</section>
+<section id="medidas-para-variáveis-binárias" class="level2" data-number="6.3">
+<h2 data-number="6.3" class="anchored" data-anchor-id="medidas-para-variáveis-binárias"><span class="header-section-number">6.3</span> Medidas para Variáveis Binárias</h2>
+<p>Quando os dados são binários (0 ou 1), a interpretação da distância muda. A distância Euclidiana quadrática, por exemplo, simplesmente conta o número de posições em que os dois vetores discordam.</p>
+<p><span class="math display">\[
+(x_{ij} - x_{kj})^2 =
+\begin{cases}
+0, &amp; \text{se } x_{ij} = x_{kj} \\
+1, &amp; \text{se } x_{ij} \neq x_{kj}
+\end{cases}
+\]</span></p>
+<p>O problema é que essa abordagem dá o mesmo peso para uma concordância de <code>1-1</code> e uma concordância de <code>0-0</code>. Em muitos contextos, a ausência conjunta de uma característica (concordância <code>0-0</code>) é menos informativa do que a presença conjunta (concordância <code>1-1</code>).</p>
+<p>Para lidar com isso, podemos construir uma tabela de contingência para duas observações <span class="math inline">\(\mathbf{x}_i\)</span> e <span class="math inline">\(\mathbf{x}_j\)</span>:</p>
 <table class="caption-top table">
 <thead>
 <tr class="header">
-<th style="text-align: left;">Indivíduo</th>
-<th style="text-align: left;">Peso (kg)</th>
-<th style="text-align: left;">Altura (cm)</th>
-<th style="text-align: left;">Renda (R$ 1000)</th>
+<th></th>
+<th style="text-align: center;">Observação j = 1</th>
+<th style="text-align: center;">Observação j = 0</th>
+<th style="text-align: center;">Total</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">65</td>
-<td style="text-align: left;">170</td>
-<td style="text-align: left;">5.5</td>
+<td><strong>Obs i = 1</strong></td>
+<td style="text-align: center;">a</td>
+<td style="text-align: center;">b</td>
+<td style="text-align: center;">a+b</td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">72</td>
-<td style="text-align: left;">182</td>
-<td style="text-align: left;">4.0</td>
+<td><strong>Obs i = 0</strong></td>
+<td style="text-align: center;">c</td>
+<td style="text-align: center;">d</td>
+<td style="text-align: center;">c+d</td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">58</td>
-<td style="text-align: left;">165</td>
-<td style="text-align: left;">7.0</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">81</td>
-<td style="text-align: left;">190</td>
-<td style="text-align: left;">3.5</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">75</td>
-<td style="text-align: left;">178</td>
-<td style="text-align: left;">5.0</td>
+<td><strong>Total</strong></td>
+<td style="text-align: center;">a+c</td>
+<td style="text-align: center;">b+d</td>
+<td style="text-align: center;">p</td>
 </tr>
 </tbody>
 </table>
-</section>
-<section id="passo-1-preparação-dos-dados" class="level2">
-<h2 class="anchored" data-anchor-id="passo-1-preparação-dos-dados">Passo 1: Preparação dos Dados</h2>
-<p>Conforme discutido no Capítulo 3, a ACP é sensível à escala das variáveis. Portanto, o primeiro passo é <strong>padronizar</strong> os dados. Isso envolve duas etapas: centralizar (subtrair a média) e escalonar (dividir pelo desvio padrão).</p>
-<section id="calcular-a-média-e-o-desvio-padrão" class="level3">
-<h3 class="anchored" data-anchor-id="calcular-a-média-e-o-desvio-padrão">1.1. Calcular a Média e o Desvio Padrão</h3>
-<p>Primeiro, calculamos a média e o desvio padrão para cada variável.</p>
+<p>Onde: - <code>a</code>: número de variáveis onde <span class="math inline">\(x_{ik}=1\)</span> e <span class="math inline">\(x_{jk}=1\)</span>. - <code>d</code>: número de variáveis onde <span class="math inline">\(x_{ik}=0\)</span> e <span class="math inline">\(x_{jk}=0\)</span>. - <code>b</code> e <code>c</code>: número de variáveis onde há discordância.</p>
+<p>A distância Euclidiana quadrática corresponde a <span class="math inline">\(b+c\)</span>.</p>
+<div id="def-jaccard" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6.4</strong></span> O <strong>Coeficiente de Jaccard</strong> é uma medida de <em>similaridade</em> para dados binários que ignora as concordâncias <code>0-0</code>.</p>
 <p><span class="math display">\[
-\bar{x}_{peso} = \frac{65+72+58+81+75}{5} = 70.2 \, \text{kg}
-\]</span> <span class="math display">\[
-\bar{x}_{altura} = \frac{170+182+165+190+178}{5} = 177.0 \, \text{cm}
-\]</span> <span class="math display">\[
-\bar{x}_{renda} = \frac{5.5+4.0+7.0+3.5+5.0}{5} = 5.0 \, (RS 1000)
+J(\mathbf{x}_i, \mathbf{x}_j) = \frac{a}{a+b+c}
 \]</span></p>
-<p>Agora, os desvios padrão (usando a fórmula com denominador <span class="math inline">\(n-1\)</span>):</p>
+<p>A <strong>Distância de Jaccard</strong> é a sua contraparte de dissimilaridade, definida como <span class="math inline">\(1 - J(\mathbf{x}_i, \mathbf{x}_j)\)</span>.</p>
+</div>
+<div id="def-smc" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6.5</strong></span> O <strong>Coeficiente de Correspondência Simples</strong> (<em>Simple Matching Coefficient</em>, SMC) considera tanto as presenças (<code>1-1</code>) quanto as ausências (<code>0-0</code>) como concordâncias. É útil quando a ausência de uma característica é tão informativa quanto a sua presença.</p>
 <p><span class="math display">\[
-s_{peso} = \sqrt{\frac{(65-70.2)^2 + ... + (75-70.2)^2}{4}} = 8.64 \, \text{kg}
-\]</span> <span class="math display">\[
-s_{altura} = \sqrt{\frac{(170-177)^2 + ... + (178-177)^2}{4}} = 9.67 \, \text{cm}
-\]</span> <span class="math display">\[
-s_{renda} = \sqrt{\frac{(5.5-5.0)^2 + ... + (5.0-5.0)^2}{4}} = 1.35 \, (RS 1000)
+SMC = \frac{a+d}{a+b+c+d}
 \]</span></p>
-</section>
-<section id="padronizar-os-dados" class="level3">
-<h3 class="anchored" data-anchor-id="padronizar-os-dados">1.2. Padronizar os Dados</h3>
-<p>Com as médias e desvios padrão, podemos padronizar cada observação <span class="math inline">\(x_{ij}\)</span> usando a fórmula <span class="math inline">\(z_{ij} = (x_{ij} - \bar{x}_j) / s_j\)</span>.</p>
-<p>Por exemplo, para o Indivíduo 1: <span class="math display">\[
-z_{1, peso} = \frac{65 - 70.2}{8.64} = -0.60
-\]</span> <span class="math display">\[
-z_{1, altura} = \frac{170 - 177}{9.67} = -0.72
-\]</span> <span class="math display">\[
-z_{1, renda} = \frac{5.5 - 5.0}{1.35} = 0.37
-\]</span></p>
-<p>Aplicando isso a todos os dados, obtemos a matriz de dados padronizados <span class="math inline">\(\mathbf{Z}\)</span>:</p>
+</div>
+<div id="def-dice" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6.6</strong></span> O <strong>Coeficiente de Dice</strong> (ou Sørensen-Dice) é outra medida de similaridade que, assim como Jaccard, ignora as concordâncias <code>0-0</code>. No entanto, ele dá um peso maior às concordâncias <code>1-1</code>.</p>
 <p><span class="math display">\[
-\mathbf{Z} = \begin{pmatrix}
--0.60 &amp; -0.72 &amp; 0.37 \\
-0.21 &amp; 0.52 &amp; -0.74 \\
--1.41 &amp; -1.24 &amp; 1.48 \\
-1.25 &amp; 1.34 &amp; -1.11 \\
-0.56 &amp; 0.10 &amp; 0.00
-\end{pmatrix}
+Dice = \frac{2a}{2a+b+c}
 \]</span></p>
-</section>
-</section>
-<section id="passo-2-calcular-a-matriz-de-correlação" class="level2">
-<h2 class="anchored" data-anchor-id="passo-2-calcular-a-matriz-de-correlação">Passo 2: Calcular a Matriz de Correlação</h2>
-<p>Como estamos trabalhando com dados padronizados, a ACP será realizada sobre a <strong>matriz de correlação</strong> <span class="math inline">\(\mathbf{R}\)</span>. A matriz de correlação pode ser calculada como:</p>
+</div>
+<div id="def-russel-rao" class="theorem definition">
+<p><span class="theorem-title"><strong>Definição 6.7</strong></span> O <strong>Coeficiente de Russell-Rao</strong> é uma medida mais simples que calcula a proporção de presenças conjuntas em relação ao total de variáveis.</p>
 <p><span class="math display">\[
-\mathbf{R} = \frac{1}{n-1} \mathbf{Z}' \mathbf{Z}
+RR = \frac{a}{a+b+c+d}
 \]</span></p>
-<p>Calculando <span class="math inline">\(\mathbf{Z}' \mathbf{Z}\)</span>: <span class="math display">\[
-\mathbf{Z}' \mathbf{Z} = \begin{pmatrix}
-4.00 &amp; 3.85 &amp; -0.81 \\
-3.85 &amp; 4.00 &amp; -1.18 \\
--0.81 &amp; -1.18 &amp; 4.00
-\end{pmatrix}
-\]</span></p>
-<p>Dividindo por <span class="math inline">\(n-1 = 4\)</span>, obtemos a matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>:</p>
-<p><span class="math display">\[
-\mathbf{R} = \begin{pmatrix}
-1.00 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 1.00 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 1.00
-\end{pmatrix}
-\]</span></p>
-<p>Como esperado, a correlação entre Peso e Altura (0.96) é muito alta, enquanto a Renda tem uma correlação fraca e negativa com as outras duas variáveis.</p>
+</div>
 </section>
-<section id="passo-3-decomposição-espectral-da-matriz-de-correlação" class="level2">
-<h2 class="anchored" data-anchor-id="passo-3-decomposição-espectral-da-matriz-de-correlação">Passo 3: Decomposição Espectral da Matriz de Correlação</h2>
-<p>O próximo passo é encontrar os autovalores (<span class="math inline">\(\lambda\)</span>) e autovetores (<span class="math inline">\(\mathbf{e}\)</span>) da matriz de correlação <span class="math inline">\(\mathbf{R}\)</span>. Eles são a solução da equação <span class="math inline">\(\mathbf{R}\mathbf{e} = \lambda\mathbf{e}\)</span>, que é equivalente a resolver <span class="math inline">\((\mathbf{R} - \lambda\mathbf{I})\mathbf{e} = \mathbf{0}\)</span>.</p>
-<p>Isso requer encontrar as raízes do polinômio característico <span class="math inline">\(det(\mathbf{R} - \lambda\mathbf{I}) = 0\)</span>.</p>
+<section id="matriz-de-distâncias" class="level2" data-number="6.4">
+<h2 data-number="6.4" class="anchored" data-anchor-id="matriz-de-distâncias"><span class="header-section-number">6.4</span> Matriz de Distâncias</h2>
+<p>Uma vez escolhida a medida de dissimilaridade, é comum pré-calcular todas as distâncias entre os pares de observações e organizá-las em uma <strong>matriz de distâncias</strong> <span class="math inline">\(\mathbf{D}\)</span>, de dimensão <span class="math inline">\(n \times n\)</span>.</p>
 <p><span class="math display">\[
-det \begin{pmatrix}
-1.00 - \lambda &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 1.00 - \lambda &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 1.00 - \lambda
-\end{pmatrix} = 0
-\]</span></p>
-<p>Resolver este determinante cúbico manualmente é trabalhoso. Usando uma calculadora ou software, encontramos os seguintes autovalores:</p>
-<p><span class="math display">\[
-\lambda_1 = 1.98 \quad \lambda_2 = 1.00 \quad \lambda_3 = 0.02
-\]</span></p>
-<section id="interpretação-dos-autovalores" class="level3">
-<h3 class="anchored" data-anchor-id="interpretação-dos-autovalores">Interpretação dos Autovalores</h3>
-<p>A variância total no sistema é a soma dos autovalores (que é igual ao traço da matriz <span class="math inline">\(\mathbf{R}\)</span>, ou seja, 3). - <strong>Variância Total</strong> = <span class="math inline">\(1.98 + 1.00 + 0.02 = 3.00\)</span></p>
-<p>A proporção da variância explicada por cada componente é: - <strong>CP1</strong>: <span class="math inline">\(\frac{1.98}{3.00} = 66.0\%\)</span> - <strong>CP2</strong>: <span class="math inline">\(\frac{1.00}{3.00} = 33.3\%\)</span> - <strong>CP3</strong>: <span class="math inline">\(\frac{0.02}{3.00} = 0.7\%\)</span></p>
-<p>Os dois primeiros componentes juntos explicam <span class="math inline">\(66.0\% + 33.3\% = 99.3\%\)</span> da variância total. Isso indica que podemos reduzir a dimensionalidade de 3 para 2 com uma perda mínima de informação.</p>
-</section>
-</section>
-<section id="passo-4-calcular-os-autovetores" class="level2">
-<h2 class="anchored" data-anchor-id="passo-4-calcular-os-autovetores">Passo 4: Calcular os Autovetores</h2>
-<p>Agora, para cada autovalor, resolvemos o sistema <span class="math inline">\((\mathbf{R} - \lambda_i\mathbf{I})\mathbf{e}_i = \mathbf{0}\)</span> para encontrar o autovetor correspondente <span class="math inline">\(\mathbf{e}_i\)</span>.</p>
-<ul>
-<li><p>Para <span class="math inline">\(\lambda_1 = 1.98\)</span>: <span class="math display">\[
+\mathbf{D} =
 \begin{pmatrix}
--0.98 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; -0.98 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; -0.98
-\end{pmatrix}
-\begin{pmatrix} e_{11} \\ e_{12} \\ e_{13} \end{pmatrix} =
-\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
-\]</span> A solução, após normalização (para que <span class="math inline">\(\mathbf{e}_1'\mathbf{e}_1 = 1\)</span>), é: <span class="math display">\[
-\mathbf{e}_1 = \begin{pmatrix} 0.69 \\ 0.71 \\ -0.15 \end{pmatrix}
-\]</span></p></li>
-<li><p>Para <span class="math inline">\(\lambda_2 = 1.00\)</span>: <span class="math display">\[
-\begin{pmatrix}
-0.00 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 0.00 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 0.00
-\end{pmatrix}
-\begin{pmatrix} e_{21} \\ e_{22} \\ e_{23} \end{pmatrix} =
-\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
-\]</span> A solução normalizada é: <span class="math display">\[
-\mathbf{e}_2 = \begin{pmatrix} 0.18 \\ -0.22 \\ -0.96 \end{pmatrix}
-\]</span></p></li>
-<li><p>Para <span class="math inline">\(\lambda_3 = 0.02\)</span>: <span class="math display">\[
-\begin{pmatrix}
-0.98 &amp; 0.96 &amp; -0.20 \\
-0.96 &amp; 0.98 &amp; -0.29 \\
--0.20 &amp; -0.29 &amp; 0.98
-\end{pmatrix}
-\begin{pmatrix} e_{31} \\ e_{32} \\ e_{33} \end{pmatrix} =
-\begin{pmatrix} 0 \\ 0 \\ 0 \end{pmatrix}
-\]</span> A solução normalizada é: <span class="math display">\[
-\mathbf{e}_3 = \begin{pmatrix} -0.70 \\ 0.67 \\ -0.24 \end{pmatrix}
-\]</span></p></li>
-</ul>
-</section>
-<section id="passo-5-interpretação-dos-componentes" class="level2">
-<h2 class="anchored" data-anchor-id="passo-5-interpretação-dos-componentes">Passo 5: Interpretação dos Componentes</h2>
-<p>Os autovetores (ou <em>loadings</em>) nos dizem como as variáveis originais se combinam para formar cada componente.</p>
-<ul>
-<li><p><strong>Componente Principal 1 (<span class="math inline">\(CP_1\)</span>)</strong>: <span class="math display">\[
-Y_1 = 0.69 \cdot Z_{peso} + 0.71 \cdot Z_{altura} - 0.15 \cdot Z_{renda}
-\]</span> Este componente é basicamente uma média ponderada de Peso e Altura, com uma pequena contribuição negativa da Renda. Podemos interpretá-lo como um índice de <strong>“Tamanho Corporal”</strong>. As cargas altas e positivas para Peso e Altura confirmam a alta correlação entre essas variáveis.</p></li>
-<li><p><strong>Componente Principal 2 (<span class="math inline">\(CP_2\)</span>)</strong>: <span class="math display">\[
-Y_2 = 0.18 \cdot Z_{peso} - 0.22 \cdot Z_{altura} - 0.96 \cdot Z_{renda}
-\]</span> Este componente é dominado pela Renda, com uma carga muito alta e negativa. As cargas para Peso e Altura são pequenas. Podemos interpretar o <span class="math inline">\(CP_2\)</span> como um índice de <strong>“Status Socioeconômico Inverso”</strong>, já que ele é quase que inteiramente uma representação da Renda (com sinal trocado).</p></li>
-</ul>
-</section>
-<section id="passo-6-calcular-os-scores-dos-componentes" class="level2">
-<h2 class="anchored" data-anchor-id="passo-6-calcular-os-scores-dos-componentes">Passo 6: Calcular os Scores dos Componentes</h2>
-<p>Finalmente, podemos calcular os valores (scores) dos componentes principais para cada indivíduo. Usamos a fórmula <span class="math inline">\(\mathbf{Y} = \mathbf{Z} \mathbf{P}\)</span>, onde <span class="math inline">\(\mathbf{P}\)</span> é a matriz cujas colunas são os autovetores.</p>
-<p><span class="math display">\[
-\mathbf{P} = \begin{pmatrix}
-0.69 &amp; 0.18 &amp; -0.70 \\
-0.71 &amp; -0.22 &amp; 0.67 \\
--0.15 &amp; -0.96 &amp; -0.24
+0 &amp; d(\mathbf{x}_1, \mathbf{x}_2) &amp; \cdots &amp; d(\mathbf{x}_1, \mathbf{x}_n) \\
+d(\mathbf{x}_2, \mathbf{x}_1) &amp; 0 &amp; \cdots &amp; d(\mathbf{x}_2, \mathbf{x}_n) \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+d(\mathbf{x}_n, \mathbf{x}_1) &amp; d(\mathbf{x}_n, \mathbf{x}_2) &amp; \cdots &amp; 0
 \end{pmatrix}
 \]</span></p>
-<p>Para o Indivíduo 1, com dados padronizados <span class="math inline">\((-0.60, -0.72, 0.37)\)</span>: <span class="math display">\[
-y_{11} = (-0.60)(0.69) + (-0.72)(0.71) + (0.37)(-0.15) = -0.98
-\]</span> <span class="math display">\[
-y_{12} = (-0.60)(0.18) + (-0.72)(-0.22) + (0.37)(-0.96) = -0.31
-\]</span></p>
-<p>Calculando para todos os indivíduos, obtemos a matriz de scores <span class="math inline">\(\mathbf{Y}\)</span>:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Indivíduo</th>
-<th style="text-align: left;">CP1 (Tamanho)</th>
-<th style="text-align: left;">CP2 (Renda Inversa)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">1</td>
-<td style="text-align: left;">-0.98</td>
-<td style="text-align: left;">-0.31</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">2</td>
-<td style="text-align: left;">0.57</td>
-<td style="text-align: left;">0.85</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">3</td>
-<td style="text-align: left;">-2.19</td>
-<td style="text-align: left;">-1.18</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">4</td>
-<td style="text-align: left;">2.09</td>
-<td style="text-align: left;">1.35</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">5</td>
-<td style="text-align: left;">0.46</td>
-<td style="text-align: left;">0.08</td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="conclusão" class="level2">
-<h2 class="anchored" data-anchor-id="conclusão">Conclusão</h2>
-<p>Este exemplo demonstra o poder da ACP. Começamos com três variáveis e, através de uma derivação passo a passo, conseguimos: 1. <strong>Reduzir a dimensionalidade</strong>: Mostramos que 99.3% da informação está contida em dois componentes. 2. <strong>Criar variáveis não correlacionadas</strong>: O <span class="math inline">\(CP_1\)</span> e o <span class="math inline">\(CP_2\)</span> são, por construção, ortogonais. 3. <strong>Interpretar a estrutura latente</strong>: Identificamos que a principal fonte de variação nos dados é o “Tamanho Corporal” (uma combinação de Peso e Altura), seguida pelo “Status Socioeconômico” (representado pela Renda).</p>
-<p>A análise manual, embora trabalhosa, revela a mecânica exata da técnica, solidificando a compreensão teórica apresentada no capítulo principal.</p>
+<p>Esta matriz é simétrica, ou seja <span class="math inline">\(d(\mathbf{x}_i, \mathbf{x}_j) = d(\mathbf{x}_j, \mathbf{x}_i)\)</span>, e possui zeros na diagonal principal. Ela serve como a entrada para muitos algoritmos de agrupamento, especialmente os hierárquicos.</p>
 
 
 </section>
@@ -945,13 +833,13 @@ y_{12} = (-0.60)(0.18) + (-0.72)(-0.22) + (0.37)(-0.96) = -0.31
   </script>
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
-      <a href="../../src/02_tec_mult/08_cluster.html" class="pagination-link" aria-label="Análise de Agrupamentos">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">9</span>&nbsp; <span class="chapter-title">Análise de Agrupamentos</span></span>
+      <a href="../../src/01_intro/05_algebra_matricial.html" class="pagination-link" aria-label="Fundamentos Matemáticos: Álgebra Matricial">
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">5</span>&nbsp; <span class="chapter-title">Fundamentos Matemáticos: Álgebra Matricial</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
-      <a href="../../src/exemplos/af_big_five.html" class="pagination-link" aria-label="Rotação fatorial em R">
-        <span class="nav-page-text">Rotação fatorial em R</span> <i class="bi bi-arrow-right-short"></i>
+      <a href="../../src/02_tec_mult/06_acp.html" class="pagination-link" aria-label="Análise de Componentes Principais">
+        <span class="nav-page-text"><span class="chapter-number">7</span>&nbsp; <span class="chapter-title">Análise de Componentes Principais</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>
