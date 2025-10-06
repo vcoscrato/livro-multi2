@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -38,10 +38,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -236,13 +236,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exemplo manual: ACP</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exemplo manual: ACP</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Rotação fatorial em R</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Rotação fatorial em R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/agrupamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de agrupamentos</span></span></a>
   </div>
 </li>
       </ul>
@@ -310,81 +316,81 @@ window.Quarto = {
 <div class="cell" data-tbl-cap="Tabela de dados com Peso (kg) e Altura (cm)." data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <style type="text/css">
-#T_fa90a_row10_col0, #T_fa90a_row10_col1, #T_fa90a_row10_col2, #T_fa90a_row11_col0, #T_fa90a_row11_col1, #T_fa90a_row11_col2 {
+#T_92b3e_row10_col0, #T_92b3e_row10_col1, #T_92b3e_row10_col2, #T_92b3e_row11_col0, #T_92b3e_row11_col1, #T_92b3e_row11_col2 {
   font-weight: bold;
   background-color: #f9f68d;
 }
 </style>
 
-<table id="T_fa90a" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_92b3e" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
 <caption>Tabela de dados com Peso (kg) e Altura (cm).</caption>
 <thead>
 <tr class="header">
-<th id="T_fa90a_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th"></th>
-<th id="T_fa90a_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Peso</th>
-<th id="T_fa90a_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Altura</th>
+<th id="T_92b3e_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th"></th>
+<th id="T_92b3e_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Peso</th>
+<th id="T_92b3e_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Altura</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_fa90a_row0_col0" class="data row0 col0"></td>
-<td id="T_fa90a_row0_col1" class="data row0 col1">65</td>
-<td id="T_fa90a_row0_col2" class="data row0 col2">170</td>
+<td id="T_92b3e_row0_col0" class="data row0 col0"></td>
+<td id="T_92b3e_row0_col1" class="data row0 col1">65</td>
+<td id="T_92b3e_row0_col2" class="data row0 col2">170</td>
 </tr>
 <tr class="even">
-<td id="T_fa90a_row1_col0" class="data row1 col0"></td>
-<td id="T_fa90a_row1_col1" class="data row1 col1">72</td>
-<td id="T_fa90a_row1_col2" class="data row1 col2">182</td>
+<td id="T_92b3e_row1_col0" class="data row1 col0"></td>
+<td id="T_92b3e_row1_col1" class="data row1 col1">72</td>
+<td id="T_92b3e_row1_col2" class="data row1 col2">182</td>
 </tr>
 <tr class="odd">
-<td id="T_fa90a_row2_col0" class="data row2 col0"></td>
-<td id="T_fa90a_row2_col1" class="data row2 col1">58</td>
-<td id="T_fa90a_row2_col2" class="data row2 col2">165</td>
+<td id="T_92b3e_row2_col0" class="data row2 col0"></td>
+<td id="T_92b3e_row2_col1" class="data row2 col1">58</td>
+<td id="T_92b3e_row2_col2" class="data row2 col2">165</td>
 </tr>
 <tr class="even">
-<td id="T_fa90a_row3_col0" class="data row3 col0"></td>
-<td id="T_fa90a_row3_col1" class="data row3 col1">81</td>
-<td id="T_fa90a_row3_col2" class="data row3 col2">190</td>
+<td id="T_92b3e_row3_col0" class="data row3 col0"></td>
+<td id="T_92b3e_row3_col1" class="data row3 col1">81</td>
+<td id="T_92b3e_row3_col2" class="data row3 col2">190</td>
 </tr>
 <tr class="odd">
-<td id="T_fa90a_row4_col0" class="data row4 col0"></td>
-<td id="T_fa90a_row4_col1" class="data row4 col1">75</td>
-<td id="T_fa90a_row4_col2" class="data row4 col2">178</td>
+<td id="T_92b3e_row4_col0" class="data row4 col0"></td>
+<td id="T_92b3e_row4_col1" class="data row4 col1">75</td>
+<td id="T_92b3e_row4_col2" class="data row4 col2">178</td>
 </tr>
 <tr class="even">
-<td id="T_fa90a_row5_col0" class="data row5 col0"></td>
-<td id="T_fa90a_row5_col1" class="data row5 col1">60</td>
-<td id="T_fa90a_row5_col2" class="data row5 col2">168</td>
+<td id="T_92b3e_row5_col0" class="data row5 col0"></td>
+<td id="T_92b3e_row5_col1" class="data row5 col1">60</td>
+<td id="T_92b3e_row5_col2" class="data row5 col2">168</td>
 </tr>
 <tr class="odd">
-<td id="T_fa90a_row6_col0" class="data row6 col0"></td>
-<td id="T_fa90a_row6_col1" class="data row6 col1">68</td>
-<td id="T_fa90a_row6_col2" class="data row6 col2">175</td>
+<td id="T_92b3e_row6_col0" class="data row6 col0"></td>
+<td id="T_92b3e_row6_col1" class="data row6 col1">68</td>
+<td id="T_92b3e_row6_col2" class="data row6 col2">175</td>
 </tr>
 <tr class="even">
-<td id="T_fa90a_row7_col0" class="data row7 col0"></td>
-<td id="T_fa90a_row7_col1" class="data row7 col1">70</td>
-<td id="T_fa90a_row7_col2" class="data row7 col2">172</td>
+<td id="T_92b3e_row7_col0" class="data row7 col0"></td>
+<td id="T_92b3e_row7_col1" class="data row7 col1">70</td>
+<td id="T_92b3e_row7_col2" class="data row7 col2">172</td>
 </tr>
 <tr class="odd">
-<td id="T_fa90a_row8_col0" class="data row8 col0"></td>
-<td id="T_fa90a_row8_col1" class="data row8 col1">78</td>
-<td id="T_fa90a_row8_col2" class="data row8 col2">185</td>
+<td id="T_92b3e_row8_col0" class="data row8 col0"></td>
+<td id="T_92b3e_row8_col1" class="data row8 col1">78</td>
+<td id="T_92b3e_row8_col2" class="data row8 col2">185</td>
 </tr>
 <tr class="even">
-<td id="T_fa90a_row9_col0" class="data row9 col0"></td>
-<td id="T_fa90a_row9_col1" class="data row9 col1">62</td>
-<td id="T_fa90a_row9_col2" class="data row9 col2">169</td>
+<td id="T_92b3e_row9_col0" class="data row9 col0"></td>
+<td id="T_92b3e_row9_col1" class="data row9 col1">62</td>
+<td id="T_92b3e_row9_col2" class="data row9 col2">169</td>
 </tr>
 <tr class="odd">
-<td id="T_fa90a_row10_col0" class="data row10 col0">Média</td>
-<td id="T_fa90a_row10_col1" class="data row10 col1">68.90</td>
-<td id="T_fa90a_row10_col2" class="data row10 col2">175.40</td>
+<td id="T_92b3e_row10_col0" class="data row10 col0">Média</td>
+<td id="T_92b3e_row10_col1" class="data row10 col1">68.90</td>
+<td id="T_92b3e_row10_col2" class="data row10 col2">175.40</td>
 </tr>
 <tr class="even">
-<td id="T_fa90a_row11_col0" class="data row11 col0">Variância</td>
-<td id="T_fa90a_row11_col1" class="data row11 col1">59.88</td>
-<td id="T_fa90a_row11_col2" class="data row11 col2">66.71</td>
+<td id="T_92b3e_row11_col0" class="data row11 col0">Variância</td>
+<td id="T_92b3e_row11_col1" class="data row11 col1">59.88</td>
+<td id="T_92b3e_row11_col2" class="data row11 col2">66.71</td>
 </tr>
 </tbody>
 </table>
@@ -673,7 +679,7 @@ Somente quando todas as variáveis estão na <strong>mesma unidade de medida</st
 <div id="fig-scree" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-scree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="06_acp_files/figure-html/fig-scree-output-1.png" width="951" height="567" class="figure-img">
+<img src="06_acp_files/figure-html/fig-scree-output-1.png" width="951" height="568" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-scree-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;7.3: Exemplo de um Scree Plot. O ‘cotovelo’ em k=3 sugere a retenção de 3 componentes.
@@ -732,7 +738,7 @@ Cor(Y_k, X_j) = \frac{e_{kj} \sqrt{\lambda_k}}{\sqrt{s_{jj}}}
 <div id="fig-generic-biplot" class="quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-generic-biplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-<img src="06_acp_files/figure-html/fig-generic-biplot-output-1.png" width="571" height="364" class="figure-img">
+<img src="06_acp_files/figure-html/fig-generic-biplot-output-1.png" width="558" height="362" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-generic-biplot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 Figura&nbsp;7.4: Exemplo de um biplot genérico para ilustrar a interpretação dos seus elementos. Os pontos representam as observações e as setas, as variáveis originais.

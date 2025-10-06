@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -19,6 +19,41 @@ ul.task-list li input[type="checkbox"] {
   width: 0.8em;
   margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
 </style>
 
@@ -38,10 +73,10 @@ ul.task-list li input[type="checkbox"] {
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -233,13 +268,19 @@ window.Quarto = {
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exemplo manual: ACP</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exemplo manual: ACP</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Rotação fatorial em R</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Rotação fatorial em R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/agrupamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de agrupamentos</span></span></a>
   </div>
 </li>
       </ul>
@@ -258,12 +299,30 @@ window.Quarto = {
   <li><a href="#agrupamentos-hierárquicos" id="toc-agrupamentos-hierárquicos" class="nav-link" data-scroll-target="#agrupamentos-hierárquicos"><span class="header-section-number">9.2</span> Agrupamentos Hierárquicos</a>
   <ul class="collapse">
   <li><a href="#métodos-de-ligação-linkage" id="toc-métodos-de-ligação-linkage" class="nav-link" data-scroll-target="#métodos-de-ligação-linkage"><span class="header-section-number">9.2.1</span> Métodos de Ligação (<em>Linkage</em>)</a></li>
-  <li><a href="#o-dendograma" id="toc-o-dendograma" class="nav-link" data-scroll-target="#o-dendograma"><span class="header-section-number">9.2.2</span> O dendograma</a></li>
+  <li><a href="#o-dendrograma" id="toc-o-dendrograma" class="nav-link" data-scroll-target="#o-dendrograma"><span class="header-section-number">9.2.2</span> O Dendrograma</a></li>
+  <li><a href="#limitações-do-agrupamento-hierárquico" id="toc-limitações-do-agrupamento-hierárquico" class="nav-link" data-scroll-target="#limitações-do-agrupamento-hierárquico"><span class="header-section-number">9.2.3</span> Limitações do Agrupamento Hierárquico</a></li>
   </ul></li>
-  <li><a href="#agrupamento-não-hierárquico-k-médias-k-means" id="toc-agrupamento-não-hierárquico-k-médias-k-means" class="nav-link" data-scroll-target="#agrupamento-não-hierárquico-k-médias-k-means"><span class="header-section-number">9.3</span> Agrupamento Não-Hierárquico: K-Médias (<em>K-Means</em>)</a>
+  <li><a href="#agrupamento-não-hierárquico" id="toc-agrupamento-não-hierárquico" class="nav-link" data-scroll-target="#agrupamento-não-hierárquico"><span class="header-section-number">9.3</span> Agrupamento Não-Hierárquico</a>
   <ul class="collapse">
-  <li><a href="#o-algoritmo-k-médias" id="toc-o-algoritmo-k-médias" class="nav-link" data-scroll-target="#o-algoritmo-k-médias"><span class="header-section-number">9.3.1</span> O Algoritmo K-Médias</a></li>
-  <li><a href="#escolhendo-o-número-de-clusters-k" id="toc-escolhendo-o-número-de-clusters-k" class="nav-link" data-scroll-target="#escolhendo-o-número-de-clusters-k"><span class="header-section-number">9.3.2</span> Escolhendo o Número de Clusters K</a></li>
+  <li><a href="#o-algoritmo-k-médias-k-means" id="toc-o-algoritmo-k-médias-k-means" class="nav-link" data-scroll-target="#o-algoritmo-k-médias-k-means"><span class="header-section-number">9.3.1</span> O Algoritmo K-Médias (<em>K-Means</em>)</a></li>
+  <li><a href="#sec-cluster" id="toc-sec-cluster" class="nav-link" data-scroll-target="#sec-cluster"><span class="header-section-number">9.3.2</span> Procedimento sugerido para análise de agrupamentos</a></li>
+  </ul></li>
+  <li><a href="#agrupamento-baseado-em-modelos" id="toc-agrupamento-baseado-em-modelos" class="nav-link" data-scroll-target="#agrupamento-baseado-em-modelos"><span class="header-section-number">9.4</span> Agrupamento Baseado em Modelos</a>
+  <ul class="collapse">
+  <li><a href="#o-algoritmo-de-expectation-maximization-em" id="toc-o-algoritmo-de-expectation-maximization-em" class="nav-link" data-scroll-target="#o-algoritmo-de-expectation-maximization-em"><span class="header-section-number">9.4.1</span> O Algoritmo de Expectation-Maximization (EM)</a></li>
+  <li><a href="#vantagens-do-agrupamento-baseado-em-modelos" id="toc-vantagens-do-agrupamento-baseado-em-modelos" class="nav-link" data-scroll-target="#vantagens-do-agrupamento-baseado-em-modelos"><span class="header-section-number">9.4.2</span> Vantagens do Agrupamento Baseado em Modelos</a></li>
+  </ul></li>
+  <li><a href="#índices-de-v1alidação-de-agrupamentos" id="toc-índices-de-v1alidação-de-agrupamentos" class="nav-link" data-scroll-target="#índices-de-v1alidação-de-agrupamentos"><span class="header-section-number">9.5</span> Índices de v1alidação de agrupamentos</a>
+  <ul class="collapse">
+  <li><a href="#método-da-silhueta" id="toc-método-da-silhueta" class="nav-link" data-scroll-target="#método-da-silhueta"><span class="header-section-number">9.5.1</span> Método da Silhueta</a></li>
+  <li><a href="#índice-de-calinski-harabasz" id="toc-índice-de-calinski-harabasz" class="nav-link" data-scroll-target="#índice-de-calinski-harabasz"><span class="header-section-number">9.5.2</span> Índice de Calinski-Harabasz</a></li>
+  <li><a href="#índice-de-davies-bouldin" id="toc-índice-de-davies-bouldin" class="nav-link" data-scroll-target="#índice-de-davies-bouldin"><span class="header-section-number">9.5.3</span> Índice de Davies-Bouldin</a></li>
+  </ul></li>
+  <li><a href="#interpretações-em-análises-de-agrupamentos" id="toc-interpretações-em-análises-de-agrupamentos" class="nav-link" data-scroll-target="#interpretações-em-análises-de-agrupamentos"><span class="header-section-number">9.6</span> Interpretações em análises de agrupamentos</a>
+  <ul class="collapse">
+  <li><a href="#perfil-dos-grupos" id="toc-perfil-dos-grupos" class="nav-link" data-scroll-target="#perfil-dos-grupos"><span class="header-section-number">9.6.1</span> Perfil dos grupos</a></li>
+  <li><a href="#visualização-do-agrupamento" id="toc-visualização-do-agrupamento" class="nav-link" data-scroll-target="#visualização-do-agrupamento"><span class="header-section-number">9.6.2</span> Visualização do agrupamento</a></li>
+  <li><a href="#nomeação-dos-grupos" id="toc-nomeação-dos-grupos" class="nav-link" data-scroll-target="#nomeação-dos-grupos"><span class="header-section-number">9.6.3</span> Nomeação dos grupos</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -295,33 +354,33 @@ window.Quarto = {
 <p>O princípio fundamental é a maximização da homogeneidade intra-grupo e, ao mesmo tempo, a maximização da heterogeneidade entre grupos.</p>
 <p>Diversas técnicas apresentadas nesse capítulo dependem da definição de uma medida para quantificar o quão semelhantes ou diferentes as observações são. Essa medida é formalizada como uma <strong>medida de dissimilaridade</strong> ou <strong>distância</strong>. Uma discussão detalhada sobre as diferentes métricas de distância pode ser encontrada na <a href="../01_intro/06_distancias.html" class="quarto-xref"><span>Capítulo 6</span></a>.</p>
 <div id="def-agrupamento" class="theorem definition" title="Agrupamento">
-<p><span class="theorem-title"><strong>Definição 9.1</strong></span> Dado um conjunto de dados com <span class="math inline">\(n\)</span> observações <span class="math inline">\(\mathbf{X} = \{\mathbf{x}_1, \dots, \mathbf{x}_n\}\)</span>, um <strong>agrupamento</strong> (ou <em>clustering</em>) é uma partição de <span class="math inline">\(\mathbf{X}\)</span> em <span class="math inline">\(K\)</span> subconjuntos disjuntos <span class="math inline">\(C_1, C_2, \dots, C_K\)</span>, chamados de <em>clusters</em>, tal que:</p>
+<p><span class="theorem-title"><strong>Definição 9.1</strong></span> Dado um conjunto de dados com <span class="math inline">\(n\)</span> observações <span class="math inline">\(\mathbf{X} = \{\mathbf{x}_1, \dots, \mathbf{x}_n\}\)</span>, um <strong>agrupamento</strong> (ou <em>clustering</em>) é uma partição de <span class="math inline">\(\mathbf{X}\)</span> em <span class="math inline">\(K\)</span> subconjuntos disjuntos <span class="math inline">\(C_1, C_2, \dots, C_K\)</span>, tal que:</p>
 <ol type="1">
 <li><span class="math inline">\(C_k \neq \emptyset\)</span> para <span class="math inline">\(k=1, \dots, K\)</span></li>
 <li><span class="math inline">\(C_k \cap C_j = \emptyset\)</span> para <span class="math inline">\(k \neq j\)</span></li>
 <li><span class="math inline">\(\bigcup_{k=1}^{K} C_k = \mathbf{X}\)</span></li>
 </ol>
-<p>Para cada cluster <span class="math inline">\(C_k\)</span>, definimos:</p>
+<p>Para cada grupo <span class="math inline">\(C_k\)</span>, definimos:</p>
 <ul>
-<li><strong>Tamanho:</strong> <span class="math inline">\(n_k = \#C_k\)</span>, o número de observações no cluster.</li>
-<li><strong>Centroide:</strong> <span class="math inline">\(\bar{\mathbf{x}}_k = \frac{1}{n_k} \sum_{\mathbf{x}_i \in C_k} \mathbf{x}_i\)</span>, o centóide, ou vetor de médias, do cluster.</li>
+<li><strong>Tamanho:</strong> <span class="math inline">\(n_k = \#C_k\)</span>, o número de observações no grupo.</li>
+<li><strong>Centroide:</strong> <span class="math inline">\(\bar{\mathbf{x}}_k = \frac{1}{n_k} \sum_{\mathbf{x}_i \in C_k} \mathbf{x}_i\)</span>, o centóide, ou vetor de médias, do grupo.</li>
 </ul>
 </div>
 <section id="decomposição-da-variabilidade" class="level2" data-number="9.1">
 <h2 data-number="9.1" class="anchored" data-anchor-id="decomposição-da-variabilidade"><span class="header-section-number">9.1</span> Decomposição da Variabilidade</h2>
 <p>Podemos formalizar o critério de “boa separação” dos grupos através de uma decomposição da variabilidade total dos dados, análoga à Análise de Variância (ANOVA).</p>
 <div id="def-somas-quadrados" class="theorem definition">
-<p><span class="theorem-title"><strong>Definição 9.2</strong></span> Dado um conjunto de <span class="math inline">\(n\)</span> observações e uma partição em <span class="math inline">\(K\)</span> clusters <span class="math inline">\(C_1, \dots, C_K\)</span>:</p>
+<p><span class="theorem-title"><strong>Definição 9.2</strong></span> Dado um conjunto de <span class="math inline">\(n\)</span> observações e uma partição em <span class="math inline">\(K\)</span> grupos <span class="math inline">\(C_1, \dots, C_K\)</span>:</p>
 <ul>
 <li><p><strong>Soma de Quadrados Total (SQT):</strong> Mede a dispersão total dos dados em torno da média geral <span class="math inline">\(\bar{\mathbf{x}}\)</span>. <span class="math display">\[
 SQT = \sum_{i=1}^{n} (\mathbf{x}_i - \bar{\mathbf{x}})'(\mathbf{x}_i - \bar{\mathbf{x}})
 \]</span></p></li>
-<li><p><strong>Soma de Quadrados Intra-grupos (SQI):</strong> Mede a dispersão dentro dos clusters. É a soma das dispersões de cada observação em relação ao centroide do seu próprio cluster, <span class="math inline">\(\bar{\mathbf{x}}_k\)</span>. Também é conhecida como <em>Within-Cluster Sum of Squares</em> (WCSS). <span class="math display">\[
+<li><p><strong>Soma de Quadrados Intra-grupos (SQI):</strong> Mede a dispersão dentro dos grupos. É a soma das dispersões de cada observação em relação ao centroide do seu próprio grupo, <span class="math inline">\(\bar{\mathbf{x}}_k\)</span>. Também é conhecida como <em>Within-Cluster Sum of Squares</em> (WCSS). <span class="math display">\[
 SQI = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\mathbf{x}_i - \bar{\mathbf{x}}_k)
 \]</span></p></li>
-<li><p><strong>Soma de Quadrados Entre-grupos (SQE):</strong> Mede a dispersão entre os centroides dos clusters em relação à média geral. <span class="math display">\[
+<li><p><strong>Soma de Quadrados Entre-grupos (SQE):</strong> Mede a dispersão entre os centroides dos grupos em relação à média geral. <span class="math display">\[
 SQE = \sum_{k=1}^{K} n_k (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})
-\]</span> Onde <span class="math inline">\(n_k\)</span> é o número de observações no cluster <span class="math inline">\(C_k\)</span>.</p></li>
+\]</span> Onde <span class="math inline">\(n_k\)</span> é o número de observações no grupo <span class="math inline">\(C_k\)</span>.</p></li>
 </ul>
 </div>
 <p>O objetivo da análise de agrupamentos pode ser visto como encontrar a partição que <strong>minimiza a SQI</strong> (grupos coesos) e <strong>maximiza a SQE</strong> (grupos separados).</p>
@@ -342,7 +401,7 @@ SQT = SQI + SQE
 <p><span class="math display">\[
 = (\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\mathbf{x}_i - \bar{\mathbf{x}}_k) + (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}}) + 2(\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})
 \]</span></p>
-<p>Agora, somamos sobre todas as observações <span class="math inline">\(i=1, \dots, n\)</span>. Para fazer isso, somamos primeiro dentro de cada cluster <span class="math inline">\(k\)</span> e depois somamos os resultados sobre todos os clusters:</p>
+<p>Agora, somamos sobre todas as observações <span class="math inline">\(i=1, \dots, n\)</span>. Para fazer isso, somamos primeiro dentro de cada grupo <span class="math inline">\(k\)</span> e depois somamos os resultados sobre todos os grupos:</p>
 <p><span class="math display">\[
 SQT = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}})'(\mathbf{x}_i - \bar{\mathbf{x}})
 \]</span></p>
@@ -352,10 +411,10 @@ SQT = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}
 <p>Analisando cada termo:</p>
 <ol type="1">
 <li>O primeiro termo é, por definição, a Soma de Quadrados Intra-grupos (SQI).</li>
-<li>No segundo termo, a expressão <span class="math inline">\((\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})\)</span> é constante para todas as <span class="math inline">\(n_k\)</span> observações no cluster <span class="math inline">\(C_k\)</span>. Portanto, a soma interna resulta em <span class="math inline">\(n_k (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})\)</span>. Somar sobre <span class="math inline">\(k\)</span> nos dá a Soma de Quadrados Entre-grupos (SQE).</li>
+<li>No segundo termo, a expressão <span class="math inline">\((\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})\)</span> é constante para todas as <span class="math inline">\(n_k\)</span> observações no grupo <span class="math inline">\(C_k\)</span>. Portanto, a soma interna resulta em <span class="math inline">\(n_k (\bar{\mathbf{x}}_k - \bar{\mathbf{x}})'(\bar{\mathbf{x}}_k - \bar{\mathbf{x}})\)</span>. Somar sobre <span class="math inline">\(k\)</span> nos dá a Soma de Quadrados Entre-grupos (SQE).</li>
 <li>Para o terceiro termo (o termo cruzado), podemos reescrevê-lo como: <span class="math display">\[
 2 \sum_{k=1}^{K} \left[ \left( \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k) \right)' (\bar{\mathbf{x}}_k - \bar{\mathbf{x}}) \right]
-\]</span> Pela definição do centroide <span class="math inline">\(\bar{\mathbf{x}}_k\)</span>, a soma dos desvios em torno dele dentro de um cluster é zero: <span class="math inline">\(\sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k) = \mathbf{0}\)</span>. Portanto, todo o terceiro termo é igual a zero.</li>
+\]</span> Pela definição do centroide <span class="math inline">\(\bar{\mathbf{x}}_k\)</span>, a soma dos desvios em torno dele dentro de um grupo é zero: <span class="math inline">\(\sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k) = \mathbf{0}\)</span>. Portanto, todo o terceiro termo é igual a zero.</li>
 </ol>
 <p>Juntando os resultados, obtemos <span class="math inline">\(SQT = SQI + SQE\)</span>.</p>
 </div>
@@ -366,69 +425,408 @@ SQT = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}
 <h2 data-number="9.2" class="anchored" data-anchor-id="agrupamentos-hierárquicos"><span class="header-section-number">9.2</span> Agrupamentos Hierárquicos</h2>
 <p>Os métodos de agrupamento hierárquico criam uma sequência de partições aninhadas, que pode ser representada visualmente por uma árvore chamada <strong>dendrograma</strong>. Existem duas abordagens principais:</p>
 <ol type="1">
-<li><strong>Aglomerativa (Bottom-Up):</strong> Começa com cada observação em seu próprio cluster e, a cada passo, funde os dois clusters mais próximos até que reste apenas um único cluster contendo todas as observações.</li>
-<li><strong>Divisiva (Top-Down):</strong> Começa com todas as observações em um único cluster e, a cada passo, divide um cluster em dois até que cada observação esteja em seu próprio cluster.</li>
+<li><strong>Aglomerativa (Bottom-Up):</strong> Começa com cada observação em seu próprio grupo e, a cada passo, funde os dois grupos mais próximos até que reste apenas um único grupo contendo todas as observações.</li>
+<li><strong>Divisiva (Top-Down):</strong> Começa com todas as observações em um único grupo e, a cada passo, divide um grupo em dois até que cada observação esteja em seu próprio grupo.</li>
 </ol>
-<p>A abordagem aglomerativa é a mais comum. O ponto crucial do algoritmo é definir a “proximidade” entre dois clusters.</p>
+<div class="callout callout-style-default callout-note callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+Nota
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Devido a dificuldades de implementação, agrupamentos divisivos raramente são utilizados na prática. Por esse motivo, os exemplos presentes nesta seção consideram apenas agrupamentos aglomerativos.</p>
+</div>
+</div>
 <section id="métodos-de-ligação-linkage" class="level3" data-number="9.2.1">
 <h3 data-number="9.2.1" class="anchored" data-anchor-id="métodos-de-ligação-linkage"><span class="header-section-number">9.2.1</span> Métodos de Ligação (<em>Linkage</em>)</h3>
-<p>O método de ligação é a regra que define a distância entre dois clusters.</p>
+<p>Enquanto as medidas de dissimilaridade retratam a distância entre observações, precisamos de uma regra que define a distância entre dois grupos. Para isso definimos alguns métodos de ligação populares a seguir.</p>
 <ul>
-<li><p><strong>Ligação Simples (<em>Single Linkage</em>):</strong> A distância entre dois clusters é a distância mínima entre quaisquer dois pontos dos clusters. Tende a produzir clusters “alongados” e é sensível a ruído. <span class="math display">\[ d(A, B) = \min_{\mathbf{a} \in A, \mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
-<li><p><strong>Ligação Completa (<em>Complete Linkage</em>):</strong> A distância é o máximo da distância entre quaisquer dois pontos. Produz clusters mais compactos e esféricos. <span class="math display">\[ d(A, B) = \max_{\mathbf{a} \in A, \mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
-<li><p><strong>Ligação Média (<em>Average Linkage</em>):</strong> A distância é a média de todas as distâncias entre os pares de pontos dos dois clusters. É um meio-termo entre a simples e a completa. <span class="math display">\[ d(A, B) = \frac{1}{n_A n_B} \sum_{\mathbf{a} \in A} \sum_{\mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
-<li><p><strong>Método de Ward:</strong> Este método se baseia em um critério de minimização da variância. A cada passo do algoritmo aglomerativo, ele funde o par de clusters que leva ao <strong>menor aumento possível na Soma de Quadrados Intra-grupos (SQI)</strong>. O objetivo é encontrar, a cada passo, a fusão mais “econômica” em termos de perda de coesão interna.</p>
-<p>Vamos formalizar esse aumento. Suponha que estejamos considerando fundir dois clusters, <span class="math inline">\(C_i\)</span> e <span class="math inline">\(C_j\)</span>. O aumento na SQI, que denotamos por <span class="math inline">\(\Delta(C_i, C_j)\)</span>, é a diferença entre a SQI do novo cluster fundido (<span class="math inline">\(C_{ij}\)</span>) e a soma das SQIs dos clusters individuais antes da fusão.</p>
+<li><p><strong>Ligação Simples (<em>Single Linkage</em>):</strong> A distância entre dois grupos é a distância mínima entre quaisquer dois pontos dos grupos. Tende a produzir grupos “alongados” e é sensível a ruído. <span class="math display">\[ d(A, B) = \min_{\mathbf{a} \in A, \mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
+<li><p><strong>Ligação Completa (<em>Complete Linkage</em>):</strong> A distância é o máximo da distância entre quaisquer dois pontos. Produz grupos mais compactos e esféricos. <span class="math display">\[ d(A, B) = \max_{\mathbf{a} \in A, \mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
+<li><p><strong>Ligação Média (<em>Average Linkage</em>):</strong> A distância é a média de todas as distâncias entre os pares de pontos dos dois grupos. É um meio-termo entre a simples e a completa. <span class="math display">\[ d(A, B) = \frac{1}{n_A n_B} \sum_{\mathbf{a} \in A} \sum_{\mathbf{b} \in B} d(\mathbf{a}, \mathbf{b}) \]</span></p></li>
+<li><p><strong>Método de Ward:</strong> Este método se baseia em um critério de minimização da variância. A cada passo do algoritmo aglomerativo, ele funde o par de grupos que leva ao <strong>menor aumento possível na Soma de Quadrados Intra-grupos (SQI)</strong>. O objetivo é encontrar, a cada passo, a fusão mais “econômica” em termos de perda de coesão interna.</p>
+<p>Suponha que estejamos considerando fundir dois grupos, <span class="math inline">\(C_i\)</span> e <span class="math inline">\(C_j\)</span>. O aumento na SQI, que denotamos por <span class="math inline">\(\Delta(C_i, C_j)\)</span>, é a diferença entre a SQI do novo grupo fundido (<span class="math inline">\(C_{ij}\)</span>) e a soma das SQIs dos grupos individuais antes da fusão.</p>
 <p><span class="math display">\[
 \Delta(C_i, C_j) = \text{SQI}(C_{ij}) - (\text{SQI}(C_i) + \text{SQI}(C_j))
 \]</span></p>
-<p>Pode-se demonstrar que esse aumento é diretamente proporcional à distância euclidiana quadrada entre os centroides dos clusters que estão sendo fundidos.</p>
-<div class="proof" title="Demonstração da fórmula de Ward">
-<p><span class="proof-title"><em>Comprovação</em>. </span>A SQI para o novo cluster <span class="math inline">\(C_{ij} = C_i \cup C_j\)</span> é <span class="math inline">\(\sum_{\mathbf{x} \in C_{ij}} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij})\)</span>. Podemos reescrever essa soma como: <span class="math display">\[
+<p>A SQI para o novo grupo <span class="math inline">\(C_{ij} = C_i \cup C_j\)</span> é <span class="math inline">\(\sum_{\mathbf{x} \in C_{ij}} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij})\)</span>, onde <span class="math inline">\(\mathbf{x}_{ij}\)</span> é o centroide do novo grupo. Podemos reescrever essa soma como: <span class="math display">\[
 \sum_{\mathbf{x} \in C_i} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij}) + \sum_{\mathbf{x} \in C_j} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij})
 \]</span> Usando a mesma lógica da decomposição da variância, podemos mostrar que <span class="math inline">\(\sum_{\mathbf{x} \in C_i} (\mathbf{x} - \bar{\mathbf{x}}_{ij})'(\mathbf{x} - \bar{\mathbf{x}}_{ij}) = \text{SQI}(C_i) + n_i (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})\)</span>.</p>
-<p>Aplicando o resultado para ambos os termos, a SQI do novo cluster é: <span class="math display">\[
+<p>Aplicando o resultado para ambos os termos, a SQI do novo grupo é: <span class="math display">\[
 \text{SQI}(C_{ij}) = \text{SQI}(C_i) + \text{SQI}(C_j) + n_i (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij}) + n_j (\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})
 \]</span> Portanto, o aumento na SQI é: <span class="math display">\[
 \Delta(C_i, C_j) = n_i (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_{ij}) + n_j (\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})'(\bar{\mathbf{x}}_j - \bar{\mathbf{x}}_{ij})
 \]</span> Substituindo <span class="math inline">\(\bar{\mathbf{x}}_{ij} = \frac{n_i\bar{\mathbf{x}}_i + n_j\bar{\mathbf{x}}_j}{n_i+n_j}\)</span> e simplificando a álgebra, chegamos a: <span class="math display">\[
 \Delta(C_i, C_j) = \frac{n_i n_j}{n_i + n_j} (\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_j)'(\bar{\mathbf{x}}_i - \bar{\mathbf{x}}_j)
 \]</span></p>
-</div>
-<p>A fórmula final nos dá uma maneira eficiente de calcular o critério de Ward. A cada passo, o algoritmo calcula <span class="math inline">\(\Delta(C_i, C_j)\)</span> para todos os pares de clusters e realiza a fusão para o par que tiver o menor valor. Como a fórmula depende da distância entre centroides, o método de Ward tende a produzir clusters de tamanho semelhante e formato esférico.</p></li>
+<p>A fórmula final nos dá uma maneira eficiente de calcular o critério de Ward. A cada passo, o algoritmo calcula <span class="math inline">\(\Delta(C_i, C_j)\)</span> para todos os pares de grupos e realiza a fusão para o par que tiver o menor valor. Note que a fórmula depende da distância euclidiana entre centroides, por esse motivo, o método de Ward tende a produzir grupos de tamanho semelhante e formato esférico.</p></li>
 </ul>
 </section>
-<section id="o-dendograma" class="level3" data-number="9.2.2">
-<h3 data-number="9.2.2" class="anchored" data-anchor-id="o-dendograma"><span class="header-section-number">9.2.2</span> O dendograma</h3>
-<p><strong>TBD</strong></p>
+<section id="o-dendrograma" class="level3" data-number="9.2.2">
+<h3 data-number="9.2.2" class="anchored" data-anchor-id="o-dendrograma"><span class="header-section-number">9.2.2</span> O Dendrograma</h3>
+<p>O dendrograma é a principal ferramenta de visualização para o agrupamento hierárquico. Ele mostra como, passo a passo, as observações são fundidas em grupos. O eixo Y representa a distância ou dissimilaridade em que as fusões ocorrem. Quanto mais alta a “ponte” que une dois grupos, mais diferentes eles são.</p>
+<p>O gráfico abaixo, gerado a partir de um exemplo simples de 4 observações, mostra a anatomia de um dendrograma.</p>
+<div id="cell-fig-dendrograma-anotado" class="cell" data-execution_count="1">
+<div class="cell-output cell-output-display">
+<div id="fig-dendrograma-anotado" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dendrograma-anotado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08_cluster_files/figure-html/fig-dendrograma-anotado-output-1.png" width="608" height="427" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dendrograma-anotado-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.1: Anatomia de um dendrograma simples.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>O exemplo abaixo apresenta os dendogramas de maneira prática, além de exemplificar também como a função de ligação escolhida impacta no agrupamento formado.</p>
+<div id="exm-dendrogram-avancado" class="theorem example">
+<p><span class="theorem-title"><strong>Exemplo 9.1</strong></span> Vamos analisar o comportamento dos métodos de ligação com a matriz de 5x5 abaixo.</p>
+<p><span class="math display">\[
+\mathbf{D} =
+\left(
+\begin{array}{c|ccccc}
+     &amp; \mathbf{1} &amp; \mathbf{2} &amp; \mathbf{3} &amp; \mathbf{4} &amp; \mathbf{5} \\ \hline
+\mathbf{1} &amp; 0     &amp;       &amp;        &amp;        &amp;        \\
+\mathbf{2} &amp; 1     &amp; 0     &amp;        &amp;        &amp;        \\
+\mathbf{3} &amp; 8     &amp; 2     &amp; 0      &amp;        &amp;        \\
+\mathbf{4} &amp; 6     &amp; 4     &amp; 11     &amp; 0      &amp;        \\
+\mathbf{5} &amp; 7     &amp; 9     &amp; 8      &amp; 7      &amp; 0      \\
+\end{array}
+\right)
+\]</span></p>
+<p><strong>1. Usando a Ligação Simples (<em>Single Linkage</em>)</strong></p>
+<ul>
+<li><strong>Passo 1:</strong> A menor distância na matriz é <code>d(1,2) = 1</code>. Fundimos <code>{1,2}</code> na altura 1.</li>
+<li><strong>Passo 2:</strong> A distância do novo grupo <code>{1,2}</code> para <code>{3}</code> é <code>min(d(1,3), d(2,3)) = min(8, 2) = 2</code>. Todas as outras distâncias entre grupos ou pontos restantes são maiores que 2. Assim, fundimos <code>{1,2}</code> com <code>{3}</code> na altura 2.</li>
+<li><strong>Passo 3:</strong> A distância de <code>{1,2,3}</code> para <code>{4}</code> é <code>min(d(1,4), d(2,4), d(3,4)) = min(6, 4, 11) = 4</code>. Esta é a próxima menor distância, então fundimos <code>{1,2,3}</code> com <code>{4}</code> na altura 4.</li>
+<li><strong>Passo 4:</strong> A distância de <code>{1,2,3,4}</code> para <code>{5}</code> é <code>min(d(1,5), d(2,5), d(3,5), d(4,5)) = min(7, 9, 8, 7) = 7</code>. Fundimos o último ponto na altura 7.</li>
+<li><strong>Resultado:</strong> O método cria uma longa cadeia: <code>((({1,2},3),4),5)</code>.</li>
+</ul>
+<p><strong>2. Usando a Ligação Completa (<em>Complete Linkage</em>)</strong></p>
+<ul>
+<li><strong>Passo 1:</strong> A fusão inicial é a mesma: <code>{1,2}</code> (altura 1).</li>
+<li><strong>Passo 2:</strong> A distância de <code>{1,2}</code> para <code>{4}</code> é <code>max(d(1,4), d(2,4)) = max(6, 4) = 6</code>. Já a distância para <code>{3}</code> é <code>max(d(1,3), d(2,3)) = max(8, 2) = 8</code>. A menor distância entre os grupos existentes é 6, então fundimos <code>{1,2}</code> com <code>{4}</code>.</li>
+<li><strong>Passo 3:</strong> Temos os grupos <code>{1,2,4}</code>, <code>{3}</code> e <code>{5}</code>. A próxima menor distância entre os grupos restantes é <code>d(3,5) = 8</code>. Fundimos <code>{3,5}</code>.</li>
+<li><strong>Passo 4:</strong> A distância entre <code>{1,2,4}</code> e <code>{3,5}</code> é <code>max(d(1,3), d(1,5), d(2,3), d(2,5), d(4,3), d(4,5)) = max(8, 7, 2, 9, 11, 7) = 11</code>. A fusão final ocorre na altura 11.</li>
+<li><strong>Resultado:</strong> O método cria dois grupos distintos, <code>({1,2,4}, {3,5})</code>, antes da fusão final.</li>
+</ul>
+<p>Os resultados são estruturalmente diferentes, como mostram os dendrogramas.</p>
+<div id="cell-fig-dendrogramas-comparacao" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> squareform</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de distância 5x5 do exemplo</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.array([</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">7</span>],</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>],</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">11</span>, <span class="dv">8</span>],</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">0</span>, <span class="dv">7</span>],</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">0</span>]</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>condensed_D <span class="op">=</span> squareform(D)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'1'</span>, <span class="st">'2'</span>, <span class="st">'3'</span>, <span class="st">'4'</span>, <span class="st">'5'</span>]</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Dendrogramas Puros (Sem Definição de grupos)'</span>)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a><span class="co"># Ligação Simples</span></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a>linked_single <span class="op">=</span> linkage(condensed_D, <span class="st">'single'</span>)</span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>dendrogram(linked_single, orientation<span class="op">=</span><span class="st">'top'</span>, labels<span class="op">=</span>labels, ax<span class="op">=</span>axes[<span class="dv">0</span>], color_threshold<span class="op">=</span><span class="dv">0</span>, above_threshold_color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Ligação Simples'</span>)</span>
+<span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'Observação'</span>)</span>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Distância'</span>)</span>
+<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a><span class="co"># Ligação Completa</span></span>
+<span id="cb1-29"><a href="#cb1-29" aria-hidden="true" tabindex="-1"></a>linked_complete <span class="op">=</span> linkage(condensed_D, <span class="st">'complete'</span>)</span>
+<span id="cb1-30"><a href="#cb1-30" aria-hidden="true" tabindex="-1"></a>dendrogram(linked_complete, orientation<span class="op">=</span><span class="st">'top'</span>, labels<span class="op">=</span>labels, ax<span class="op">=</span>axes[<span class="dv">1</span>], color_threshold<span class="op">=</span><span class="dv">0</span>, above_threshold_color<span class="op">=</span><span class="st">'k'</span>)</span>
+<span id="cb1-31"><a href="#cb1-31" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Ligação Completa'</span>)</span>
+<span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Observação'</span>)</span>
+<span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-dendrogramas-comparacao" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dendrogramas-comparacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08_cluster_files/figure-html/fig-dendrogramas-comparacao-output-1.png" width="662" height="461" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dendrogramas-comparacao-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.2: Comparação de dendrogramas para a matriz 5x5. As cores foram removidas para mostrar a estrutura pura.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+</div>
+<p>O dendrograma não apenas mostra a hierarquia das fusões, mas também é a principal ferramenta para decidir o número final de grupos. A estratégia consiste em “cortar” a árvore em uma determinada altura. Todas as ramificações que estão abaixo da linha de corte constituem os grupos.</p>
+<p>A regra geral é procurar por um corte que cruze as conexões mais longas. Uma conexão longa representa uma fusão que ocorreu a uma distância (ou aumento de SQI, no caso de Ward) muito maior do que as fusões anteriores. Isso sugere que estamos unindo grupos que são naturalmente muito diferentes entre si. Portanto, cortar a árvore logo acima dessa grande “distância de fusão” é uma escolha sensata.</p>
+<p>A <a href="#fig-dendrogramas-cortes" class="quarto-xref">Figura&nbsp;<span>9.3</span></a> demonstra como a escolha de diferentes alturas de corte leva a diferentes números de grupos.</p>
+<div id="cell-fig-dendrogramas-cortes" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Código</summary>
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> squareform</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="co"># Matriz de distância 5x5 do exemplo</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>D <span class="op">=</span> np.array([</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">8</span>, <span class="dv">6</span>, <span class="dv">7</span>],</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">1</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">9</span>],</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">8</span>, <span class="dv">2</span>, <span class="dv">0</span>, <span class="dv">11</span>, <span class="dv">8</span>],</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">6</span>, <span class="dv">4</span>, <span class="dv">11</span>, <span class="dv">0</span>, <span class="dv">7</span>],</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>    [<span class="dv">7</span>, <span class="dv">9</span>, <span class="dv">8</span>, <span class="dv">7</span>, <span class="dv">0</span>]</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>])</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>condensed_D <span class="op">=</span> squareform(D)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>labels <span class="op">=</span> [<span class="st">'1'</span>, <span class="st">'2'</span>, <span class="st">'3'</span>, <span class="st">'4'</span>, <span class="st">'5'</span>]</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>linked_complete <span class="op">=</span> linkage(condensed_D, <span class="st">'complete'</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">3</span>, figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">'Visualização dos Cortes no Dendrograma (Ligação Completa)'</span>)</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Corte para K=2 ---</span></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>cut_height_k2 <span class="op">=</span> <span class="dv">9</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a>dendrogram(</span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a>    linked_complete,</span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">'top'</span>,</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>labels,</span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">0</span>],</span>
+<span id="cb2-29"><a href="#cb2-29" aria-hidden="true" tabindex="-1"></a>    color_threshold<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-30"><a href="#cb2-30" aria-hidden="true" tabindex="-1"></a>    above_threshold_color<span class="op">=</span><span class="st">'k'</span></span>
+<span id="cb2-31"><a href="#cb2-31" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-32"><a href="#cb2-32" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].axhline(y<span class="op">=</span>cut_height_k2, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb2-33"><a href="#cb2-33" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_title(<span class="st">'Corte para K=2 grupos'</span>)</span>
+<span id="cb2-34"><a href="#cb2-34" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_xlabel(<span class="st">'Observação'</span>)</span>
+<span id="cb2-35"><a href="#cb2-35" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>].set_ylabel(<span class="st">'Distância'</span>)</span>
+<span id="cb2-36"><a href="#cb2-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-37"><a href="#cb2-37" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Corte para K=3 ---</span></span>
+<span id="cb2-38"><a href="#cb2-38" aria-hidden="true" tabindex="-1"></a>cut_height_k3 <span class="op">=</span> <span class="dv">7</span></span>
+<span id="cb2-39"><a href="#cb2-39" aria-hidden="true" tabindex="-1"></a>dendrogram(</span>
+<span id="cb2-40"><a href="#cb2-40" aria-hidden="true" tabindex="-1"></a>    linked_complete,</span>
+<span id="cb2-41"><a href="#cb2-41" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">'top'</span>,</span>
+<span id="cb2-42"><a href="#cb2-42" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>labels,</span>
+<span id="cb2-43"><a href="#cb2-43" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">1</span>],</span>
+<span id="cb2-44"><a href="#cb2-44" aria-hidden="true" tabindex="-1"></a>    color_threshold<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-45"><a href="#cb2-45" aria-hidden="true" tabindex="-1"></a>    above_threshold_color<span class="op">=</span><span class="st">'k'</span></span>
+<span id="cb2-46"><a href="#cb2-46" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-47"><a href="#cb2-47" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].axhline(y<span class="op">=</span>cut_height_k3, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb2-48"><a href="#cb2-48" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_title(<span class="st">'Corte para K=3 grupos'</span>)</span>
+<span id="cb2-49"><a href="#cb2-49" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Observação'</span>)</span>
+<span id="cb2-50"><a href="#cb2-50" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-51"><a href="#cb2-51" aria-hidden="true" tabindex="-1"></a><span class="co"># --- Corte para K=4 ---</span></span>
+<span id="cb2-52"><a href="#cb2-52" aria-hidden="true" tabindex="-1"></a>cut_height_k4 <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb2-53"><a href="#cb2-53" aria-hidden="true" tabindex="-1"></a>dendrogram(</span>
+<span id="cb2-54"><a href="#cb2-54" aria-hidden="true" tabindex="-1"></a>    linked_complete,</span>
+<span id="cb2-55"><a href="#cb2-55" aria-hidden="true" tabindex="-1"></a>    orientation<span class="op">=</span><span class="st">'top'</span>,</span>
+<span id="cb2-56"><a href="#cb2-56" aria-hidden="true" tabindex="-1"></a>    labels<span class="op">=</span>labels,</span>
+<span id="cb2-57"><a href="#cb2-57" aria-hidden="true" tabindex="-1"></a>    ax<span class="op">=</span>axes[<span class="dv">2</span>],</span>
+<span id="cb2-58"><a href="#cb2-58" aria-hidden="true" tabindex="-1"></a>    color_threshold<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb2-59"><a href="#cb2-59" aria-hidden="true" tabindex="-1"></a>    above_threshold_color<span class="op">=</span><span class="st">'k'</span></span>
+<span id="cb2-60"><a href="#cb2-60" aria-hidden="true" tabindex="-1"></a>)</span>
+<span id="cb2-61"><a href="#cb2-61" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].axhline(y<span class="op">=</span>cut_height_k4, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>)</span>
+<span id="cb2-62"><a href="#cb2-62" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_title(<span class="st">'Corte para K=4 grupos'</span>)</span>
+<span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_xlabel(<span class="st">'Observação'</span>)</span>
+<span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</details>
+<div class="cell-output cell-output-display">
+<div id="fig-dendrogramas-cortes" class="quarto-float quarto-figure quarto-figure-center anchored">
+<figure class="quarto-float quarto-float-fig figure">
+<div aria-describedby="fig-dendrogramas-cortes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<img src="08_cluster_files/figure-html/fig-dendrogramas-cortes-output-1.png" width="668" height="461" class="figure-img">
+</div>
+<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dendrogramas-cortes-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Figura&nbsp;9.3: Ilustração do corte no dendrograma de Ligação Completa para obter K=2 (esquerda), K=3 (centro) e K=4 (direita) grupos.
+</figcaption>
+</figure>
+</div>
+</div>
+</div>
+<p>A interpretação dos resultados para cada corte é a seguinte:</p>
+<ul>
+<li><strong>K=2:</strong> Ao cortar o dendrograma na altura 9, obtemos dois grupos. O primeiro é <code>{1, 2, 4}</code> e o segundo é <code>{3, 5}</code>. Esta partição representa a estrutura de mais alto nível nos dados, separando os dois grupos mais distintos.</li>
+<li><strong>K=3:</strong> Abaixando a linha de corte para a altura 7, o grupo <code>{3, 5}</code> (que era formado na altura 8) é quebrado. O resultado são três grupos: <code>{1, 2, 4}</code>, <code>{3}</code> e <code>{5}</code>.</li>
+<li><strong>K=4:</strong> Com um corte ainda mais baixo, na altura 3, quebramos o grupo <code>{1, 2, 4}</code> (formado na altura 6). Os grupos resultantes são <code>{1, 2}</code>, <code>{4}</code>, <code>{3}</code> e <code>{5}</code>.</li>
+</ul>
+<p>Observe que o primeiro grupo <code>{1, 2}</code> se forma em uma altura de uma unidade de distância. Já a segunda ligação, <code>{1, 2}</code> com <code>{4}</code> ocorre na altura <code>d({1, 2}, {4})=6</code>. Isso indica que já existe um salto na distância da ligação logo no segundo passo. Por isso, uma escolha sensível é <span class="math inline">\(K=4\)</span>.</p>
+<div class="callout callout-style-default callout-note callout-titled" title="O Eixo Vertical no Dendrograma">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+O Eixo Vertical no Dendrograma
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Para os métodos de ligação simples, completa e média o eixo vertical do dendrograma represente diretamente a distância da fusão. Já para o <strong>Método de Ward</strong>, a altura da fusão representa o <strong>aumento na Soma de Quadrados Intra-grupos (SQI)</strong> resultante da união dos dois grupos. Esse valor não é uma distância, mas sim uma medida de perda de homogeneidade.</p>
+</div>
+</div>
+</section>
+<section id="limitações-do-agrupamento-hierárquico" class="level3" data-number="9.2.3">
+<h3 data-number="9.2.3" class="anchored" data-anchor-id="limitações-do-agrupamento-hierárquico"><span class="header-section-number">9.2.3</span> Limitações do Agrupamento Hierárquico</h3>
+<p>Apesar de sua simplicidade e elegância, os métodos hierárquicos possuem limitações importantes. Uma delas é sua complexidade computacional, que cresce rapidamente para dados com muitas observações devido a grande quantidade de comparações.</p>
+<p>Além disso, a decisão de fusão é final e não pode ser desfeita. Se um grupo inicial for inadequada, o erro se propagará por toda a hierarquia. Ou seja, o agrupamento é muito sensível à estrutura inicial. Finalmente, todos os métodos de ligação carregam suas vantagens e problemas.</p>
+<p>Essas limitações motivam o uso de métodos não hierárquicos, como o K-médias, que abordaremos a seguir.</p>
 </section>
 </section>
-<section id="agrupamento-não-hierárquico-k-médias-k-means" class="level2" data-number="9.3">
-<h2 data-number="9.3" class="anchored" data-anchor-id="agrupamento-não-hierárquico-k-médias-k-means"><span class="header-section-number">9.3</span> Agrupamento Não-Hierárquico: K-Médias (<em>K-Means</em>)</h2>
-<p>Diferente dos métodos hierárquicos, os métodos particionais, como o K-Médias, dividem os dados em um número <span class="math inline">\(K\)</span> de clusters pré-especificado. O K-Médias é um dos algoritmos de agrupamento mais populares e eficientes.</p>
-<p>O objetivo do K-Médias é particionar as <span class="math inline">\(n\)</span> observações em <span class="math inline">\(K\)</span> clusters de modo a minimizar a Soma de Quadrados Intra-grupos (SQI), também chamada de inércia ou <em>Within-Cluster Sum of Squares</em> (WCSS).</p>
+<section id="agrupamento-não-hierárquico" class="level2" data-number="9.3">
+<h2 data-number="9.3" class="anchored" data-anchor-id="agrupamento-não-hierárquico"><span class="header-section-number">9.3</span> Agrupamento Não-Hierárquico</h2>
+<p>Diferente dos métodos hierárquicos, os métodos particionais, como o K-Médias, dividem os dados em um número <span class="math inline">\(K\)</span> de grupos pré-especificado. O K-Médias é um dos algoritmos de agrupamento mais populares e eficientes.</p>
+<p>O objetivo do K-Médias é particionar as <span class="math inline">\(n\)</span> observações em <span class="math inline">\(K\)</span> grupos de modo a minimizar a Soma de Quadrados Intra-grupos (SQI), também chamada de inércia.</p>
 <p><span class="math display">\[
 \text{SQI} = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}}_k)'(\mathbf{x}_i - \bar{\mathbf{x}}_k)
 \]</span></p>
-<p>Onde <span class="math inline">\(\bar{\mathbf{x}}_k\)</span> é o centroide (média) do cluster <span class="math inline">\(C_k\)</span>.</p>
-<section id="o-algoritmo-k-médias" class="level3" data-number="9.3.1">
-<h3 data-number="9.3.1" class="anchored" data-anchor-id="o-algoritmo-k-médias"><span class="header-section-number">9.3.1</span> O Algoritmo K-Médias</h3>
-<p>O algoritmo é iterativo e funciona da seguinte forma:</p>
+<p>Onde <span class="math inline">\(\bar{\mathbf{x}}_k\)</span> é o centroide (média) do grupo <span class="math inline">\(C_k\)</span>.</p>
+<section id="o-algoritmo-k-médias-k-means" class="level3" data-number="9.3.1">
+<h3 data-number="9.3.1" class="anchored" data-anchor-id="o-algoritmo-k-médias-k-means"><span class="header-section-number">9.3.1</span> O Algoritmo K-Médias (<em>K-Means</em>)</h3>
+<p>O algoritmo K-médias é um processo iterativo que busca minimizar a SQI. Seus passos podem ser definidos matematicamente da seguinte forma:</p>
 <ol type="1">
-<li><strong>Inicialização:</strong> Escolha <span class="math inline">\(K\)</span> centroides iniciais. Isso pode ser feito selecionando <span class="math inline">\(K\)</span> observações aleatórias dos dados.</li>
-<li><strong>Atribuição:</strong> Atribua cada observação ao cluster cujo centroide é o mais próximo (usando, por exemplo, a distância Euclidiana).</li>
-<li><strong>Atualização:</strong> Recalcule o centroide de cada um dos <span class="math inline">\(K\)</span> clusters como a média de todas as observações atribuídas a ele.</li>
-<li><strong>Repetição:</strong> Repita os passos 2 e 3 até que as atribuições dos clusters não mudem mais ou um número máximo de iterações seja atingido.</li>
+<li><p><strong>Inicialização:</strong> Escolha <span class="math inline">\(K\)</span> centroides iniciais <span class="math inline">\(\boldsymbol{\mu}_1^{(0)}, \boldsymbol{\mu}_2^{(0)}, \dots, \boldsymbol{\mu}_K^{(0)}\)</span>. Esta escolha pode ser feita selecionando <span class="math inline">\(K\)</span> observações aleatórias do conjunto de dados.</p></li>
+<li><p><strong>Atribuição:</strong> Em cada iteração <span class="math inline">\(t\)</span>, atribua cada observação <span class="math inline">\(\mathbf{x}_i\)</span> ao grupo cujo centroide é o mais próximo. Matematicamente, para cada observação <span class="math inline">\(i\)</span>, encontramos o índice do grupo <span class="math inline">\(c_i\)</span> que minimiza a distância Euclidiana quadrada: <span class="math display">\[
+c_i^{(t)} = \arg \min_{k} (\mathbf{x}_i - \boldsymbol{\mu}_k^{(t-1)})' (\mathbf{x}_i - \boldsymbol{\mu}_k^{(t-1)})
+\]</span> Isso particiona os dados nos conjuntos <span class="math inline">\(C_1^{(t)}, \dots, C_K^{(t)}\)</span>.</p></li>
+<li><p><strong>Atualização:</strong> Recalcule o centroide de cada grupo como a média de todas as observações atribuídas a ele na iteração atual: <span class="math display">\[
+\boldsymbol{\mu}_k^{(t)} = \frac{1}{\# C_k^{(t)}} \sum_{\mathbf{x}_i \in C_k^{(t)}} \mathbf{x}_i
+\]</span></p></li>
+<li><p><strong>Repetição:</strong> Repita os passos 2 e 3 até que as atribuições dos grupos não mudem mais, ou seja, <span class="math inline">\(c_i^{(t)} = c_i^{(t-1)}\)</span> para todas as observações <span class="math inline">\(i\)</span>.</p></li>
 </ol>
-<p>O algoritmo tem a garantia de convergir, mas pode chegar a um mínimo local, não necessariamente o mínimo global da WCSS. Por isso, é comum executar o algoritmo várias vezes com diferentes inicializações e escolher o resultado com a menor WCSS.</p>
+<p>O grande problema do método K-médias é a escolha dos centroides iniciais. O algoritmo tem a garantia de convergir, mas dependendo das condições iniciais pode chegar a um mínimo local, e não necessariamente o mínimo global da SQI. Uma opção comum é executar o algoritmo várias vezes com diferentes inicializações e escolher o resultado com a menor SQI.</p>
+<p>A necessidade de pré-especificar o número de grupos, <span class="math inline">\(K\)</span>, também pode ser uma desvantagem. Para contornar o problema, é comum executar o algoritmo para uma gama de valores de <span class="math inline">\(K\)</span> e calcular a Soma de Quadrados Intra-grupos (SQI) em cada caso. A ideia é escolher <span class="math inline">\(K\)</span> tal que a SQI seja baixa, mas sendo parcimonioso com o número de grupos. Vale lembrar que a SQI é inversamente proporcional a K – se <span class="math inline">\(K=1\)</span>, a SQI é máxima e se <span class="math inline">\(K=n\)</span> a SQI é zero. Na prática, aumentamos <span class="math inline">\(K\)</span> progressivamente observando os decréscimo na SQI, seguimos aumentando <span class="math inline">\(K\)</span> enquanto esse decréscimo for grande.</p>
+<p>A seguir, definimos um procedimento mais robusto, que soluciona os problemas mencionados combinando diferentes métodos de agrupamento.</p>
 </section>
-<section id="escolhendo-o-número-de-clusters-k" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="escolhendo-o-número-de-clusters-k"><span class="header-section-number">9.3.2</span> Escolhendo o Número de Clusters K</h3>
-<p>A escolha de <span class="math inline">\(K\)</span> é um passo crítico. Dois métodos comuns são:</p>
+<section id="sec-cluster" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="sec-cluster"><span class="header-section-number">9.3.2</span> Procedimento sugerido para análise de agrupamentos</h3>
+<p>Levando em consideração as vantagens e desvantagens dos agrupamentos hierárquicos e de K-médias, podemos definir um procedimento que simplifica as escolhas durante um problema prático de análise de agrupamentos.</p>
 <ul>
-<li><p><strong>Método do Cotovelo (<em>Elbow Method</em>):</strong> Plota-se a WCSS para diferentes valores de <span class="math inline">\(K\)</span>. O gráfico tipicamente se parece com um braço. O “cotovelo” nesse gráfico, o ponto onde a taxa de diminuição da WCSS se torna abruptamente menor, é um bom candidato para o número ideal de clusters.</p></li>
-<li><p><strong>Análise de Silhueta:</strong> O coeficiente de silhueta de uma observação mede o quão bem ela se encaixa em seu cluster em comparação com os clusters vizinhos. Ele varia de -1 a 1, onde valores altos indicam que a observação está bem agrupada. Pode-se calcular a média do coeficiente de silhueta para todos os pontos para um dado <span class="math inline">\(K\)</span>, e o <span class="math inline">\(K\)</span> que maximiza essa média é considerado o ideal.</p></li>
+<li>Inicie com um agrupamento hierárquico. O método de Ward costuma ser uma boa primeira opção, no entanto, experimente também outros métodos de ligação conforme necessário.</li>
+<li>Observe o dendograma para escolher o corte que seja mais plausível. Esse corte determina um número de grupos ótimo <span class="math inline">\(K*\)</span>.</li>
+<li>Calcule o centroide para cada um dos grupos obtidos via agrupamento hierárquico <span class="math inline">\(\mu_1, \cdots, \mu_K\)</span>.</li>
+<li>Utilize os centoides obtidos como centroides iniciais para o método K-médias com <span class="math inline">\(K*\)</span> grupos.</li>
 </ul>
+<p>Exemplificamos esse procedimento com dados reais no <a href="../exemplos/agrupamentos.html" class="quarto-xref"><span>Capítulo 12</span></a>.</p>
+</section>
+</section>
+<section id="agrupamento-baseado-em-modelos" class="level2" data-number="9.4">
+<h2 data-number="9.4" class="anchored" data-anchor-id="agrupamento-baseado-em-modelos"><span class="header-section-number">9.4</span> Agrupamento Baseado em Modelos</h2>
+<p>Uma abordagem mais avançada e flexível é o agrupamento baseado em modelos. A ideia central é assumir que os dados são gerados a partir de uma <strong>mistura de distribuições de probabilidade</strong>, onde cada componente da mistura corresponde a um grupo.</p>
+<p>O modelo mais comum é o <strong>Modelo de Mistura Gaussiana (<em>Gaussian Mixture Model</em>, GMM)</strong>. Ele assume que cada grupo segue uma distribuição normal multivariada. A densidade de probabilidade de todo o conjunto de dados é uma soma ponderada de <span class="math inline">\(K\)</span> densidades Gaussianas:</p>
+<p><span class="math display">\[
+p(\mathbf{x}) = \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}_k, \mathbf{\Sigma}_k)
+\]</span></p>
+<p>Onde, para cada grupo <span class="math inline">\(k\)</span>:</p>
+<ul>
+<li><span class="math inline">\(\pi_k\)</span>: é o peso da mistura (a probabilidade de uma observação pertencer ao grupo <span class="math inline">\(k\)</span>).</li>
+<li><span class="math inline">\(\boldsymbol{\mu}_k\)</span>: é o vetor de médias (o centroide do grupo).</li>
+<li><span class="math inline">\(\mathbf{\Sigma}_k\)</span>: é a matriz de covariâncias (descreve a forma e orientação do grupo).</li>
+</ul>
+<section id="o-algoritmo-de-expectation-maximization-em" class="level3" data-number="9.4.1">
+<h3 data-number="9.4.1" class="anchored" data-anchor-id="o-algoritmo-de-expectation-maximization-em"><span class="header-section-number">9.4.1</span> O Algoritmo de Expectation-Maximization (EM)</h3>
+<p>Os parâmetros do GMM (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) são estimados usando o algoritmo de <strong>Expectation-Maximization (EM)</strong>.</p>
+<p>O algoritmo é um processo iterativo que alterna entre dois passos:</p>
+<ol type="1">
+<li><p><strong>Inicialização:</strong> Inicialize os parâmetros do modelo (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) para cada grupo <span class="math inline">\(k=1, \dots, K\)</span>. Isso pode ser feito de forma aleatória ou usando o resultado de um algoritmo mais simples, como o K-médias.</p></li>
+<li><p><strong>Passo-E (Expectation):</strong> Nesta etapa, calculamos a “responsabilidade” de cada grupo <span class="math inline">\(k\)</span> por cada observação <span class="math inline">\(\mathbf{x}_i\)</span>. A responsabilidade, denotada por <span class="math inline">\(p_{ik}\)</span>, é a probabilidade posterior de que a observação <span class="math inline">\(\mathbf{x}_i\)</span> tenha sido gerada pela componente <span class="math inline">\(k\)</span> da mistura, dados os parâmetros atuais. Usando a regra de Bayes, a responsabilidade é calculada como: <span class="math display">\[
+p_{ik} = \frac{\pi_k \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \mathbf{\Sigma}_k)}{\sum_{j=1}^{K} \pi_j \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_j, \mathbf{\Sigma}_j)}
+\]</span> Essencialmente, para cada ponto, calculamos a probabilidade de ele pertencer a cada um dos <span class="math inline">\(K\)</span> grupos.</p></li>
+<li><p><strong>Passo-M (Maximization):</strong> Nesta etapa, usamos as responsabilidades calculadas para reestimar os parâmetros do modelo, maximizando a verossimilhança esperada. As atualizações são:</p>
+<ul>
+<li><p><strong>Novos pesos da mistura:</strong> O novo peso <span class="math inline">\(\pi_k^{\text{novo}}\)</span> é a proporção média de responsabilidade do grupo <span class="math inline">\(k\)</span> sobre todas as observações. <span class="math display">\[
+\pi_k^{\text{novo}} = \frac{N_k}{n}, \quad \text{onde } N_k = \sum_{i=1}^{n} p_{ik}
+\]</span></p></li>
+<li><p><strong>Novas médias:</strong> A nova média <span class="math inline">\(\boldsymbol{\mu}_k^{\text{novo}}\)</span> é uma média ponderada de todas as observações, onde os pesos são as responsabilidades. <span class="math display">\[
+\boldsymbol{\mu}_k^{\text{novo}} = \frac{1}{N_k} \sum_{i=1}^{n} p_{ik} \mathbf{x}_i
+\]</span></p></li>
+<li><p><strong>Novas covariâncias:</strong> A nova matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}_k^{\text{novo}}\)</span> é uma média ponderada das covariâncias, centrada na nova média. <span class="math display">\[
+\mathbf{\Sigma}_k^{\text{novo}} = \frac{1}{N_k} \sum_{i=1}^{n} p_{ik} (\mathbf{x}_i - \boldsymbol{\mu}_k^{\text{novo}})(\mathbf{x}_i - \boldsymbol{\mu}_k^{\text{novo}})'
+\]</span></p></li>
+</ul></li>
+<li><p><strong>Repetição:</strong> Os passos E e M são repetidos até que a log-verossimilhança do modelo, <span class="math inline">\(\ln p(\mathbf{X} | \pi, \boldsymbol{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^{n} \ln \left( \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \mathbf{\Sigma}_k) \right)\)</span>, convirja para um valor estável.</p></li>
+</ol>
+</section>
+<section id="vantagens-do-agrupamento-baseado-em-modelos" class="level3" data-number="9.4.2">
+<h3 data-number="9.4.2" class="anchored" data-anchor-id="vantagens-do-agrupamento-baseado-em-modelos"><span class="header-section-number">9.4.2</span> Vantagens do Agrupamento Baseado em Modelos</h3>
+<ul>
+<li><strong>Agrupamento “Suave”:</strong> O GMM fornece uma probabilidade de pertencimento a cada grupo para cada observação, em vez de uma atribuição “dura” (tudo ou nada) como o K-Médias.</li>
+<li><strong>Flexibilidade de Formato:</strong> Ao permitir que cada grupo tenha sua própria matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}_k\)</span>, os GMMs podem identificar grupos com diferentes formas (elípticas) e orientações, enquanto o K-Médias assume implicitamente que os grupos são esféricos.</li>
+<li><strong>Seleção de Modelo Criteriosa:</strong> A natureza estatística do método permite o uso de critérios de informação, como o <strong>Critério de Informação Bayesiano (BIC)</strong> ou o <strong>Critério de Informação de Akaike (AIC)</strong>, para selecionar o número ideal de grupos <span class="math inline">\(K\)</span> e a estrutura da matriz de covariâncias de forma mais objetiva. O modelo com o menor valor de BIC é geralmente preferido.</li>
+</ul>
+</section>
+</section>
+<section id="índices-de-v1alidação-de-agrupamentos" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="índices-de-v1alidação-de-agrupamentos"><span class="header-section-number">9.5</span> Índices de v1alidação de agrupamentos</h2>
+<p>Uma das perguntas mais importantes na análise de grupo é “qual o número ideal de grupos?”. Embora o procedimento que combina o método hierárquico com o K-médias ajude a guiar essa escolha, existem diversas métricas quantitativas que avaliam a qualidade de uma partição de grupos, independentemente do método utilizado para obtê-la. Esses índices nos permitem comparar os resultados para diferentes valores de <span class="math inline">\(K\)</span> e escolher o que for estatisticamente mais robusto.</p>
+<section id="método-da-silhueta" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="método-da-silhueta"><span class="header-section-number">9.5.1</span> Método da Silhueta</h3>
+<p>A análise de silhueta é uma das técnicas mais populares. Ela mede o quão bem cada observação se encaixa em seu grupo em comparação com outros grupos. O coeficiente de silhueta para uma única observação <span class="math inline">\(i\)</span> é:</p>
+<p><span class="math display">\[
+s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}
+\]</span></p>
+<p>Onde: - <span class="math inline">\(a(i)\)</span>: A distância média de <span class="math inline">\(i\)</span> para todas as outras observações no <em>mesmo</em> grupo (coesão). - <span class="math inline">\(b(i)\)</span>: A distância média de <span class="math inline">\(i\)</span> para todas as observações no grupo <em>vizinho mais próximo</em> (separação).</p>
+<p>O valor de <span class="math inline">\(s(i)\)</span> varia de -1 a 1. Para um dado <span class="math inline">\(K\)</span>, calculamos o coeficiente de silhueta médio para todas as observações. O valor de <span class="math inline">\(K\)</span> que <strong>maximiza</strong> a pontuação média da silhueta é considerado o ideal.</p>
+</section>
+<section id="índice-de-calinski-harabasz" class="level3" data-number="9.5.2">
+<h3 data-number="9.5.2" class="anchored" data-anchor-id="índice-de-calinski-harabasz"><span class="header-section-number">9.5.2</span> Índice de Calinski-Harabasz</h3>
+<p>Também conhecido como Critério da Razão de Variâncias, este índice avalia a qualidade do agrupamento pela razão entre a dispersão entre os grupos e a dispersão intra-grupo. A fórmula é:</p>
+<p><span class="math display">\[
+CH(K) = \frac{SQE / (K-1)}{SQI / (n-K)}
+\]</span></p>
+<p>Onde <span class="math inline">\(SQE\)</span> é a Soma de Quadrados Entre-grupos, <span class="math inline">\(SQI\)</span> é a Soma de Quadrados Intra-grupos, <span class="math inline">\(n\)</span> é o número total de observações e <span class="math inline">\(K\)</span> é o número de grupos.</p>
+<p>Intuitivamente, um bom agrupamento tem uma alta dispersão entre os grupos (SQE alta) e uma baixa dispersão dentro dos grupos (SQI baixa). Portanto, procuramos o valor de <span class="math inline">\(K\)</span> que <strong>maximiza</strong> o índice de Calinski-Harabasz.</p>
+</section>
+<section id="índice-de-davies-bouldin" class="level3" data-number="9.5.3">
+<h3 data-number="9.5.3" class="anchored" data-anchor-id="índice-de-davies-bouldin"><span class="header-section-number">9.5.3</span> Índice de Davies-Bouldin</h3>
+<p>Este índice mede a “similaridade” média de cada grupo com seu grupo mais semelhante. A similaridade entre dois grupos <span class="math inline">\(C_i\)</span> e <span class="math inline">\(C_j\)</span> é definida como:</p>
+<p><span class="math display">\[
+R_{ij} = \frac{s_i + s_j}{d_{ij}}
+\]</span></p>
+<p>Onde <span class="math inline">\(s_i\)</span> é a dispersão média dentro do grupo <span class="math inline">\(i\)</span> (por exemplo, a distância média de cada ponto ao centroide) e <span class="math inline">\(d_{ij}\)</span> é a distância entre os centroides dos grupos <span class="math inline">\(i\)</span> e <span class="math inline">\(j\)</span>.</p>
+<p>Para cada grupo <span class="math inline">\(i\)</span>, encontramos o grupo <span class="math inline">\(j\)</span> que maximiza <span class="math inline">\(R_{ij}\)</span>. O índice de Davies-Bouldin é a média desses valores máximos sobre todos os grupos:</p>
+<p><span class="math display">\[
+DB(K) = \frac{1}{K} \sum_{i=1}^{K} \max_{j \neq i} (R_{ij})
+\]</span></p>
+<p>Um valor baixo de <span class="math inline">\(DB(K)\)</span> indica que os grupos estão bem separados e compactos. Portanto, procuramos o valor de <span class="math inline">\(K\)</span> que <strong>minimiza</strong> o índice de Davies-Bouldin.</p>
+<p>Em resumo, a escolha de <span class="math inline">\(K\)</span> deve ser guiada por uma combinação dessas ferramentas, a análise do dendrograma e, mais importante, o contexto do problema. Se os grupos resultantes não forem interpretáveis ou úteis, o valor de <span class="math inline">\(K\)</span> deve ser reconsiderado.</p>
+</section>
+</section>
+<section id="interpretações-em-análises-de-agrupamentos" class="level2" data-number="9.6">
+<h2 data-number="9.6" class="anchored" data-anchor-id="interpretações-em-análises-de-agrupamentos"><span class="header-section-number">9.6</span> Interpretações em análises de agrupamentos</h2>
+<p>Uma vez que os grupos são formados, o passo final e mais importante é a <strong>interpretação</strong>. Um agrupamento matematicamente sólido é inútil se não pudermos extrair dele insights práticos. A interpretação envolve a caracterização e a validação dos grupos.</p>
+<section id="perfil-dos-grupos" class="level3" data-number="9.6.1">
+<h3 data-number="9.6.1" class="anchored" data-anchor-id="perfil-dos-grupos"><span class="header-section-number">9.6.1</span> Perfil dos grupos</h3>
+<p>O objetivo aqui é responder à pergunta: “Quem são os membros de cada grupo?”. Para isso, descrevemos cada grupo em termos das variáveis usadas na análise (e também de outras variáveis descritivas, se disponíveis). O método mais comum é calcular estatísticas descritivas para cada variável, segmentadas por grupo.</p>
+<ul>
+<li><strong>Variáveis Contínuas:</strong> Calcule a média e o desvio padrão de cada variável para cada grupo. Em seguida, compare a média de um grupo com a média geral da amostra. Por exemplo: “O grupo 2 tem uma renda média 30% acima da média geral, enquanto o grupo 1 tem uma renda 20% abaixo”.</li>
+<li><strong>Variáveis Categóricas:</strong> Calcule a distribuição de frequência (ou porcentagens) de cada categoria para cada grupo. Por exemplo: “O grupo 3 é composto por 80% de clientes do sexo feminino, enquanto na amostra total essa proporção é de 55%”.</li>
+</ul>
+<p>A criação de uma tabela de perfis, com os grupos nas linhas e as estatísticas das variáveis nas colunas, é uma ferramenta extremamente eficaz para resumir e comunicar os resultados.</p>
+</section>
+<section id="visualização-do-agrupamento" class="level3" data-number="9.6.2">
+<h3 data-number="9.6.2" class="anchored" data-anchor-id="visualização-do-agrupamento"><span class="header-section-number">9.6.2</span> Visualização do agrupamento</h3>
+<p>A visualização é pode auxiliar na validação da separação dos grupos.</p>
+<ul>
+<li><strong>Dados de Baixa Dimensão (2D ou 3D):</strong> Um simples gráfico de dispersão, com os pontos identificados de acordo com seu grupo designado, é suficiente.</li>
+<li><strong>Dados de Alta Dimensão:</strong> Quando temos mais de três variáveis, precisamos primeiro reduzir a dimensionalidade para poder visualizar. A <strong>Análise de Componentes Principais (ACP)</strong> é a técnica mais comum para isso. Podemos plotar as observações em um gráfico de dispersão usando os dois primeiros componentes principais como eixos e identificar os pontos por grupo. Isso nos dá uma visão da separação dos grupos no espaço que captura a maior parte da variabilidade dos dados.</li>
+</ul>
+</section>
+<section id="nomeação-dos-grupos" class="level3" data-number="9.6.3">
+<h3 data-number="9.6.3" class="anchored" data-anchor-id="nomeação-dos-grupos"><span class="header-section-number">9.6.3</span> Nomeação dos grupos</h3>
+<p>Depois de entender o perfil de cada grupo, é uma boa prática dar a eles nomes ou “personas” descritivas. Nomes como “Jovens Urbanos Conectados”, “Famílias Rurais Conservadoras” ou “Clientes de Alto Risco” são muito mais fáceis de comunicar e lembrar do que “Grupo 1”, “Grupo 2”, etc. O nome deve capturar a essência do que torna aquele grupo único.</p>
+<p>A interpretação é um processo iterativo. Às vezes, os perfis dos grupos podem sugerir que o número de grupos escolhido não foi o ideal, levando o analista a revisitar as etapas anteriores.</p>
 
 
 </section>
@@ -842,7 +1240,7 @@ SQT = \sum_{k=1}^{K} \sum_{\mathbf{x}_i \in C_k} (\mathbf{x}_i - \bar{\mathbf{x}
   </div>
   <div class="nav-page nav-page-next">
       <a href="../../src/exemplos/acp_manual.html" class="pagination-link" aria-label="Exemplo manual: ACP">
-        <span class="nav-page-text">Exemplo manual: ACP</span> <i class="bi bi-arrow-right-short"></i>
+        <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exemplo manual: ACP</span></span> <i class="bi bi-arrow-right-short"></i>
       </a>
   </div>
 </nav>

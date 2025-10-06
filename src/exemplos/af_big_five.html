@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.33">
+<meta name="generator" content="quarto-1.7.34">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Rotação fatorial em R – Estatística Multivariada 2</title>
+<title>11&nbsp; Rotação fatorial em R – Estatística Multivariada 2</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,6 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../src/exemplos/agrupamentos.html" rel="next">
 <link href="../../src/exemplos/acp_manual.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
@@ -72,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -116,7 +117,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
       <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
         <i class="bi bi-layout-text-sidebar-reverse"></i>
       </button>
-        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/af_big_five.html">Rotação fatorial em R</a></li></ol></nav>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/af_big_five.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Rotação fatorial em R</span></a></li></ol></nav>
         <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Alternar barra lateral" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
         </a>
       <button type="button" class="btn quarto-search-button" aria-label="Procurar" onclick="window.quartoOpenSearch();">
@@ -238,13 +239,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/exemplos/acp_manual.html" class="sidebar-item-text sidebar-link">
- <span class="menu-text">Exemplo manual: ACP</span></a>
+ <span class="menu-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exemplo manual: ACP</span></span></a>
   </div>
 </li>
           <li class="sidebar-item">
   <div class="sidebar-item-container"> 
   <a href="../../src/exemplos/af_big_five.html" class="sidebar-item-text sidebar-link active">
- <span class="menu-text">Rotação fatorial em R</span></a>
+ <span class="menu-text"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Rotação fatorial em R</span></span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/agrupamentos.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de agrupamentos</span></span></a>
   </div>
 </li>
       </ul>
@@ -259,20 +266,20 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
     <h2 id="toc-title">Índice</h2>
    
   <ul>
-  <li><a href="#passo-1-análise-descritiva-e-adequação-dos-dados" id="toc-passo-1-análise-descritiva-e-adequação-dos-dados" class="nav-link active" data-scroll-target="#passo-1-análise-descritiva-e-adequação-dos-dados">Passo 1: Análise Descritiva e Adequação dos Dados</a></li>
-  <li><a href="#passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores" id="toc-passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores" class="nav-link" data-scroll-target="#passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores">Passo 2: Extração Inicial dos Fatores e Escolha do Número de Fatores</a></li>
-  <li><a href="#passo-3-rotação-ortogonal-varimax" id="toc-passo-3-rotação-ortogonal-varimax" class="nav-link" data-scroll-target="#passo-3-rotação-ortogonal-varimax">Passo 3: Rotação Ortogonal (Varimax)</a></li>
-  <li><a href="#passo-4-rotação-oblíqua-promax" id="toc-passo-4-rotação-oblíqua-promax" class="nav-link" data-scroll-target="#passo-4-rotação-oblíqua-promax">Passo 4: Rotação Oblíqua (Promax)</a></li>
-  <li><a href="#conclusão-qual-rotação-escolher" id="toc-conclusão-qual-rotação-escolher" class="nav-link" data-scroll-target="#conclusão-qual-rotação-escolher">Conclusão: Qual Rotação Escolher?</a></li>
+  <li><a href="#passo-1-análise-descritiva-e-adequação-dos-dados" id="toc-passo-1-análise-descritiva-e-adequação-dos-dados" class="nav-link active" data-scroll-target="#passo-1-análise-descritiva-e-adequação-dos-dados"><span class="header-section-number">11.1</span> Passo 1: Análise Descritiva e Adequação dos Dados</a></li>
+  <li><a href="#passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores" id="toc-passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores" class="nav-link" data-scroll-target="#passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores"><span class="header-section-number">11.2</span> Passo 2: Extração Inicial dos Fatores e Escolha do Número de Fatores</a></li>
+  <li><a href="#passo-3-rotação-ortogonal-varimax" id="toc-passo-3-rotação-ortogonal-varimax" class="nav-link" data-scroll-target="#passo-3-rotação-ortogonal-varimax"><span class="header-section-number">11.3</span> Passo 3: Rotação Ortogonal (Varimax)</a></li>
+  <li><a href="#passo-4-rotação-oblíqua-promax" id="toc-passo-4-rotação-oblíqua-promax" class="nav-link" data-scroll-target="#passo-4-rotação-oblíqua-promax"><span class="header-section-number">11.4</span> Passo 4: Rotação Oblíqua (Promax)</a></li>
+  <li><a href="#conclusão-qual-rotação-escolher" id="toc-conclusão-qual-rotação-escolher" class="nav-link" data-scroll-target="#conclusão-qual-rotação-escolher"><span class="header-section-number">11.5</span> Conclusão: Qual Rotação Escolher?</a></li>
   </ul>
 </nav>
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
 
-<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/af_big_five.html">Rotação fatorial em R</a></li></ol></nav>
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../../src/exemplos/acp_manual.html">Exemplos</a></li><li class="breadcrumb-item"><a href="../../src/exemplos/af_big_five.html"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Rotação fatorial em R</span></a></li></ol></nav>
 <div class="quarto-title">
-<h1 class="title">Rotação fatorial em R</h1>
+<h1 class="title"><span class="chapter-number">11</span>&nbsp; <span class="chapter-title">Rotação fatorial em R</span></h1>
 </div>
 
 
@@ -299,8 +306,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>Aplicar e interpretar uma <strong>rotação oblíqua (Promax)</strong>, que permite a correlação entre os fatores.</li>
 <li>Discutir como a escolha da rotação afeta a interpretação final e a validade teórica dos resultados.</li>
 </ol>
-<section id="passo-1-análise-descritiva-e-adequação-dos-dados" class="level2">
-<h2 class="anchored" data-anchor-id="passo-1-análise-descritiva-e-adequação-dos-dados">Passo 1: Análise Descritiva e Adequação dos Dados</h2>
+<section id="passo-1-análise-descritiva-e-adequação-dos-dados" class="level2" data-number="11.1">
+<h2 data-number="11.1" class="anchored" data-anchor-id="passo-1-análise-descritiva-e-adequação-dos-dados"><span class="header-section-number">11.1</span> Passo 1: Análise Descritiva e Adequação dos Dados</h2>
 <p>Primeiro, carregamos os pacotes necessários e o conjunto de dados <code>bfi</code>. Este dataset contém respostas de 2800 indivíduos a 25 itens de personalidade.</p>
 <div class="cell">
 <details class="code-fold">
@@ -326,7 +333,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div id="tbl-setup" class="cell quarto-float quarto-figure quarto-figure-center anchored">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;1: Exemplo de respostas no banco de dados Big Five
+Tabela&nbsp;11.1: Exemplo de respostas no banco de dados Big Five
 </figcaption>
 <div aria-describedby="tbl-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output-display">
@@ -605,8 +612,8 @@ Tabela&nbsp;1: Exemplo de respostas no banco de dados Big Five
 </div>
 <p>O p-valor de Bartlett próximo de zero e o KMO de 0.85 (“meritório”) sugerem que os dados têm correlações suficientes para justificar uma análise fatorial.</p>
 </section>
-<section id="passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores" class="level2">
-<h2 class="anchored" data-anchor-id="passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores">Passo 2: Extração Inicial dos Fatores e Escolha do Número de Fatores</h2>
+<section id="passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores" class="level2" data-number="11.2">
+<h2 data-number="11.2" class="anchored" data-anchor-id="passo-2-extração-inicial-dos-fatores-e-escolha-do-número-de-fatores"><span class="header-section-number">11.2</span> Passo 2: Extração Inicial dos Fatores e Escolha do Número de Fatores</h2>
 <p>Antes de rotacionar, precisamos extrair os fatores. Dois métodos comuns são a <strong>Fatoração do Eixo Principal</strong> (ou “componentes principais” para o modelo fatorial) e a <strong>Máxima Verossimilhança</strong>. Vamos extrair 5 fatores usando ambos os métodos (sem rotação) para ver a solução inicial.</p>
 <div class="cell">
 <details class="code-fold">
@@ -724,16 +731,16 @@ Cumulative Var 0.178 0.273 0.335 0.384 0.423</code></pre>
 <img src="af_big_five_files/figure-html/fig-parallel-analysis-1.png" class="img-fluid figure-img" width="576">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-parallel-analysis-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;1: Análise Paralela sugerindo a extração de 6 fatores.
+Figura&nbsp;11.1: Análise Paralela sugerindo a extração de 6 fatores.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A Análise Paralela (<a href="#fig-parallel-analysis" class="quarto-xref">Figura&nbsp;<span>1</span></a>) sugere 6 fatores. No entanto, como nosso objetivo é testar a teoria dos Big Five, <strong>prosseguiremos com a extração de 5 fatores</strong>, uma decisão comum quando a teoria é forte.</p>
+<p>A Análise Paralela (<a href="#fig-parallel-analysis" class="quarto-xref">Figura&nbsp;<span>11.1</span></a>) sugere 6 fatores. No entanto, como nosso objetivo é testar a teoria dos Big Five, <strong>prosseguiremos com a extração de 5 fatores</strong>, uma decisão comum quando a teoria é forte.</p>
 </section>
-<section id="passo-3-rotação-ortogonal-varimax" class="level2">
-<h2 class="anchored" data-anchor-id="passo-3-rotação-ortogonal-varimax">Passo 3: Rotação Ortogonal (Varimax)</h2>
+<section id="passo-3-rotação-ortogonal-varimax" class="level2" data-number="11.3">
+<h2 data-number="11.3" class="anchored" data-anchor-id="passo-3-rotação-ortogonal-varimax"><span class="header-section-number">11.3</span> Passo 3: Rotação Ortogonal (Varimax)</h2>
 <p>A rotação <strong>Varimax</strong> “limpa” a estrutura sob a suposição de que <strong>os fatores não são correlacionados entre si</strong>.</p>
 <div class="cell">
 <details class="code-fold">
@@ -789,7 +796,7 @@ Cumulative Var   0.107   0.200   0.282   0.361   0.423</code></pre>
 </div>
 </div>
 <p>A estrutura agora é muito mais “simples” e alinhada com a teoria. Podemos visualizar essa transformação de forma clara comparando o círculo de correlações <em>antes</em> e <em>depois</em> da rotação.</p>
-<p>Primeiro, a solução não rotacionada (<a href="#fig-unrotated-circle" class="quarto-xref">Figura&nbsp;<span>2</span></a>). Note como as variáveis (vetores) se espalham pelo espaço fatorial sem um padrão claro. É difícil traçar os eixos (fatores) de forma que representem grupos distintos de variáveis.</p>
+<p>Primeiro, a solução não rotacionada (<a href="#fig-unrotated-circle" class="quarto-xref">Figura&nbsp;<span>11.2</span></a>). Note como as variáveis (vetores) se espalham pelo espaço fatorial sem um padrão claro. É difícil traçar os eixos (fatores) de forma que representem grupos distintos de variáveis.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Código</summary>
@@ -832,13 +839,13 @@ Cumulative Var   0.107   0.200   0.282   0.361   0.423</code></pre>
 <img src="af_big_five_files/figure-html/fig-unrotated-circle-1.png" class="img-fluid figure-img" width="576">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-unrotated-circle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;2: Círculo de correlações da solução não rotacionada. Os vetores não estão alinhados com os eixos.
+Figura&nbsp;11.2: Círculo de correlações da solução não rotacionada. Os vetores não estão alinhados com os eixos.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Agora, veja o resultado após a rotação Varimax (<a href="#fig-rotated-circle" class="quarto-xref">Figura&nbsp;<span>3</span></a>). A rotação funcionou como um ajuste dos eixos, alinhando-os com os agrupamentos de variáveis.</p>
+<p>Agora, veja o resultado após a rotação Varimax (<a href="#fig-rotated-circle" class="quarto-xref">Figura&nbsp;<span>11.3</span></a>). A rotação funcionou como um ajuste dos eixos, alinhando-os com os agrupamentos de variáveis.</p>
 <div class="cell">
 <details class="code-fold">
 <summary>Código</summary>
@@ -877,7 +884,7 @@ Figura&nbsp;2: Círculo de correlações da solução não rotacionada. Os vetor
 <img src="af_big_five_files/figure-html/fig-rotated-circle-1.png" class="img-fluid figure-img" width="576">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-rotated-circle-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;3: Círculo de correlações após a rotação Varimax. A rotação alinhou os vetores com os eixos, revelando uma estrutura simples.
+Figura&nbsp;11.3: Círculo de correlações após a rotação Varimax. A rotação alinhou os vetores com os eixos, revelando uma estrutura simples.
 </figcaption>
 </figure>
 </div>
@@ -885,8 +892,8 @@ Figura&nbsp;3: Círculo de correlações após a rotação Varimax. A rotação 
 </div>
 <p>O resultado é uma “estrutura simples”, onde os itens de Neuroticismo (como N1 e N3) carregam quase exclusivamente no Fator 1 (correlação próxima de 1 ou -1 em um eixo e de 0 no outro), e os itens de Extroversão (como E2 e E4) carregam no Fator 2. A interpretação se torna direta.</p>
 </section>
-<section id="passo-4-rotação-oblíqua-promax" class="level2">
-<h2 class="anchored" data-anchor-id="passo-4-rotação-oblíqua-promax">Passo 4: Rotação Oblíqua (Promax)</h2>
+<section id="passo-4-rotação-oblíqua-promax" class="level2" data-number="11.4">
+<h2 data-number="11.4" class="anchored" data-anchor-id="passo-4-rotação-oblíqua-promax"><span class="header-section-number">11.4</span> Passo 4: Rotação Oblíqua (Promax)</h2>
 <p>A rotação <strong>Promax</strong> é mais flexível, pois <strong>permite que os fatores sejam correlacionados</strong>. Isso costuma ser mais realista em psicologia.</p>
 <div class="cell">
 <details class="code-fold">
@@ -984,16 +991,16 @@ PA4  0.04  0.14  0.19  0.16 1.00</code></pre>
 <img src="af_big_five_files/figure-html/fig-factor-correlation-1.png" class="img-fluid figure-img" width="576">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-factor-correlation-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;4: Correlações entre os fatores da solução Promax.
+Figura&nbsp;11.4: Correlações entre os fatores da solução Promax.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A matriz de correlação (<a href="#fig-factor-correlation" class="quarto-xref">Figura&nbsp;<span>4</span></a>) mostra que <strong>Neuroticismo (ML1)</strong> se correlaciona negativamente com <strong>Conscienciosidade (ML3)</strong> (-0.33) e <strong>Extroversão (ML2)</strong> (-0.24). Essas relações são teoricamente plausíveis e seriam perdidas em uma rotação ortogonal.</p>
+<p>A matriz de correlação (<a href="#fig-factor-correlation" class="quarto-xref">Figura&nbsp;<span>11.4</span></a>) mostra que <strong>Neuroticismo (ML1)</strong> se correlaciona negativamente com <strong>Conscienciosidade (ML3)</strong> (-0.33) e <strong>Extroversão (ML2)</strong> (-0.24). Essas relações são teoricamente plausíveis e seriam perdidas em uma rotação ortogonal.</p>
 </section>
-<section id="conclusão-qual-rotação-escolher" class="level2">
-<h2 class="anchored" data-anchor-id="conclusão-qual-rotação-escolher">Conclusão: Qual Rotação Escolher?</h2>
+<section id="conclusão-qual-rotação-escolher" class="level2" data-number="11.5">
+<h2 data-number="11.5" class="anchored" data-anchor-id="conclusão-qual-rotação-escolher"><span class="header-section-number">11.5</span> Conclusão: Qual Rotação Escolher?</h2>
 <ul>
 <li><strong>Solução Não Rotacionada:</strong> É apenas um ponto de partida matemático. Dificilmente é possível tirar interpretações úteis dela.</li>
 <li><strong>Rotação Ortogonal (Varimax):</strong> É a melhor escolha quando há fortes razões teóricas para acreditar que os fatores são independentes. Oferece uma solução mais simples (parcimoniosa).</li>
@@ -1407,10 +1414,13 @@ Figura&nbsp;4: Correlações entre os fatores da solução Promax.
 <nav class="page-navigation">
   <div class="nav-page nav-page-previous">
       <a href="../../src/exemplos/acp_manual.html" class="pagination-link" aria-label="Exemplo manual: ACP">
-        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text">Exemplo manual: ACP</span>
+        <i class="bi bi-arrow-left-short"></i> <span class="nav-page-text"><span class="chapter-number">10</span>&nbsp; <span class="chapter-title">Exemplo manual: ACP</span></span>
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../src/exemplos/agrupamentos.html" class="pagination-link" aria-label="Análise de agrupamentos">
+        <span class="nav-page-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de agrupamentos</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->
