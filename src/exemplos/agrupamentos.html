@@ -370,21 +370,19 @@ window.Quarto = {
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando um DataFrame com os dados padronizados para facilitar a manipulação</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>X_scaled_df <span class="op">=</span> pd.DataFrame(X_scaled, index<span class="op">=</span>states, columns<span class="op">=</span>data.columns)</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Visualização dos 5 primeiros estados com dados padronizados:"</span>)</span>
-<span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(X_scaled_df.head())</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(X_scaled_df.head(), headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </details>
 <div id="fig-grupo-setup" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
 <figure class="quarto-float quarto-float-fig figure">
 <div aria-describedby="fig-grupo-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-stdout">
-<pre><code>Visualização dos 5 primeiros estados com dados padronizados:
-              Murder   Assault  UrbanPop      Rape
-rownames                                          
-Alabama     1.255179  0.790787 -0.526195 -0.003451
-Alaska      0.513019  1.118060 -1.224067  2.509424
-Arizona     0.072361  1.493817  1.009122  1.053466
-Arkansas    0.234708  0.233212 -1.084492 -0.186794
-California  0.281093  1.275635  1.776781  2.088814</code></pre>
+<pre><code>| rownames   |    Murder |   Assault |   UrbanPop |        Rape |
+|:-----------|----------:|----------:|-----------:|------------:|
+| Alabama    | 1.25518   |  0.790787 |  -0.526195 | -0.00345116 |
+| Alaska     | 0.513019  |  1.11806  |  -1.22407  |  2.50942    |
+| Arizona    | 0.0723607 |  1.49382  |   1.00912  |  1.05347    |
+| Arkansas   | 0.234708  |  0.233212 |  -1.08449  | -0.186794   |
+| California | 0.281093  |  1.27564  |   1.77678  |  2.08881    |</code></pre>
 </div>
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-grupo-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
@@ -532,7 +530,7 @@ Figura&nbsp;12.5: Dendrograma para o conjunto de dados USArrests usando o métod
 <li>Executamos o K-médias com <span class="math inline">\(K=4\)</span>, usando os centroides calculados como pontos de partida.</li>
 </ol>
 <p>Isso ajuda o K-médias a evitar mínimos locais e a convergir para uma solução mais estável e significativa.</p>
-<div id="679da7b9" class="cell" data-execution_count="6">
+<div id="86c0bf40" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Código</summary>
 <div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Obter os 4 grupos do modelo hierárquico</span></span>
