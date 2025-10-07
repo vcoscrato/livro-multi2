@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.7.33">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -73,10 +73,10 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-ea385d0e468b0dd5ea5bf0780b1290d9.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-e7cc1873387c927615ded18f462bb333.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -322,7 +322,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#perfil-dos-grupos" id="toc-perfil-dos-grupos" class="nav-link" data-scroll-target="#perfil-dos-grupos"><span class="header-section-number">9.6.1</span> Perfil dos grupos</a></li>
   <li><a href="#visualização-do-agrupamento" id="toc-visualização-do-agrupamento" class="nav-link" data-scroll-target="#visualização-do-agrupamento"><span class="header-section-number">9.6.2</span> Visualização do agrupamento</a></li>
-  <li><a href="#nomeação-dos-grupos" id="toc-nomeação-dos-grupos" class="nav-link" data-scroll-target="#nomeação-dos-grupos"><span class="header-section-number">9.6.3</span> Nomeação dos grupos</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -714,9 +713,9 @@ c_i^{(t)} = \arg \min_{k} (\mathbf{x}_i - \boldsymbol{\mu}_k^{(t-1)})' (\mathbf{
 <p>Levando em consideração as vantagens e desvantagens dos agrupamentos hierárquicos e de K-médias, podemos definir um procedimento que simplifica as escolhas durante um problema prático de análise de agrupamentos.</p>
 <ul>
 <li>Inicie com um agrupamento hierárquico. O método de Ward costuma ser uma boa primeira opção, no entanto, experimente também outros métodos de ligação conforme necessário.</li>
-<li>Observe o dendograma para escolher o corte que seja mais plausível. Esse corte determina um número de grupos ótimo <span class="math inline">\(K*\)</span>.</li>
+<li>Observe o dendograma para escolher o corte que seja mais plausível. Esse corte determina um número de grupos ótimo <span class="math inline">\(K^*\)</span>.</li>
 <li>Calcule o centroide para cada um dos grupos obtidos via agrupamento hierárquico <span class="math inline">\(\mu_1, \cdots, \mu_K\)</span>.</li>
-<li>Utilize os centoides obtidos como centroides iniciais para o método K-médias com <span class="math inline">\(K*\)</span> grupos.</li>
+<li>Utilize os centoides obtidos como centroides iniciais para o método K-médias com <span class="math inline">\(K^*\)</span> grupos.</li>
 </ul>
 <p>Exemplificamos esse procedimento com dados reais no <a href="../exemplos/agrupamentos.html" class="quarto-xref"><span>Capítulo 12</span></a>.</p>
 </section>
@@ -730,29 +729,28 @@ p(\mathbf{x}) = \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}_k
 \]</span></p>
 <p>Onde, para cada grupo <span class="math inline">\(k\)</span>:</p>
 <ul>
-<li><span class="math inline">\(\pi_k\)</span>: é o peso da mistura (a probabilidade de uma observação pertencer ao grupo <span class="math inline">\(k\)</span>).</li>
+<li><span class="math inline">\(\pi_k\)</span>: é o peso da mistura. Por ser uma probabilidade, deve satisfazer <span class="math inline">\(\pi_k \ge 0\)</span> e <span class="math inline">\(\sum_{k=1}^{K} \pi_k = 1\)</span>.</li>
 <li><span class="math inline">\(\boldsymbol{\mu}_k\)</span>: é o vetor de médias (o centroide do grupo).</li>
 <li><span class="math inline">\(\mathbf{\Sigma}_k\)</span>: é a matriz de covariâncias (descreve a forma e orientação do grupo).</li>
 </ul>
 <section id="o-algoritmo-de-expectation-maximization-em" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="o-algoritmo-de-expectation-maximization-em"><span class="header-section-number">9.4.1</span> O Algoritmo de Expectation-Maximization (EM)</h3>
-<p>Os parâmetros do GMM (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) são estimados usando o algoritmo de <strong>Expectation-Maximization (EM)</strong>.</p>
-<p>O algoritmo é um processo iterativo que alterna entre dois passos:</p>
+<p>Os parâmetros do GMM (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) são estimados usando o algoritmo de <strong>Expectation-Maximization (EM)</strong>, um processo iterativo que alterna entre dois passos.</p>
 <ol type="1">
-<li><p><strong>Inicialização:</strong> Inicialize os parâmetros do modelo (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) para cada grupo <span class="math inline">\(k=1, \dots, K\)</span>. Isso pode ser feito de forma aleatória ou usando o resultado de um algoritmo mais simples, como o K-médias.</p></li>
-<li><p><strong>Passo-E (Expectation):</strong> Nesta etapa, calculamos a “responsabilidade” de cada grupo <span class="math inline">\(k\)</span> por cada observação <span class="math inline">\(\mathbf{x}_i\)</span>. A responsabilidade, denotada por <span class="math inline">\(p_{ik}\)</span>, é a probabilidade posterior de que a observação <span class="math inline">\(\mathbf{x}_i\)</span> tenha sido gerada pela componente <span class="math inline">\(k\)</span> da mistura, dados os parâmetros atuais. Usando a regra de Bayes, a responsabilidade é calculada como: <span class="math display">\[
-p_{ik} = \frac{\pi_k \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \mathbf{\Sigma}_k)}{\sum_{j=1}^{K} \pi_j \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_j, \mathbf{\Sigma}_j)}
+<li><p><strong>Inicialização:</strong> Inicialize os parâmetros do modelo <span class="math inline">\(\pi_k^{(0)}, \boldsymbol{\mu}_k^{(0)}, \mathbf{\Sigma}_k^{(0)}\)</span> para cada grupo <span class="math inline">\(k=1, \dots, K\)</span>. Isso pode ser feito de forma aleatória ou usando o resultado de um algoritmo mais simples, como o K-médias.</p></li>
+<li><p><strong>Passo-E (Expectation):</strong> Em cada iteração <span class="math inline">\(t\)</span>, calculamos a “responsabilidade” de cada grupo <span class="math inline">\(k\)</span> por cada observação <span class="math inline">\(\mathbf{x}_i\)</span>. A responsabilidade, denotada por <span class="math inline">\(p_{ik}^{(t)}\)</span>, é a probabilidade posterior de que a observação <span class="math inline">\(\mathbf{x}_i\)</span> tenha sido gerada pela componente <span class="math inline">\(k\)</span>, dados os parâmetros da iteração anterior. Usando a regra de Bayes, a responsabilidade é calculada como: <span class="math display">\[
+p_{ik}^{(t)} = \frac{\pi_k^{(t-1)} \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k^{(t-1)}, \mathbf{\Sigma}_k^{(t-1)})}{\sum_{j=1}^{K} \pi_j^{(t-1)} \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_j^{(t-1)}, \mathbf{\Sigma}_j^{(t-1)})}
 \]</span> Essencialmente, para cada ponto, calculamos a probabilidade de ele pertencer a cada um dos <span class="math inline">\(K\)</span> grupos.</p></li>
-<li><p><strong>Passo-M (Maximization):</strong> Nesta etapa, usamos as responsabilidades calculadas para reestimar os parâmetros do modelo, maximizando a verossimilhança esperada. As atualizações são:</p>
+<li><p><strong>Passo-M (Maximization):</strong> Nesta etapa, usamos as responsabilidades <span class="math inline">\(p_{ik}^{(t)}\)</span> para reestimar os parâmetros do modelo, maximizando a verossimilhança esperada. As atualizações para a iteração <span class="math inline">\(t\)</span> são:</p>
 <ul>
-<li><p><strong>Novos pesos da mistura:</strong> O novo peso <span class="math inline">\(\pi_k^{\text{novo}}\)</span> é a proporção média de responsabilidade do grupo <span class="math inline">\(k\)</span> sobre todas as observações. <span class="math display">\[
-\pi_k^{\text{novo}} = \frac{N_k}{n}, \quad \text{onde } N_k = \sum_{i=1}^{n} p_{ik}
+<li><p><strong>Pesos da mistura:</strong> O peso <span class="math inline">\(\pi_k^{(t)}\)</span> é a proporção média de responsabilidade do grupo <span class="math inline">\(k\)</span> sobre todas as observações. <span class="math display">\[
+\pi_k^{(t)} = \frac{N_k^{(t)}}{n}, \quad \text{onde } N_k^{(t)} = \sum_{i=1}^{n} p_{ik}^{(t)}
 \]</span></p></li>
-<li><p><strong>Novas médias:</strong> A nova média <span class="math inline">\(\boldsymbol{\mu}_k^{\text{novo}}\)</span> é uma média ponderada de todas as observações, onde os pesos são as responsabilidades. <span class="math display">\[
-\boldsymbol{\mu}_k^{\text{novo}} = \frac{1}{N_k} \sum_{i=1}^{n} p_{ik} \mathbf{x}_i
+<li><p><strong>Médias:</strong> A média <span class="math inline">\(\boldsymbol{\mu}_k^{(t)}\)</span> é uma média ponderada de todas as observações, onde os pesos são as responsabilidades. <span class="math display">\[
+\boldsymbol{\mu}_k^{(t)} = \frac{1}{N_k^{(t)}} \sum_{i=1}^{n} p_{ik}^{(t)} \mathbf{x}_i
 \]</span></p></li>
-<li><p><strong>Novas covariâncias:</strong> A nova matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}_k^{\text{novo}}\)</span> é uma média ponderada das covariâncias, centrada na nova média. <span class="math display">\[
-\mathbf{\Sigma}_k^{\text{novo}} = \frac{1}{N_k} \sum_{i=1}^{n} p_{ik} (\mathbf{x}_i - \boldsymbol{\mu}_k^{\text{novo}})(\mathbf{x}_i - \boldsymbol{\mu}_k^{\text{novo}})'
+<li><p><strong>Covariâncias:</strong> A matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}_k^{(t)}\)</span> é uma média ponderada das covariâncias, centrada na nova média. <span class="math display">\[
+\mathbf{\Sigma}_k^{(t)} = \frac{1}{N_k^{(t)}} \sum_{i=1}^{n} p_{ik}^{(t)} (\mathbf{x}_i - \boldsymbol{\mu}_k^{(t)})(\mathbf{x}_i - \boldsymbol{\mu}_k^{(t)})'
 \]</span></p></li>
 </ul></li>
 <li><p><strong>Repetição:</strong> Os passos E e M são repetidos até que a log-verossimilhança do modelo, <span class="math inline">\(\ln p(\mathbf{X} | \pi, \boldsymbol{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^{n} \ln \left( \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \mathbf{\Sigma}_k) \right)\)</span>, convirja para um valor estável.</p></li>
@@ -814,6 +812,8 @@ DB(K) = \frac{1}{K} \sum_{i=1}^{K} \max_{j \neq i} (R_{ij})
 <li><strong>Variáveis Categóricas:</strong> Calcule a distribuição de frequência (ou porcentagens) de cada categoria para cada grupo. Por exemplo: “O grupo 3 é composto por 80% de clientes do sexo feminino, enquanto na amostra total essa proporção é de 55%”.</li>
 </ul>
 <p>A criação de uma tabela de perfis, com os grupos nas linhas e as estatísticas das variáveis nas colunas, é uma ferramenta extremamente eficaz para resumir e comunicar os resultados.</p>
+<p>Depois de entender o perfil de cada grupo, é uma boa prática dar a eles nomes descritivas. Nomes como “Jovens Urbanos Conectados”, “Famílias Rurais Conservadoras” ou “Clientes de Alto Risco” são muito mais fáceis de comunicar e lembrar do que “Grupo 1”, “Grupo 2”, etc. O nome deve capturar a essência do que torna aquele grupo único.</p>
+<p>A interpretação é um processo iterativo. Às vezes, os perfis dos grupos podem sugerir que o número de grupos escolhido não foi o ideal, levando o analista a revisitar as etapas anteriores.</p>
 </section>
 <section id="visualização-do-agrupamento" class="level3" data-number="9.6.2">
 <h3 data-number="9.6.2" class="anchored" data-anchor-id="visualização-do-agrupamento"><span class="header-section-number">9.6.2</span> Visualização do agrupamento</h3>
@@ -822,11 +822,6 @@ DB(K) = \frac{1}{K} \sum_{i=1}^{K} \max_{j \neq i} (R_{ij})
 <li><strong>Dados de Baixa Dimensão (2D ou 3D):</strong> Um simples gráfico de dispersão, com os pontos identificados de acordo com seu grupo designado, é suficiente.</li>
 <li><strong>Dados de Alta Dimensão:</strong> Quando temos mais de três variáveis, precisamos primeiro reduzir a dimensionalidade para poder visualizar. A <strong>Análise de Componentes Principais (ACP)</strong> é a técnica mais comum para isso. Podemos plotar as observações em um gráfico de dispersão usando os dois primeiros componentes principais como eixos e identificar os pontos por grupo. Isso nos dá uma visão da separação dos grupos no espaço que captura a maior parte da variabilidade dos dados.</li>
 </ul>
-</section>
-<section id="nomeação-dos-grupos" class="level3" data-number="9.6.3">
-<h3 data-number="9.6.3" class="anchored" data-anchor-id="nomeação-dos-grupos"><span class="header-section-number">9.6.3</span> Nomeação dos grupos</h3>
-<p>Depois de entender o perfil de cada grupo, é uma boa prática dar a eles nomes ou “personas” descritivas. Nomes como “Jovens Urbanos Conectados”, “Famílias Rurais Conservadoras” ou “Clientes de Alto Risco” são muito mais fáceis de comunicar e lembrar do que “Grupo 1”, “Grupo 2”, etc. O nome deve capturar a essência do que torna aquele grupo único.</p>
-<p>A interpretação é um processo iterativo. Às vezes, os perfis dos grupos podem sugerir que o número de grupos escolhido não foi o ideal, levando o analista a revisitar as etapas anteriores.</p>
 
 
 </section>
