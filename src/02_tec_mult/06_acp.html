@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -23,7 +23,7 @@ ul.task-list li input[type="checkbox"] {
 </style>
 
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../../site_libs/quarto-nav/quarto-nav.js"></script>
 <script src="../../site_libs/quarto-nav/headroom.min.js"></script>
 <script src="../../site_libs/clipboard/clipboard.min.js"></script>
 <script src="../../site_libs/quarto-search/autocomplete.umd.js"></script>
@@ -34,14 +34,15 @@ ul.task-list li input[type="checkbox"] {
 <link href="../../src/01_intro/06_distancias.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-6733bee0cb8b1cbcf83d02364101e3cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -69,7 +70,7 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Procurar"
   }
 }</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
 
 <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 
@@ -87,7 +88,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -127,7 +128,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">Estatística Multivariada 2</a> 
         <div class="sidebar-tools-main">
@@ -251,6 +254,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de agrupamentos</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/agrup_gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Agrupamento com Modelos de Mistura Gaussiana (GMM)</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -316,81 +325,81 @@ window.Quarto = {
 <div class="cell" data-tbl-cap="Tabela de dados com Peso (kg) e Altura (cm)." data-execution_count="1">
 <div class="cell-output cell-output-display" data-execution_count="1">
 <style type="text/css">
-#T_155cb_row10_col0, #T_155cb_row10_col1, #T_155cb_row10_col2, #T_155cb_row11_col0, #T_155cb_row11_col1, #T_155cb_row11_col2 {
+#T_7d67d_row10_col0, #T_7d67d_row10_col1, #T_7d67d_row10_col2, #T_7d67d_row11_col0, #T_7d67d_row11_col1, #T_7d67d_row11_col2 {
   font-weight: bold;
   background-color: #f9f68d;
 }
 </style>
 
-<table id="T_155cb" class="caption-top table table-sm table-striped small" data-quarto-postprocess="true">
+<table id="T_7d67d" class="caption-top table table-sm table-striped small">
 <caption>Tabela de dados com Peso (kg) e Altura (cm).</caption>
 <thead>
 <tr class="header">
-<th id="T_155cb_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th"></th>
-<th id="T_155cb_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Peso</th>
-<th id="T_155cb_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Altura</th>
+<th id="T_7d67d_level0_col0" class="col_heading level0 col0" data-quarto-table-cell-role="th"></th>
+<th id="T_7d67d_level0_col1" class="col_heading level0 col1" data-quarto-table-cell-role="th">Peso</th>
+<th id="T_7d67d_level0_col2" class="col_heading level0 col2" data-quarto-table-cell-role="th">Altura</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td id="T_155cb_row0_col0" class="data row0 col0"></td>
-<td id="T_155cb_row0_col1" class="data row0 col1">65</td>
-<td id="T_155cb_row0_col2" class="data row0 col2">170</td>
+<td id="T_7d67d_row0_col0" class="data row0 col0"></td>
+<td id="T_7d67d_row0_col1" class="data row0 col1">65</td>
+<td id="T_7d67d_row0_col2" class="data row0 col2">170</td>
 </tr>
 <tr class="even">
-<td id="T_155cb_row1_col0" class="data row1 col0"></td>
-<td id="T_155cb_row1_col1" class="data row1 col1">72</td>
-<td id="T_155cb_row1_col2" class="data row1 col2">182</td>
+<td id="T_7d67d_row1_col0" class="data row1 col0"></td>
+<td id="T_7d67d_row1_col1" class="data row1 col1">72</td>
+<td id="T_7d67d_row1_col2" class="data row1 col2">182</td>
 </tr>
 <tr class="odd">
-<td id="T_155cb_row2_col0" class="data row2 col0"></td>
-<td id="T_155cb_row2_col1" class="data row2 col1">58</td>
-<td id="T_155cb_row2_col2" class="data row2 col2">165</td>
+<td id="T_7d67d_row2_col0" class="data row2 col0"></td>
+<td id="T_7d67d_row2_col1" class="data row2 col1">58</td>
+<td id="T_7d67d_row2_col2" class="data row2 col2">165</td>
 </tr>
 <tr class="even">
-<td id="T_155cb_row3_col0" class="data row3 col0"></td>
-<td id="T_155cb_row3_col1" class="data row3 col1">81</td>
-<td id="T_155cb_row3_col2" class="data row3 col2">190</td>
+<td id="T_7d67d_row3_col0" class="data row3 col0"></td>
+<td id="T_7d67d_row3_col1" class="data row3 col1">81</td>
+<td id="T_7d67d_row3_col2" class="data row3 col2">190</td>
 </tr>
 <tr class="odd">
-<td id="T_155cb_row4_col0" class="data row4 col0"></td>
-<td id="T_155cb_row4_col1" class="data row4 col1">75</td>
-<td id="T_155cb_row4_col2" class="data row4 col2">178</td>
+<td id="T_7d67d_row4_col0" class="data row4 col0"></td>
+<td id="T_7d67d_row4_col1" class="data row4 col1">75</td>
+<td id="T_7d67d_row4_col2" class="data row4 col2">178</td>
 </tr>
 <tr class="even">
-<td id="T_155cb_row5_col0" class="data row5 col0"></td>
-<td id="T_155cb_row5_col1" class="data row5 col1">60</td>
-<td id="T_155cb_row5_col2" class="data row5 col2">168</td>
+<td id="T_7d67d_row5_col0" class="data row5 col0"></td>
+<td id="T_7d67d_row5_col1" class="data row5 col1">60</td>
+<td id="T_7d67d_row5_col2" class="data row5 col2">168</td>
 </tr>
 <tr class="odd">
-<td id="T_155cb_row6_col0" class="data row6 col0"></td>
-<td id="T_155cb_row6_col1" class="data row6 col1">68</td>
-<td id="T_155cb_row6_col2" class="data row6 col2">175</td>
+<td id="T_7d67d_row6_col0" class="data row6 col0"></td>
+<td id="T_7d67d_row6_col1" class="data row6 col1">68</td>
+<td id="T_7d67d_row6_col2" class="data row6 col2">175</td>
 </tr>
 <tr class="even">
-<td id="T_155cb_row7_col0" class="data row7 col0"></td>
-<td id="T_155cb_row7_col1" class="data row7 col1">70</td>
-<td id="T_155cb_row7_col2" class="data row7 col2">172</td>
+<td id="T_7d67d_row7_col0" class="data row7 col0"></td>
+<td id="T_7d67d_row7_col1" class="data row7 col1">70</td>
+<td id="T_7d67d_row7_col2" class="data row7 col2">172</td>
 </tr>
 <tr class="odd">
-<td id="T_155cb_row8_col0" class="data row8 col0"></td>
-<td id="T_155cb_row8_col1" class="data row8 col1">78</td>
-<td id="T_155cb_row8_col2" class="data row8 col2">185</td>
+<td id="T_7d67d_row8_col0" class="data row8 col0"></td>
+<td id="T_7d67d_row8_col1" class="data row8 col1">78</td>
+<td id="T_7d67d_row8_col2" class="data row8 col2">185</td>
 </tr>
 <tr class="even">
-<td id="T_155cb_row9_col0" class="data row9 col0"></td>
-<td id="T_155cb_row9_col1" class="data row9 col1">62</td>
-<td id="T_155cb_row9_col2" class="data row9 col2">169</td>
+<td id="T_7d67d_row9_col0" class="data row9 col0"></td>
+<td id="T_7d67d_row9_col1" class="data row9 col1">62</td>
+<td id="T_7d67d_row9_col2" class="data row9 col2">169</td>
 </tr>
 <tr class="odd">
-<td id="T_155cb_row10_col0" class="data row10 col0">Média</td>
-<td id="T_155cb_row10_col1" class="data row10 col1">68.90</td>
-<td id="T_155cb_row10_col2" class="data row10 col2">175.40</td>
+<td id="T_7d67d_row10_col0" class="data row10 col0">Média</td>
+<td id="T_7d67d_row10_col1" class="data row10 col1">68.90</td>
+<td id="T_7d67d_row10_col2" class="data row10 col2">175.40</td>
 </tr>
 <tr class="even">
-<td id="T_155cb_row11_col0" class="data row11 col0">Variância</td>
-<td id="T_155cb_row11_col1" class="data row11 col1">59.88</td>
-<td id="T_155cb_row11_col2" class="data row11 col2">66.71</td>
+<td id="T_7d67d_row11_col0" class="data row11 col0">Variância</td>
+<td id="T_7d67d_row11_col1" class="data row11 col1">59.88</td>
+<td id="T_7d67d_row11_col2" class="data row11 col2">66.71</td>
 </tr>
 </tbody>
 </table>
@@ -803,13 +812,14 @@ Figura&nbsp;7.4: Exemplo de um biplot genérico para ilustrar a interpretação 
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy

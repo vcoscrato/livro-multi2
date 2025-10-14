@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -65,17 +65,19 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="../../site_libs/quarto-search/fuse.min.js"></script>
 <script src="../../site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="../../">
+<link href="../../src/exemplos/agrup_gmm.html" rel="next">
 <link href="../../src/exemplos/af_big_five.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-6733bee0cb8b1cbcf83d02364101e3cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -118,7 +120,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -158,7 +160,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">Estatística Multivariada 2</a> 
         <div class="sidebar-tools-main">
@@ -282,6 +286,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de agrupamentos</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/agrup_gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Agrupamento com Modelos de Mistura Gaussiana (GMM)</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -330,7 +340,7 @@ window.Quarto = {
 </header>
 
 
-<p>Neste exemplo, aplicaremos o procedimento de análise de agrupamentos proposto na <a href="../02_tec_mult/08_cluster.html#sec-cluster" class="quarto-xref"><span>Seção 9.3.2</span></a>. O objetivo é ilustrar como a combinação de métodos hierárquicos e não hierárquicos pode levar a uma solução de agrupamento robusta e interpretável.</p>
+<p>Neste exemplo, aplicaremos o procedimento de análise de agrupamentos proposto na <a href="../02_tec_mult/08_cluster.html#sec-cluster-protocolo" class="quarto-xref"><span>Seção 9.3.2</span></a>. O objetivo é ilustrar como a combinação de métodos hierárquicos e não hierárquicos pode levar a uma solução de agrupamento robusta e interpretável.</p>
 <p>Utilizaremos o conjunto de dados <code>USArrests</code>, que contém estatísticas de crimes para cada um dos 50 estados dos EUA em 1973. As variáveis são:</p>
 <ul>
 <li><code>Murder</code>: Assassinatos (por 100.000 habitantes).</li>
@@ -345,7 +355,7 @@ window.Quarto = {
 <p>Padronizamos as variáveis para que tenham média 0 e desvio padrão 1.</p>
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.preprocessing <span class="im">import</span> StandardScaler</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> statsmodels.api <span class="im">as</span> sm</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -370,11 +380,14 @@ window.Quarto = {
 <span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando um DataFrame com os dados padronizados para facilitar a manipulação</span></span>
 <span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>X_scaled_df <span class="op">=</span> pd.DataFrame(X_scaled, index<span class="op">=</span>states, columns<span class="op">=</span>data.columns)</span>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(X_scaled_df.head(), headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(X_scaled_df.head(), headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
-<div id="fig-grupo-setup" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
-<figure class="quarto-float quarto-float-fig figure">
-<div aria-describedby="fig-grupo-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+<div id="tbl-grupo-setup" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="1">
+<figure class="quarto-float quarto-float-tbl figure">
+<figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grupo-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
+Tabela&nbsp;12.1: Cabeçalho dos dados padronizados
+</figcaption>
+<div aria-describedby="tbl-grupo-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-stdout">
 <pre><code>| rownames   |    Murder |   Assault |   UrbanPop |        Rape |
 |:-----------|----------:|----------:|-----------:|------------:|
@@ -385,9 +398,6 @@ window.Quarto = {
 | California | 0.281093  |  1.27564  |   1.77678  |  2.08881    |</code></pre>
 </div>
 </div>
-<figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig quarto-uncaptioned" id="fig-grupo-setup-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.1
-</figcaption>
 </figure>
 </div>
 <section id="análise-descritiva" class="level3" data-number="12.1.1">
@@ -396,7 +406,7 @@ Figura&nbsp;12.1
 <div id="cell-fig-descritiva-usarrests" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>sns.histplot(data[<span class="st">'Murder'</span>], ax<span class="op">=</span>axes[<span class="dv">0</span>, <span class="dv">0</span>], kde<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].set_title(<span class="st">'Assassinatos'</span>)</span>
@@ -411,7 +421,7 @@ Figura&nbsp;12.1
 <span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>, <span class="dv">1</span>].set_title(<span class="st">'Estupros'</span>)</span>
 <span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
-<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-descritiva-usarrests" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -420,7 +430,7 @@ Figura&nbsp;12.1
 <img src="agrupamentos_files/figure-html/fig-descritiva-usarrests-output-1.png" width="662" height="433" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-descritiva-usarrests-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.2: Distribuição das variáveis do dataset USArrests.
+Figura&nbsp;12.1: Distribuição das variáveis do dataset USArrests.
 </figcaption>
 </figure>
 </div>
@@ -431,10 +441,10 @@ Figura&nbsp;12.2: Distribuição das variáveis do dataset USArrests.
 <div id="cell-fig-corr-matrix" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="op">=</span> data.corr()</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>corr_matrix <span class="op">=</span> data.corr()</span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
-<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(corr_matrix, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'viridis'</span>, fmt<span class="op">=</span><span class="st">'.2f'</span>)</span>
-<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>sns.heatmap(corr_matrix, annot<span class="op">=</span><span class="va">True</span>, cmap<span class="op">=</span><span class="st">'Greys'</span>, fmt<span class="op">=</span><span class="st">'.2f'</span>)</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-corr-matrix" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -443,13 +453,13 @@ Figura&nbsp;12.2: Distribuição das variáveis do dataset USArrests.
 <img src="agrupamentos_files/figure-html/fig-corr-matrix-output-1.png" width="533" height="416" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-corr-matrix-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.3: Matriz de Correlação entre as variáveis.
+Figura&nbsp;12.2: Matriz de Correlação entre as variáveis.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>A matriz de correlação na <a href="#fig-corr-matrix" class="quarto-xref">Figura&nbsp;<span>12.3</span></a> mostra, como esperado, uma forte correlação positiva entre as três variáveis de crime (<code>Murder</code>, <code>Assault</code>, <code>Rape</code>). <code>UrbanPop</code> tem uma correlação positiva mais fraca com as outras variáveis, sugerindo que o efeito da urbanização no aumento da criminalidade geral é moderado.</p>
+<p>A matriz de correlação na <a href="#fig-corr-matrix" class="quarto-xref">Figura&nbsp;<span>12.2</span></a> mostra, como esperado, uma forte correlação positiva entre as três variáveis de crime (<code>Murder</code>, <code>Assault</code>, <code>Rape</code>). <code>UrbanPop</code> tem uma correlação positiva mais fraca com as outras variáveis, sugerindo que o efeito da urbanização no aumento da criminalidade geral é moderado.</p>
 </section>
 </section>
 <section id="agrupamento-hierárquico-e-escolha-de-k" class="level2" data-number="12.2">
@@ -458,7 +468,7 @@ Figura&nbsp;12.3: Matriz de Correlação entre as variáveis.
 <div id="cell-fig-dendrograma-usarrests" class="cell" data-execution_count="4">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizando o agrupamento hierárquico com o método de Ward</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Realizando o agrupamento hierárquico com o método de Ward</span></span>
 <span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>linked <span class="op">=</span> linkage(X_scaled, method<span class="op">=</span><span class="st">'ward'</span>)</span>
 <span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a><span class="co"># Plotando o dendrograma</span></span>
@@ -474,7 +484,7 @@ Figura&nbsp;12.3: Matriz de Correlação entre as variáveis.
 <span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="fl">5.2</span>, color<span class="op">=</span><span class="st">'r'</span>, linestyle<span class="op">=</span><span class="st">'-.'</span>, label<span class="op">=</span><span class="st">"Corte 1 (K=4)"</span>)</span>
 <span id="cb5-15"><a href="#cb5-15" aria-hidden="true" tabindex="-1"></a>plt.axhline(y<span class="op">=</span><span class="fl">10.5</span>, color<span class="op">=</span><span class="st">'grey'</span>, linestyle<span class="op">=</span><span class="st">'--'</span>, label<span class="op">=</span><span class="st">"Corte 2 (K=2)"</span>)</span>
 <span id="cb5-16"><a href="#cb5-16" aria-hidden="true" tabindex="-1"></a>plt.legend(loc<span class="op">=</span><span class="st">"upper left"</span>)</span>
-<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb5-17"><a href="#cb5-17" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-dendrograma-usarrests" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -483,18 +493,18 @@ Figura&nbsp;12.3: Matriz de Correlação entre as variáveis.
 <img src="agrupamentos_files/figure-html/fig-dendrograma-usarrests-output-1.png" width="585" height="501" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dendrograma-usarrests-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.4: Dendrograma para o conjunto de dados USArrests usando o método de Ward.
+Figura&nbsp;12.3: Dendrograma para o conjunto de dados USArrests usando o método de Ward.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>Analisando o <a href="#fig-dendrograma-usarrests" class="quarto-xref">Figura&nbsp;<span>12.4</span></a>, procuramos por um corte que cruze o maior espaço vertical possível. Vemos duas opções razoáveis, indicadas pelas linhas tracejadas. O “Corte 2” (cinza) sugere uma partição em <span class="math inline">\(K=2\)</span> grupos, separando os estados em dois grandes blocos. O “Corte 1” (vermelho), mais abaixo, sugere uma partição mais granular de <span class="math inline">\(K=4\)</span> grupos. Uma solução com 4 grupos nos dará um entendimento mais detalhado dos perfis dos estados. Portanto, iniciaremos a análise com <span class="math inline">\(K=4\)</span> e, ao final deste exemplo, exploraremos a solução mais simples com <span class="math inline">\(K=2\)</span> para fins de comparação.</p>
+<p>Analisando o <a href="#fig-dendrograma-usarrests" class="quarto-xref">Figura&nbsp;<span>12.3</span></a>, procuramos por um corte que cruze o maior espaço vertical possível. Vemos duas opções razoáveis, indicadas pelas linhas tracejadas. O “Corte 2” (cinza) sugere uma partição em <span class="math inline">\(K=2\)</span> grupos, separando os estados em dois grandes blocos. O “Corte 1” (vermelho), mais abaixo, sugere uma partição mais granular de <span class="math inline">\(K=4\)</span> grupos. Uma solução com 4 grupos nos dará um entendimento mais detalhado dos perfis dos estados. Portanto, iniciaremos a análise com <span class="math inline">\(K=4\)</span> e, ao final deste exemplo, exploraremos a solução mais simples com <span class="math inline">\(K=2\)</span> para fins de comparação.</p>
 <p>Para verificar a robustez dessa escolha, podemos comparar o resultado com o de outro método de ligação, como a <strong>ligação completa</strong>.</p>
 <div id="cell-fig-dendrograma-completa" class="cell" data-execution_count="5">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>linked_complete <span class="op">=</span> linkage(X_scaled, method<span class="op">=</span><span class="st">'complete'</span>)</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>linked_complete <span class="op">=</span> linkage(X_scaled, method<span class="op">=</span><span class="st">'complete'</span>)</span>
 <span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>dendrogram(linked_complete,</span>
@@ -504,7 +514,7 @@ Figura&nbsp;12.4: Dendrograma para o conjunto de dados USArrests usando o métod
 <span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>           show_leaf_counts<span class="op">=</span><span class="va">True</span>)</span>
 <span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>plt.xlabel(<span class="st">'Estados'</span>)</span>
 <span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="st">'Distância'</span>)</span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-dendrograma-completa" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -513,7 +523,7 @@ Figura&nbsp;12.4: Dendrograma para o conjunto de dados USArrests usando o métod
 <img src="agrupamentos_files/figure-html/fig-dendrograma-completa-output-1.png" width="576" height="501" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-dendrograma-completa-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.5: Dendrograma para o conjunto de dados USArrests usando o método de Ligação Completa.
+Figura&nbsp;12.4: Dendrograma para o conjunto de dados USArrests usando o método de Ligação Completa.
 </figcaption>
 </figure>
 </div>
@@ -530,10 +540,10 @@ Figura&nbsp;12.5: Dendrograma para o conjunto de dados USArrests usando o métod
 <li>Executamos o K-médias com <span class="math inline">\(K=4\)</span>, usando os centroides calculados como pontos de partida.</li>
 </ol>
 <p>Isso ajuda o K-médias a evitar mínimos locais e a convergir para uma solução mais estável e significativa.</p>
-<div id="86c0bf40" class="cell" data-execution_count="6">
+<div id="36d3b800" class="cell" data-execution_count="6">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Obter os 4 grupos do modelo hierárquico</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Obter os 4 grupos do modelo hierárquico</span></span>
 <span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">4</span></span>
 <span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>hierarchical_grupos <span class="op">=</span> fcluster(linked, k, criterion<span class="op">=</span><span class="st">'maxclust'</span>)</span>
 <span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -551,7 +561,7 @@ Figura&nbsp;12.5: Dendrograma para o conjunto de dados USArrests usando o métod
 <span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a>final_grupos <span class="op">=</span> kmeans.labels_</span>
 <span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># Adicionar os grupos finais ao DataFrame original (não padronizado)</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'grupo'</span>] <span class="op">=</span> final_grupos</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'grupo'</span>] <span class="op">=</span> final_grupos</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 </div>
 </section>
@@ -560,14 +570,14 @@ Figura&nbsp;12.5: Dendrograma para o conjunto de dados USArrests usando o métod
 <p>Com os grupos finais definidos, o passo mais importante é a interpretação. Calculamos a média de cada variável para cada grupo para criar um “perfil”.</p>
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular as médias por grupo</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Calcular as médias por grupo</span></span>
 <span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>grupo_profile <span class="op">=</span> data.groupby(<span class="st">'grupo'</span>).mean()</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(grupo_profile, headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(grupo_profile, headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-grupo-profile" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="7">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-grupo-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;12.1: Perfil dos grupos: médias das variáveis para cada grupo.
+Tabela&nbsp;12.2: Perfil dos grupos: médias das variáveis para cada grupo.
 </figcaption>
 <div aria-describedby="tbl-grupo-profile-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-stdout">
@@ -581,7 +591,7 @@ Tabela&nbsp;12.1: Perfil dos grupos: médias das variáveis para cada grupo.
 </div>
 </figure>
 </div>
-<p>A <a href="#tbl-grupo-profile" class="quarto-xref">Tabela&nbsp;<span>12.1</span></a> nos permite caracterizar cada grupo:</p>
+<p>A <a href="#tbl-grupo-profile" class="quarto-xref">Tabela&nbsp;<span>12.2</span></a> nos permite caracterizar cada grupo:</p>
 <ul>
 <li><p><strong>Grupo 0 (Estados Perigosos):</strong> Este grupo tem os maiores índices de assassinatos e índices também altos de agressões e estupros. A população urbana é uma das mais baixas. Podemos nomeá-lo “Estados Violentos e Rurais”.</p></li>
 <li><p><strong>Grupo 1 (Estados Urbanizados e Perigosos):</strong> Este grupo tem alta urbanização e níveis de criminalidade também muito altos, especialmente quanto a estupros e agressões. Um bom nome seria “Grandes Centros Urbanos Perigosos”.</p></li>
@@ -594,7 +604,7 @@ Tabela&nbsp;12.1: Perfil dos grupos: médias das variáveis para cada grupo.
 <p>Antes de visualizar o gráfico, é crucial entender o que os eixos (os componentes principais) representam. Eles são combinações lineares das variáveis originais. Podemos inspecionar os pesos (loadings) de cada variável para interpretar o significado de cada componente.</p>
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduzindo a dimensionalidade com ACP</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Reduzindo a dimensionalidade com ACP</span></span>
 <span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>pca <span class="op">=</span> PCA(n_components<span class="op">=</span><span class="dv">2</span>)</span>
 <span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>X_pca <span class="op">=</span> pca.fit_transform(X_scaled)</span>
 <span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -604,12 +614,12 @@ Tabela&nbsp;12.1: Perfil dos grupos: médias das variáveis para cada grupo.
 <span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co"># Loadings</span></span>
 <span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a>loadings <span class="op">=</span> pca.components_.T</span>
 <span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>loadings_df <span class="op">=</span> pd.DataFrame(loadings, columns<span class="op">=</span>[<span class="st">'PC1'</span>, <span class="st">'PC2'</span>], index<span class="op">=</span>data.columns[:<span class="op">-</span><span class="dv">1</span>])</span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(loadings_df, headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(loadings_df, headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-pca-loadings" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="8">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-pca-loadings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;12.2: Cargas (loadings) dos componentes principais.
+Tabela&nbsp;12.3: Cargas (loadings) dos componentes principais.
 </figcaption>
 <div aria-describedby="tbl-pca-loadings-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-stdout">
@@ -623,7 +633,7 @@ Tabela&nbsp;12.2: Cargas (loadings) dos componentes principais.
 </div>
 </figure>
 </div>
-<p>A tabela <a href="#tbl-pca-loadings" class="quarto-xref">Tabela&nbsp;<span>12.2</span></a> mostra as cargas das variáveis nos dois primeiros fatores.</p>
+<p>A tabela <a href="#tbl-pca-loadings" class="quarto-xref">Tabela&nbsp;<span>12.3</span></a> mostra as cargas das variáveis nos dois primeiros fatores.</p>
 <p>O primeiro componente (PC1) explica aproximadamente 62% da variância total, enquanto o segundo (PC2) explica cerca de 25%. Juntos, eles capturam 87% da informação original, o que é excelente para uma visualização 2D.</p>
 <ul>
 <li><strong>Componente Principal 1 (PC1):</strong> Todas as quatro variáveis têm cargas positivas, com destaque para as variáveis associadas à criminalidade. Isso significa que ele representa uma medida geral de “Criminalidade”.</li>
@@ -633,7 +643,7 @@ Tabela&nbsp;12.2: Cargas (loadings) dos componentes principais.
 <div id="cell-fig-grupo-pca-plot" class="cell" data-execution_count="9">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando um DataFrame para o plot</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Criando um DataFrame para o plot</span></span>
 <span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>pca_df <span class="op">=</span> pd.DataFrame(data<span class="op">=</span>X_pca, columns<span class="op">=</span>[<span class="st">'PC1'</span>, <span class="st">'PC2'</span>])</span>
 <span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>pca_df[<span class="st">'grupo'</span>] <span class="op">=</span> final_grupos</span>
 <span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>pca_df[<span class="st">'state'</span>] <span class="op">=</span> states</span>
@@ -652,7 +662,7 @@ Tabela&nbsp;12.2: Cargas (loadings) dos componentes principais.
 <span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="ss">f'Componente Principal 2 (</span><span class="sc">{</span>explained_variance[<span class="dv">1</span>]<span class="sc">:.1%}</span><span class="ss">)'</span>)</span>
 <span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Grupo'</span>)</span>
 <span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-grupo-pca-plot" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -661,13 +671,13 @@ Tabela&nbsp;12.2: Cargas (loadings) dos componentes principais.
 <img src="agrupamentos_files/figure-html/fig-grupo-pca-plot-output-1.png" width="617" height="450" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-grupo-pca-plot-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.6: Visualização dos grupos no espaço dos dois primeiros componentes principais.
+Figura&nbsp;12.5: Visualização dos grupos no espaço dos dois primeiros componentes principais.
 </figcaption>
 </figure>
 </div>
 </div>
 </div>
-<p>O gráfico na <a href="#fig-grupo-pca-plot" class="quarto-xref">Figura&nbsp;<span>12.6</span></a> mostra uma separação clara dos grupos. O primeiro componente principal (PC1, eixo horizontal) efetivamente separa os estados com base na “Criminalidade Geral”, com os grupos mais violentos (0 e 1) à direita e os mais seguros (2 e 3) à esquerda. O segundo componente principal (PC2, eixo vertical) está relacionado à “Urbanização”, posicionando os grupos mais urbanizados (1 e 3) na parte superior e os mais rurais (0 e 2) na parte inferior. A análise combinada forneceu uma partição clara e interpretável dos estados dos EUA com base em seus dados sociais de 1973.</p>
+<p>O gráfico na <a href="#fig-grupo-pca-plot" class="quarto-xref">Figura&nbsp;<span>12.5</span></a> mostra uma separação clara dos grupos. O primeiro componente principal (PC1, eixo horizontal) efetivamente separa os estados com base na “Criminalidade Geral”, com os grupos mais violentos (0 e 1) à direita e os mais seguros (2 e 3) à esquerda. O segundo componente principal (PC2, eixo vertical) está relacionado à “Urbanização”, posicionando os grupos mais urbanizados (1 e 3) na parte superior e os mais rurais (0 e 2) na parte inferior. A análise combinada forneceu uma partição clara e interpretável dos estados dos EUA com base em seus dados sociais de 1973.</p>
 </section>
 </section>
 <section id="comparação-com-k2-grupos" class="level2" data-number="12.5">
@@ -675,7 +685,7 @@ Figura&nbsp;12.6: Visualização dos grupos no espaço dos dois primeiros compon
 <p>Como vimos no dendrograma, uma solução com <span class="math inline">\(K=2\)</span> também é uma escolha justificável e representa a divisão de mais alto nível nos dados. Vamos repetir a etapa final do nosso procedimento para <span class="math inline">\(K=2\)</span> e analisar o resultado.</p>
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Obter os 2 grupos do modelo hierárquico</span></span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 1. Obter os 2 grupos do modelo hierárquico</span></span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>k <span class="op">=</span> <span class="dv">2</span></span>
 <span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>hierarchical_grupos_k2 <span class="op">=</span> fcluster(linked, k, criterion<span class="op">=</span><span class="st">'maxclust'</span>)</span>
 <span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
@@ -691,12 +701,12 @@ Figura&nbsp;12.6: Visualização dos grupos no espaço dos dois primeiros compon
 <span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a><span class="co"># 3. Calcular e exibir o perfil</span></span>
 <span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>data[<span class="st">'grupo_k2'</span>] <span class="op">=</span> final_grupos_k2</span>
 <span id="cb13-16"><a href="#cb13-16" aria-hidden="true" tabindex="-1"></a>grupo_profile_k2 <span class="op">=</span> data.groupby(<span class="st">'grupo_k2'</span>).mean().drop(<span class="st">'grupo'</span>, axis<span class="op">=</span><span class="dv">1</span>)</span>
-<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(grupo_profile_k2, headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(tabulate(grupo_profile_k2, headers<span class="op">=</span><span class="st">'keys'</span>, tablefmt<span class="op">=</span><span class="st">'pipe'</span>))</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div id="tbl-profile-k2" class="cell quarto-float quarto-figure quarto-figure-center anchored" data-execution_count="10">
 <figure class="quarto-float quarto-float-tbl figure">
 <figcaption class="quarto-float-caption-top quarto-float-caption quarto-float-tbl" id="tbl-profile-k2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Tabela&nbsp;12.3: Perfil dos grupos para a solução com K=2.
+Tabela&nbsp;12.4: Perfil dos grupos para a solução com K=2.
 </figcaption>
 <div aria-describedby="tbl-profile-k2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
 <div class="cell-output cell-output-stdout">
@@ -717,7 +727,7 @@ Tabela&nbsp;12.3: Perfil dos grupos para a solução com K=2.
 <div id="cell-fig-pca-plot-k2" class="cell" data-execution_count="11">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pca_df[<span class="st">'grupo_k2'</span>] <span class="op">=</span> final_grupos_k2</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>pca_df[<span class="st">'grupo_k2'</span>] <span class="op">=</span> final_grupos_k2</span>
 <span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>plt.figure(figsize<span class="op">=</span>(<span class="dv">7</span>, <span class="dv">5</span>))</span>
 <span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>sns.scatterplot(x<span class="op">=</span><span class="st">'PC1'</span>, y<span class="op">=</span><span class="st">'PC2'</span>, hue<span class="op">=</span><span class="st">'grupo_k2'</span>, data<span class="op">=</span>pca_df, palette<span class="op">=</span><span class="st">'viridis'</span>, s<span class="op">=</span><span class="dv">100</span>)</span>
@@ -732,7 +742,7 @@ Tabela&nbsp;12.3: Perfil dos grupos para a solução com K=2.
 <span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>plt.ylabel(<span class="ss">f'Componente Principal 2 (</span><span class="sc">{</span>explained_variance[<span class="dv">1</span>]<span class="sc">:.1%}</span><span class="ss">)'</span>)</span>
 <span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>plt.legend(title<span class="op">=</span><span class="st">'Grupo'</span>)</span>
 <span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>plt.grid(<span class="va">True</span>)</span>
-<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-pca-plot-k2" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -741,7 +751,7 @@ Tabela&nbsp;12.3: Perfil dos grupos para a solução com K=2.
 <img src="agrupamentos_files/figure-html/fig-pca-plot-k2-output-1.png" width="617" height="450" class="figure-img">
 </div>
 <figcaption class="quarto-float-caption-bottom quarto-float-caption quarto-float-fig" id="fig-pca-plot-k2-caption-0ceaefa1-69ba-4598-a22c-09a6ac19f8ca">
-Figura&nbsp;12.7: Visualização dos grupos (K=2) no espaço dos componentes principais.
+Figura&nbsp;12.6: Visualização dos grupos (K=2) no espaço dos componentes principais.
 </figcaption>
 </figure>
 </div>
@@ -803,13 +813,14 @@ Figura&nbsp;12.7: Visualização dos grupos (K=2) no espaço dos componentes pri
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
@@ -1158,6 +1169,9 @@ Figura&nbsp;12.7: Visualização dos grupos (K=2) no espaço dos componentes pri
       </a>          
   </div>
   <div class="nav-page nav-page-next">
+      <a href="../../src/exemplos/agrup_gmm.html" class="pagination-link" aria-label="Agrupamento com Modelos de Mistura Gaussiana (GMM)">
+        <span class="nav-page-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Agrupamento com Modelos de Mistura Gaussiana (GMM)</span></span> <i class="bi bi-arrow-right-short"></i>
+      </a>
   </div>
 </nav>
 </div> <!-- /content -->

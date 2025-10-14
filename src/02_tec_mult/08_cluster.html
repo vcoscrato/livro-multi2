@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="pt-BR" xml:lang="pt-BR"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.7.34">
+<meta name="generator" content="quarto-1.8.25">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
@@ -69,14 +69,15 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="../../src/02_tec_mult/07_af.html" rel="prev">
 <script src="../../site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="../../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../../site_libs/quarto-html/axe/axe-check.js" type="module"></script>
 <script src="../../site_libs/quarto-html/popper.min.js"></script>
 <script src="../../site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="../../site_libs/quarto-html/anchor.min.js"></script>
 <link href="../../site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-c8ad9e5dbd60b7b70b38521ab19b7da4.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="../../site_libs/quarto-html/quarto-syntax-highlighting-7b89279ff1a6dce999919e0e67d4d9ec.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="../../site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="../../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="../../site_libs/bootstrap/bootstrap-3d2a8444d2b9392f8320dfc657f7baeb.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="../../site_libs/bootstrap/bootstrap-6733bee0cb8b1cbcf83d02364101e3cc.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "sidebar",
   "copy-button": false,
@@ -119,7 +120,7 @@ const typesetMath = (el) => {
     var macros = [];
     for (var i = 0; i < mathElements.length; i++) {
       var texText = mathElements[i].firstChild;
-      if (mathElements[i].tagName == "SPAN") {
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
         window.katex.render(texText.data, mathElements[i], {
           displayMode: mathElements[i].classList.contains('display'),
           throwOnError: false,
@@ -159,7 +160,9 @@ window.Quarto = {
 <div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
 <!-- sidebar -->
   <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation floating overflow-auto">
-    <div class="pt-lg-2 mt-2 text-left sidebar-header">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="../../index.html" class="sidebar-logo-link">
+      </a>
     <div class="sidebar-title mb-0 py-0">
       <a href="../../">Estatística Multivariada 2</a> 
         <div class="sidebar-tools-main">
@@ -283,6 +286,12 @@ window.Quarto = {
  <span class="menu-text"><span class="chapter-number">12</span>&nbsp; <span class="chapter-title">Análise de agrupamentos</span></span></a>
   </div>
 </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../../src/exemplos/agrup_gmm.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text"><span class="chapter-number">13</span>&nbsp; <span class="chapter-title">Agrupamento com Modelos de Mistura Gaussiana (GMM)</span></span></a>
+  </div>
+</li>
       </ul>
   </li>
     </ul>
@@ -305,16 +314,16 @@ window.Quarto = {
   <li><a href="#agrupamento-não-hierárquico" id="toc-agrupamento-não-hierárquico" class="nav-link" data-scroll-target="#agrupamento-não-hierárquico"><span class="header-section-number">9.3</span> Agrupamento Não-Hierárquico</a>
   <ul class="collapse">
   <li><a href="#o-algoritmo-k-médias-k-means" id="toc-o-algoritmo-k-médias-k-means" class="nav-link" data-scroll-target="#o-algoritmo-k-médias-k-means"><span class="header-section-number">9.3.1</span> O Algoritmo K-Médias (<em>K-Means</em>)</a></li>
-  <li><a href="#sec-cluster" id="toc-sec-cluster" class="nav-link" data-scroll-target="#sec-cluster"><span class="header-section-number">9.3.2</span> Procedimento sugerido para análise de agrupamentos</a></li>
+  <li><a href="#sec-cluster-protocolo" id="toc-sec-cluster-protocolo" class="nav-link" data-scroll-target="#sec-cluster-protocolo"><span class="header-section-number">9.3.2</span> Procedimento sugerido para análise de agrupamentos</a></li>
   </ul></li>
   <li><a href="#agrupamento-baseado-em-modelos" id="toc-agrupamento-baseado-em-modelos" class="nav-link" data-scroll-target="#agrupamento-baseado-em-modelos"><span class="header-section-number">9.4</span> Agrupamento Baseado em Modelos</a>
   <ul class="collapse">
   <li><a href="#o-algoritmo-de-expectation-maximization-em" id="toc-o-algoritmo-de-expectation-maximization-em" class="nav-link" data-scroll-target="#o-algoritmo-de-expectation-maximization-em"><span class="header-section-number">9.4.1</span> O Algoritmo de Expectation-Maximization (EM)</a></li>
   <li><a href="#vantagens-do-agrupamento-baseado-em-modelos" id="toc-vantagens-do-agrupamento-baseado-em-modelos" class="nav-link" data-scroll-target="#vantagens-do-agrupamento-baseado-em-modelos"><span class="header-section-number">9.4.2</span> Vantagens do Agrupamento Baseado em Modelos</a></li>
   </ul></li>
-  <li><a href="#índices-de-v1alidação-de-agrupamentos" id="toc-índices-de-v1alidação-de-agrupamentos" class="nav-link" data-scroll-target="#índices-de-v1alidação-de-agrupamentos"><span class="header-section-number">9.5</span> Índices de v1alidação de agrupamentos</a>
+  <li><a href="#índices-de-validação-de-agrupamentos" id="toc-índices-de-validação-de-agrupamentos" class="nav-link" data-scroll-target="#índices-de-validação-de-agrupamentos"><span class="header-section-number">9.5</span> Índices de validação de agrupamentos</a>
   <ul class="collapse">
-  <li><a href="#método-da-silhueta" id="toc-método-da-silhueta" class="nav-link" data-scroll-target="#método-da-silhueta"><span class="header-section-number">9.5.1</span> Método da Silhueta</a></li>
+  <li><a href="#sec-Silhueta" id="toc-sec-Silhueta" class="nav-link" data-scroll-target="#sec-Silhueta"><span class="header-section-number">9.5.1</span> Método da Silhueta</a></li>
   <li><a href="#índice-de-calinski-harabasz" id="toc-índice-de-calinski-harabasz" class="nav-link" data-scroll-target="#índice-de-calinski-harabasz"><span class="header-section-number">9.5.2</span> Índice de Calinski-Harabasz</a></li>
   <li><a href="#índice-de-davies-bouldin" id="toc-índice-de-davies-bouldin" class="nav-link" data-scroll-target="#índice-de-davies-bouldin"><span class="header-section-number">9.5.3</span> Índice de Davies-Bouldin</a></li>
   </ul></li>
@@ -322,7 +331,6 @@ window.Quarto = {
   <ul class="collapse">
   <li><a href="#perfil-dos-grupos" id="toc-perfil-dos-grupos" class="nav-link" data-scroll-target="#perfil-dos-grupos"><span class="header-section-number">9.6.1</span> Perfil dos grupos</a></li>
   <li><a href="#visualização-do-agrupamento" id="toc-visualização-do-agrupamento" class="nav-link" data-scroll-target="#visualização-do-agrupamento"><span class="header-section-number">9.6.2</span> Visualização do agrupamento</a></li>
-  <li><a href="#nomeação-dos-grupos" id="toc-nomeação-dos-grupos" class="nav-link" data-scroll-target="#nomeação-dos-grupos"><span class="header-section-number">9.6.3</span> Nomeação dos grupos</a></li>
   </ul></li>
   </ul>
 </nav>
@@ -520,7 +528,7 @@ Figura&nbsp;9.1: Anatomia de um dendrograma simples.
 <div id="cell-fig-dendrogramas-comparacao" class="cell" data-execution_count="2">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> squareform</span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -554,7 +562,7 @@ Figura&nbsp;9.1: Anatomia de um dendrograma simples.
 <span id="cb1-32"><a href="#cb1-32" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">1</span>].set_xlabel(<span class="st">'Observação'</span>)</span>
 <span id="cb1-33"><a href="#cb1-33" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-34"><a href="#cb1-34" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
-<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb1-35"><a href="#cb1-35" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-dendrogramas-comparacao" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -576,7 +584,7 @@ Figura&nbsp;9.2: Comparação de dendrogramas para a matriz 5x5. As cores foram 
 <div id="cell-fig-dendrogramas-cortes" class="cell" data-execution_count="3">
 <details class="code-fold">
 <summary>Código</summary>
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.cluster.hierarchy <span class="im">import</span> dendrogram, linkage</span>
 <span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> scipy.spatial.distance <span class="im">import</span> squareform</span>
 <span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
@@ -641,7 +649,7 @@ Figura&nbsp;9.2: Comparação de dendrogramas para a matriz 5x5. As cores foram 
 <span id="cb2-63"><a href="#cb2-63" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">2</span>].set_xlabel(<span class="st">'Observação'</span>)</span>
 <span id="cb2-64"><a href="#cb2-64" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb2-65"><a href="#cb2-65" aria-hidden="true" tabindex="-1"></a>plt.tight_layout(rect<span class="op">=</span>[<span class="dv">0</span>, <span class="fl">0.03</span>, <span class="dv">1</span>, <span class="fl">0.95</span>])</span>
-<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb2-66"><a href="#cb2-66" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copiar para a área de transferência" class="code-copy-button"><i class="bi"></i></button></div>
 </details>
 <div class="cell-output cell-output-display">
 <div id="fig-dendrogramas-cortes" class="quarto-float quarto-figure quarto-figure-center anchored">
@@ -669,7 +677,7 @@ Figura&nbsp;9.3: Ilustração do corte no dendrograma de Ligação Completa para
 <i class="callout-icon"></i>
 </div>
 <div class="callout-title-container flex-fill">
-O Eixo Vertical no Dendrograma
+<span class="screen-reader-only">Nota</span>O Eixo Vertical no Dendrograma
 </div>
 </div>
 <div class="callout-body-container callout-body">
@@ -709,14 +717,14 @@ c_i^{(t)} = \arg \min_{k} (\mathbf{x}_i - \boldsymbol{\mu}_k^{(t-1)})' (\mathbf{
 <p>A necessidade de pré-especificar o número de grupos, <span class="math inline">\(K\)</span>, também pode ser uma desvantagem. Para contornar o problema, é comum executar o algoritmo para uma gama de valores de <span class="math inline">\(K\)</span> e calcular a Soma de Quadrados Intra-grupos (SQI) em cada caso. A ideia é escolher <span class="math inline">\(K\)</span> tal que a SQI seja baixa, mas sendo parcimonioso com o número de grupos. Vale lembrar que a SQI é inversamente proporcional a K – se <span class="math inline">\(K=1\)</span>, a SQI é máxima e se <span class="math inline">\(K=n\)</span> a SQI é zero. Na prática, aumentamos <span class="math inline">\(K\)</span> progressivamente observando os decréscimo na SQI, seguimos aumentando <span class="math inline">\(K\)</span> enquanto esse decréscimo for grande.</p>
 <p>A seguir, definimos um procedimento mais robusto, que soluciona os problemas mencionados combinando diferentes métodos de agrupamento.</p>
 </section>
-<section id="sec-cluster" class="level3" data-number="9.3.2">
-<h3 data-number="9.3.2" class="anchored" data-anchor-id="sec-cluster"><span class="header-section-number">9.3.2</span> Procedimento sugerido para análise de agrupamentos</h3>
+<section id="sec-cluster-protocolo" class="level3" data-number="9.3.2">
+<h3 data-number="9.3.2" class="anchored" data-anchor-id="sec-cluster-protocolo"><span class="header-section-number">9.3.2</span> Procedimento sugerido para análise de agrupamentos</h3>
 <p>Levando em consideração as vantagens e desvantagens dos agrupamentos hierárquicos e de K-médias, podemos definir um procedimento que simplifica as escolhas durante um problema prático de análise de agrupamentos.</p>
 <ul>
 <li>Inicie com um agrupamento hierárquico. O método de Ward costuma ser uma boa primeira opção, no entanto, experimente também outros métodos de ligação conforme necessário.</li>
-<li>Observe o dendograma para escolher o corte que seja mais plausível. Esse corte determina um número de grupos ótimo <span class="math inline">\(K*\)</span>.</li>
+<li>Observe o dendograma para escolher o corte que seja mais plausível. Esse corte determina um número de grupos ótimo <span class="math inline">\(K^*\)</span>.</li>
 <li>Calcule o centroide para cada um dos grupos obtidos via agrupamento hierárquico <span class="math inline">\(\mu_1, \cdots, \mu_K\)</span>.</li>
-<li>Utilize os centoides obtidos como centroides iniciais para o método K-médias com <span class="math inline">\(K*\)</span> grupos.</li>
+<li>Utilize os centoides obtidos como centroides iniciais para o método K-médias com <span class="math inline">\(K^*\)</span> grupos.</li>
 </ul>
 <p>Exemplificamos esse procedimento com dados reais no <a href="../exemplos/agrupamentos.html" class="quarto-xref"><span>Capítulo 12</span></a>.</p>
 </section>
@@ -730,33 +738,33 @@ p(\mathbf{x}) = \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x} | \boldsymbol{\mu}_k
 \]</span></p>
 <p>Onde, para cada grupo <span class="math inline">\(k\)</span>:</p>
 <ul>
-<li><span class="math inline">\(\pi_k\)</span>: é o peso da mistura (a probabilidade de uma observação pertencer ao grupo <span class="math inline">\(k\)</span>).</li>
+<li><span class="math inline">\(\pi_k\)</span>: é o peso da mistura. Por ser uma probabilidade, deve satisfazer <span class="math inline">\(\pi_k \ge 0\)</span> e <span class="math inline">\(\sum_{k=1}^{K} \pi_k = 1\)</span>.</li>
 <li><span class="math inline">\(\boldsymbol{\mu}_k\)</span>: é o vetor de médias (o centroide do grupo).</li>
 <li><span class="math inline">\(\mathbf{\Sigma}_k\)</span>: é a matriz de covariâncias (descreve a forma e orientação do grupo).</li>
 </ul>
 <section id="o-algoritmo-de-expectation-maximization-em" class="level3" data-number="9.4.1">
 <h3 data-number="9.4.1" class="anchored" data-anchor-id="o-algoritmo-de-expectation-maximization-em"><span class="header-section-number">9.4.1</span> O Algoritmo de Expectation-Maximization (EM)</h3>
-<p>Os parâmetros do GMM (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) são estimados usando o algoritmo de <strong>Expectation-Maximization (EM)</strong>.</p>
-<p>O algoritmo é um processo iterativo que alterna entre dois passos:</p>
+<p>Os parâmetros do GMM (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) são estimados usando o algoritmo de <strong>Expectation-Maximization (EM)</strong>, um processo iterativo que alterna entre dois passos.</p>
 <ol type="1">
-<li><p><strong>Inicialização:</strong> Inicialize os parâmetros do modelo (<span class="math inline">\(\pi_k, \boldsymbol{\mu}_k, \mathbf{\Sigma}_k\)</span>) para cada grupo <span class="math inline">\(k=1, \dots, K\)</span>. Isso pode ser feito de forma aleatória ou usando o resultado de um algoritmo mais simples, como o K-médias.</p></li>
-<li><p><strong>Passo-E (Expectation):</strong> Nesta etapa, calculamos a “responsabilidade” de cada grupo <span class="math inline">\(k\)</span> por cada observação <span class="math inline">\(\mathbf{x}_i\)</span>. A responsabilidade, denotada por <span class="math inline">\(p_{ik}\)</span>, é a probabilidade posterior de que a observação <span class="math inline">\(\mathbf{x}_i\)</span> tenha sido gerada pela componente <span class="math inline">\(k\)</span> da mistura, dados os parâmetros atuais. Usando a regra de Bayes, a responsabilidade é calculada como: <span class="math display">\[
-p_{ik} = \frac{\pi_k \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \mathbf{\Sigma}_k)}{\sum_{j=1}^{K} \pi_j \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_j, \mathbf{\Sigma}_j)}
+<li><p><strong>Inicialização:</strong> Inicialize os parâmetros do modelo <span class="math inline">\(\pi_k^{(0)}, \boldsymbol{\mu}_k^{(0)}, \mathbf{\Sigma}_k^{(0)}\)</span> para cada grupo <span class="math inline">\(k=1, \dots, K\)</span>. Isso pode ser feito de forma aleatória ou usando o resultado de um algoritmo mais simples, como o K-médias.</p></li>
+<li><p><strong>Passo-E (Expectation):</strong> Em cada iteração <span class="math inline">\(t\)</span>, calculamos a “responsabilidade” de cada grupo <span class="math inline">\(k\)</span> por cada observação <span class="math inline">\(\mathbf{x}_i\)</span>. A responsabilidade, denotada por <span class="math inline">\(p_{ik}^{(t)}\)</span>, é a probabilidade posterior de que a observação <span class="math inline">\(\mathbf{x}_i\)</span> tenha sido gerada pela componente <span class="math inline">\(k\)</span>, dados os parâmetros da iteração anterior. Usando a regra de Bayes, a responsabilidade é calculada como: <span class="math display">\[
+p_{ik}^{(t)} = \frac{\pi_k^{(t-1)} \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k^{(t-1)}, \mathbf{\Sigma}_k^{(t-1)})}{\sum_{j=1}^{K} \pi_j^{(t-1)} \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_j^{(t-1)}, \mathbf{\Sigma}_j^{(t-1)})}
 \]</span> Essencialmente, para cada ponto, calculamos a probabilidade de ele pertencer a cada um dos <span class="math inline">\(K\)</span> grupos.</p></li>
-<li><p><strong>Passo-M (Maximization):</strong> Nesta etapa, usamos as responsabilidades calculadas para reestimar os parâmetros do modelo, maximizando a verossimilhança esperada. As atualizações são:</p>
+<li><p><strong>Passo-M (Maximization):</strong> Nesta etapa, usamos as responsabilidades <span class="math inline">\(p_{ik}^{(t)}\)</span> para reestimar os parâmetros do modelo, maximizando a verossimilhança esperada. As atualizações para a iteração <span class="math inline">\(t\)</span> são:</p>
 <ul>
-<li><p><strong>Novos pesos da mistura:</strong> O novo peso <span class="math inline">\(\pi_k^{\text{novo}}\)</span> é a proporção média de responsabilidade do grupo <span class="math inline">\(k\)</span> sobre todas as observações. <span class="math display">\[
-\pi_k^{\text{novo}} = \frac{N_k}{n}, \quad \text{onde } N_k = \sum_{i=1}^{n} p_{ik}
+<li><p><strong>Pesos da mistura:</strong> O peso <span class="math inline">\(\pi_k^{(t)}\)</span> é a proporção média de responsabilidade do grupo <span class="math inline">\(k\)</span> sobre todas as observações. <span class="math display">\[
+\pi_k^{(t)} = \frac{N_k^{(t)}}{n}, \quad \text{onde } N_k^{(t)} = \sum_{i=1}^{n} p_{ik}^{(t)}
 \]</span></p></li>
-<li><p><strong>Novas médias:</strong> A nova média <span class="math inline">\(\boldsymbol{\mu}_k^{\text{novo}}\)</span> é uma média ponderada de todas as observações, onde os pesos são as responsabilidades. <span class="math display">\[
-\boldsymbol{\mu}_k^{\text{novo}} = \frac{1}{N_k} \sum_{i=1}^{n} p_{ik} \mathbf{x}_i
+<li><p><strong>Médias:</strong> A média <span class="math inline">\(\boldsymbol{\mu}_k^{(t)}\)</span> é uma média ponderada de todas as observações, onde os pesos são as responsabilidades. <span class="math display">\[
+\boldsymbol{\mu}_k^{(t)} = \frac{1}{N_k^{(t)}} \sum_{i=1}^{n} p_{ik}^{(t)} \mathbf{x}_i
 \]</span></p></li>
-<li><p><strong>Novas covariâncias:</strong> A nova matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}_k^{\text{novo}}\)</span> é uma média ponderada das covariâncias, centrada na nova média. <span class="math display">\[
-\mathbf{\Sigma}_k^{\text{novo}} = \frac{1}{N_k} \sum_{i=1}^{n} p_{ik} (\mathbf{x}_i - \boldsymbol{\mu}_k^{\text{novo}})(\mathbf{x}_i - \boldsymbol{\mu}_k^{\text{novo}})'
+<li><p><strong>Covariâncias:</strong> A matriz de covariâncias <span class="math inline">\(\mathbf{\Sigma}_k^{(t)}\)</span> é uma média ponderada das covariâncias, centrada na nova média. <span class="math display">\[
+\mathbf{\Sigma}_k^{(t)} = \frac{1}{N_k^{(t)}} \sum_{i=1}^{n} p_{ik}^{(t)} (\mathbf{x}_i - \boldsymbol{\mu}_k^{(t)})(\mathbf{x}_i - \boldsymbol{\mu}_k^{(t)})'
 \]</span></p></li>
 </ul></li>
 <li><p><strong>Repetição:</strong> Os passos E e M são repetidos até que a log-verossimilhança do modelo, <span class="math inline">\(\ln p(\mathbf{X} | \pi, \boldsymbol{\mu}, \mathbf{\Sigma}) = \sum_{i=1}^{n} \ln \left( \sum_{k=1}^{K} \pi_k \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \mathbf{\Sigma}_k) \right)\)</span>, convirja para um valor estável.</p></li>
 </ol>
+<p>Exemplificamos a aplicação do modelo de mistura Gaussiana para análise de agrupamentos na <a href="../exemplos/agrup_gmm.html" class="quarto-xref"><span>Capítulo 13</span></a>.</p>
 </section>
 <section id="vantagens-do-agrupamento-baseado-em-modelos" class="level3" data-number="9.4.2">
 <h3 data-number="9.4.2" class="anchored" data-anchor-id="vantagens-do-agrupamento-baseado-em-modelos"><span class="header-section-number">9.4.2</span> Vantagens do Agrupamento Baseado em Modelos</h3>
@@ -767,16 +775,20 @@ p_{ik} = \frac{\pi_k \mathcal{N}(\mathbf{x}_i | \boldsymbol{\mu}_k, \mathbf{\Sig
 </ul>
 </section>
 </section>
-<section id="índices-de-v1alidação-de-agrupamentos" class="level2" data-number="9.5">
-<h2 data-number="9.5" class="anchored" data-anchor-id="índices-de-v1alidação-de-agrupamentos"><span class="header-section-number">9.5</span> Índices de v1alidação de agrupamentos</h2>
+<section id="índices-de-validação-de-agrupamentos" class="level2" data-number="9.5">
+<h2 data-number="9.5" class="anchored" data-anchor-id="índices-de-validação-de-agrupamentos"><span class="header-section-number">9.5</span> Índices de validação de agrupamentos</h2>
 <p>Uma das perguntas mais importantes na análise de grupo é “qual o número ideal de grupos?”. Embora o procedimento que combina o método hierárquico com o K-médias ajude a guiar essa escolha, existem diversas métricas quantitativas que avaliam a qualidade de uma partição de grupos, independentemente do método utilizado para obtê-la. Esses índices nos permitem comparar os resultados para diferentes valores de <span class="math inline">\(K\)</span> e escolher o que for estatisticamente mais robusto.</p>
-<section id="método-da-silhueta" class="level3" data-number="9.5.1">
-<h3 data-number="9.5.1" class="anchored" data-anchor-id="método-da-silhueta"><span class="header-section-number">9.5.1</span> Método da Silhueta</h3>
+<section id="sec-Silhueta" class="level3" data-number="9.5.1">
+<h3 data-number="9.5.1" class="anchored" data-anchor-id="sec-Silhueta"><span class="header-section-number">9.5.1</span> Método da Silhueta</h3>
 <p>A análise de silhueta é uma das técnicas mais populares. Ela mede o quão bem cada observação se encaixa em seu grupo em comparação com outros grupos. O coeficiente de silhueta para uma única observação <span class="math inline">\(i\)</span> é:</p>
 <p><span class="math display">\[
 s(i) = \frac{b(i) - a(i)}{\max\{a(i), b(i)\}}
 \]</span></p>
-<p>Onde: - <span class="math inline">\(a(i)\)</span>: A distância média de <span class="math inline">\(i\)</span> para todas as outras observações no <em>mesmo</em> grupo (coesão). - <span class="math inline">\(b(i)\)</span>: A distância média de <span class="math inline">\(i\)</span> para todas as observações no grupo <em>vizinho mais próximo</em> (separação).</p>
+<p>Onde:</p>
+<ul>
+<li><span class="math inline">\(a(i)\)</span>: A distância média de <span class="math inline">\(i\)</span> para todas as outras observações no <em>mesmo</em> grupo (coesão).</li>
+<li><span class="math inline">\(b(i)\)</span>: A distância média de <span class="math inline">\(i\)</span> para todas as observações no grupo <em>vizinho mais próximo</em> (separação).</li>
+</ul>
 <p>O valor de <span class="math inline">\(s(i)\)</span> varia de -1 a 1. Para um dado <span class="math inline">\(K\)</span>, calculamos o coeficiente de silhueta médio para todas as observações. O valor de <span class="math inline">\(K\)</span> que <strong>maximiza</strong> a pontuação média da silhueta é considerado o ideal.</p>
 </section>
 <section id="índice-de-calinski-harabasz" class="level3" data-number="9.5.2">
@@ -814,6 +826,8 @@ DB(K) = \frac{1}{K} \sum_{i=1}^{K} \max_{j \neq i} (R_{ij})
 <li><strong>Variáveis Categóricas:</strong> Calcule a distribuição de frequência (ou porcentagens) de cada categoria para cada grupo. Por exemplo: “O grupo 3 é composto por 80% de clientes do sexo feminino, enquanto na amostra total essa proporção é de 55%”.</li>
 </ul>
 <p>A criação de uma tabela de perfis, com os grupos nas linhas e as estatísticas das variáveis nas colunas, é uma ferramenta extremamente eficaz para resumir e comunicar os resultados.</p>
+<p>Depois de entender o perfil de cada grupo, é uma boa prática dar a eles nomes descritivas. Nomes como “Jovens Urbanos Conectados”, “Famílias Rurais Conservadoras” ou “Clientes de Alto Risco” são muito mais fáceis de comunicar e lembrar do que “Grupo 1”, “Grupo 2”, etc. O nome deve capturar a essência do que torna aquele grupo único.</p>
+<p>A interpretação é um processo iterativo. Às vezes, os perfis dos grupos podem sugerir que o número de grupos escolhido não foi o ideal, levando o analista a revisitar as etapas anteriores.</p>
 </section>
 <section id="visualização-do-agrupamento" class="level3" data-number="9.6.2">
 <h3 data-number="9.6.2" class="anchored" data-anchor-id="visualização-do-agrupamento"><span class="header-section-number">9.6.2</span> Visualização do agrupamento</h3>
@@ -822,11 +836,6 @@ DB(K) = \frac{1}{K} \sum_{i=1}^{K} \max_{j \neq i} (R_{ij})
 <li><strong>Dados de Baixa Dimensão (2D ou 3D):</strong> Um simples gráfico de dispersão, com os pontos identificados de acordo com seu grupo designado, é suficiente.</li>
 <li><strong>Dados de Alta Dimensão:</strong> Quando temos mais de três variáveis, precisamos primeiro reduzir a dimensionalidade para poder visualizar. A <strong>Análise de Componentes Principais (ACP)</strong> é a técnica mais comum para isso. Podemos plotar as observações em um gráfico de dispersão usando os dois primeiros componentes principais como eixos e identificar os pontos por grupo. Isso nos dá uma visão da separação dos grupos no espaço que captura a maior parte da variabilidade dos dados.</li>
 </ul>
-</section>
-<section id="nomeação-dos-grupos" class="level3" data-number="9.6.3">
-<h3 data-number="9.6.3" class="anchored" data-anchor-id="nomeação-dos-grupos"><span class="header-section-number">9.6.3</span> Nomeação dos grupos</h3>
-<p>Depois de entender o perfil de cada grupo, é uma boa prática dar a eles nomes ou “personas” descritivas. Nomes como “Jovens Urbanos Conectados”, “Famílias Rurais Conservadoras” ou “Clientes de Alto Risco” são muito mais fáceis de comunicar e lembrar do que “Grupo 1”, “Grupo 2”, etc. O nome deve capturar a essência do que torna aquele grupo único.</p>
-<p>A interpretação é um processo iterativo. Às vezes, os perfis dos grupos podem sugerir que o número de grupos escolhido não foi o ideal, levando o analista a revisitar as etapas anteriores.</p>
 
 
 </section>
@@ -884,13 +893,14 @@ DB(K) = \frac{1}{K} \sum_{i=1}^{K} \max_{j \neq i} (R_{ij})
       e.clearSelection();
     }
     const getTextToCopy = function(trigger) {
-        const codeEl = trigger.previousElementSibling.cloneNode(true);
-        for (const childEl of codeEl.children) {
-          if (isCodeAnnotation(childEl)) {
-            childEl.remove();
-          }
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
         }
-        return codeEl.innerText;
+      }
+      return codeEl.innerText;
     }
     const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
       text: getTextToCopy
